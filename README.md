@@ -1,4 +1,4 @@
-# coal-llc-mods
+# Coal LLC Mods
 
 Collection of mods for the game [Coal LLC](https://store.steampowered.com/app/2443540/Coal_LLC/).
 
