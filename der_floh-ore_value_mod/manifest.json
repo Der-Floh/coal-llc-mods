@@ -1,0 +1,114 @@
+{
+    "name": "ore_value_mod",
+    "namespace": "der_floh",
+    "version_number": "1.0.0",
+    "description": "Configurable sell price multipliers for all ore types. Each ore can be independently scaled relative to its vanilla price.",
+    "website_url": "",
+    "dependencies": [],
+    "extra": {
+        "godot": {
+            "authors": [
+                "der_floh"
+            ],
+            "tags": [
+                "gameplay",
+                "balance",
+                "settings"
+            ],
+            "description_rich": "",
+            "optional_dependencies": [],
+            "load_before": [],
+            "incompatibilities": [
+                "der_floh-coal_value_mod"
+            ],
+            "config_schema": {
+                "title": "Config",
+                "description": "Sell price multipliers per ore type (1.0 = vanilla price)",
+                "type": "object",
+                "properties": {
+                    "coal": {
+                        "title": "Coal",
+                        "type": "number",
+                        "default": 1.0
+                    },
+                    "copper": {
+                        "title": "Copper Ore",
+                        "type": "number",
+                        "default": 1.0
+                    },
+                    "iron": {
+                        "title": "Iron Ore",
+                        "type": "number",
+                        "default": 1.0
+                    },
+                    "silver": {
+                        "title": "Silver Ore",
+                        "type": "number",
+                        "default": 1.0
+                    },
+                    "gold": {
+                        "title": "Gold Ore",
+                        "type": "number",
+                        "default": 1.0
+                    },
+                    "amethyst": {
+                        "title": "Amethyst",
+                        "type": "number",
+                        "default": 1.0
+                    },
+                    "sapphire": {
+                        "title": "Sapphire",
+                        "type": "number",
+                        "default": 1.0
+                    },
+                    "emerald": {
+                        "title": "Emerald",
+                        "type": "number",
+                        "default": 1.0
+                    },
+                    "ruby": {
+                        "title": "Ruby",
+                        "type": "number",
+                        "default": 1.0
+                    },
+                    "diamond": {
+                        "title": "Diamond",
+                        "type": "number",
+                        "default": 1.0
+                    },
+                    "pink_diamond": {
+                        "title": "Pink Diamond",
+                        "type": "number",
+                        "default": 1.0
+                    },
+                    "spinel": {
+                        "title": "Spinel",
+                        "type": "number",
+                        "default": 1.0
+                    },
+                    "uranium": {
+                        "title": "Uranium",
+                        "type": "number",
+                        "default": 1.0
+                    },
+                    "moonstone": {
+                        "title": "Moonstone",
+                        "type": "number",
+                        "default": 1.0
+                    },
+                    "onyx": {
+                        "title": "Onyx",
+                        "type": "number",
+                        "default": 1.0
+                    }
+                }
+            },
+            "compatible_mod_loader_version": [
+                "7.0.1"
+            ],
+            "compatible_game_version": [
+                "1.2.1"
+            ]
+        }
+    }
+}

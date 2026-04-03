@@ -1,0 +1,51 @@
+{
+    "name": "game_limits_mod",
+    "namespace": "der_floh",
+    "version_number": "1.0.0",
+    "description": "Adds a 'Game Limits' tab to the settings menu to configure max mortar count, max employee entities drawn, and chunk load radius.",
+    "website_url": "",
+    "dependencies": [],
+    "extra": {
+        "godot": {
+            "authors": [
+                "der_floh"
+            ],
+            "tags": [
+                "gameplay",
+                "settings"
+            ],
+            "description_rich": "",
+            "optional_dependencies": [],
+            "load_before": [],
+            "incompatibilities": [],
+            "config_schema": {
+                "title": "Config",
+                "description": "Config for Game Limits",
+                "type": "object",
+                "properties": {
+                    "max_mortars": {
+                        "title": "Max Mortars",
+                        "type": "number",
+                        "default": 1000
+                    },
+                    "chunk_load_radius": {
+                        "title": "Chunk Load Radius",
+                        "type": "number",
+                        "default": 3
+                    },
+                    "chunks_per_frame": {
+                        "title": "Chunks Per Frame",
+                        "type": "number",
+                        "default": 1
+                    }
+                }
+            },
+            "compatible_mod_loader_version": [
+                "7.0.1"
+            ],
+            "compatible_game_version": [
+                "1.2.1"
+            ]
+        }
+    }
+}

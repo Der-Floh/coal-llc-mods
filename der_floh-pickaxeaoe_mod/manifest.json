@@ -1,0 +1,29 @@
+{
+    "name": "pickaxeaoe_mod",
+    "namespace": "der_floh",
+    "version_number": "1.0.0",
+    "description": "Makes the electric pickaxe and the AOE character deal equal damage to all ores instead of reduced damage to chained/surrounding tiles.",
+    "website_url": "",
+    "dependencies": [],
+    "extra": {
+        "godot": {
+            "authors": [
+                "der_floh"
+            ],
+            "tags": [
+                "gameplay",
+                "balance"
+            ],
+            "description_rich": "",
+            "optional_dependencies": [],
+            "load_before": [],
+            "incompatibilities": [],
+            "compatible_mod_loader_version": [
+                "7.0.1"
+            ],
+            "compatible_game_version": [
+                "1.2.1"
+            ]
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "name": "performance_mod",
+    "namespace": "der_floh",
+    "version_number": "1.0.0",
+    "description": "Optimises chunk loading and tile effects. Supersedes der_floh-game_limits_mod's load_chunks hook and reads its config automatically.",
+    "website_url": "",
+    "dependencies": [],
+    "extra": {
+        "godot": {
+            "authors": [
+                "der_floh"
+            ],
+            "tags": [
+                "performance"
+            ],
+            "description_rich": "",
+            "optional_dependencies": [
+                "der_floh-game_limits_mod"
+            ],
+            "load_before": [],
+            "incompatibilities": [],
+            "compatible_mod_loader_version": [
+                "7.0.1"
+            ],
+            "compatible_game_version": [
+                "1.2.1"
+            ]
+        }
+    }
+}

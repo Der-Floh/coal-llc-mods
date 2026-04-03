@@ -1,0 +1,56 @@
+name: Release Mods
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Pack mods
+        id: pack
+        run: |
+          set -e
+          OUT_DIR="$GITHUB_WORKSPACE/out"
+          mkdir -p "$OUT_DIR"
+
+          for mod_dir in */; do
+            # Skip non-mod directories
+            manifest="$mod_dir/manifest.json"
+            if [ ! -f "$manifest" ]; then
+              continue
+            fi
+
+            namespace=$(jq -r '.namespace'       "$manifest")
+            name=$(jq      -r '.name'            "$manifest")
+            version=$(jq   -r '.version_number'  "$manifest")
+
+            if [ -z "$namespace" ] || [ -z "$name" ] || [ -z "$version" ]; then
+              echo "Skipping $mod_dir: missing namespace/name/version_number in manifest.json"
+              continue
+            fi
+
+            zip_name="${namespace}-${name}-${version}.zip"
+            zip_path="$OUT_DIR/$zip_name"
+
+            # Stage under mods-unpacked/<folder>/ as required by GML
+            folder_name="${mod_dir%/}"
+            staging=$(mktemp -d)
+            mkdir -p "$staging/mods-unpacked/$folder_name"
+            cp -r "$mod_dir"* "$staging/mods-unpacked/$folder_name/"
+
+            (cd "$staging" && zip -r "$zip_path" mods-unpacked/)
+            rm -rf "$staging"
+
+            echo "Packed: $zip_name"
+          done
+
+      - name: Upload ZIPs to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: out/*.zip
