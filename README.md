@@ -8,7 +8,7 @@ Collection of mods for the game [Coal LLC](https://store.steampowered.com/app/24
 
 ## Installation
 
-All mods require **Godot Mod Loader (GML)** by NanobotZ to be installed first:
+All mods require **Godot Mod Loader (GML)** by NanobotZ to be installed first:<br>
 👉 [https://github.com/NanobotZ/godot-mod-loader](https://github.com/NanobotZ/godot-mod-loader)
 
 1. Download the mod loader here (choose the version for your operating system): [https://github.com/NanobotZ/godot-mod-loader/releases/latest](https://github.com/NanobotZ/godot-mod-loader/releases/latest)
