@@ -72,17 +72,47 @@ Adds an **Ore Value** tab to the in-game settings menu with a number input per o
 
 ### Passive Drop Mod (`der_floh-passive_drop_mod`)
 
-Adds a configurable chance for each **ore tile** to drop a **PassiveUpgrade** scroll when destroyed. Also lets you toggle weapon-scroll drops from chests and disable chest generation entirely.
+Adds a configurable chance for each **ore type** (and optionally any block) to drop a **PassiveUpgrade** scroll when destroyed. The **quality** of the dropped passive scales with the layer depth of the destroyed tile — just like vanilla chests give better loot deeper down.
 
-Adds a **Passive Drop** tab to the in-game settings menu.
+Adds a **Passive Drop** tab to the in-game settings menu with a slider (0–100 %) per ore type.
 
-| Option                   | Default | Description                                                                          |
-| ------------------------ | ------- | ------------------------------------------------------------------------------------ |
-| Passive Drop Chance      | `5`     | Percentage chance (0–100 %) that a destroyed ore tile drops a passive upgrade scroll |
-| Weapon Drops from Chests | `true`  | When disabled, weapon scrolls in chests are replaced with a passive upgrade instead  |
-| Chest Generation         | `true`  | When disabled, no chest dungeons are generated (takes effect on next level load)     |
+> **Optional:** Install [AutoPassiveChooser](https://github.com/NanobotZ/CoalLLC-AutoPassiveChooser) alongside this mod and enable **Auto-Collect Dropped Passives** to have the passive chooser trigger instantly on each drop and auto-select the best option without any player interaction.
 
-Ore-dropped passives use multiplier 1.0 (equivalent to a shallowest-depth chest). `load_before: der_floh-performance_mod` to ensure chest generation toggle takes full effect.
+#### Drop Chances
+
+Individual sliders for each ore type. Defaults reflect ore rarity:
+
+| Ore            | Default |
+| -------------- | ------- |
+| Coal           | `1 %`   |
+| Copper         | `2 %`   |
+| Iron           | `4 %`   |
+| Silver         | `6 %`   |
+| Gold           | `8 %`   |
+| Amethyst       | `10 %`  |
+| Sapphire       | `20 %`  |
+| Emerald        | `30 %`  |
+| Ruby           | `40 %`  |
+| Diamond        | `50 %`  |
+| Pink Diamond   | `60 %`  |
+| Spinel         | `70 %`  |
+| Uranium        | `80 %`  |
+| Moonstone      | `90 %`  |
+| Onyx           | `100 %` |
+| Non-Ore Blocks | `0 %`   |
+
+#### Chests
+
+| Option                   | Default | Description                                                                           |
+| ------------------------ | ------- | ------------------------------------------------------------------------------------- |
+| Weapon Drops from Chests | `true`  | When disabled, weapon-scroll chest drops are replaced with a passive upgrade          |
+| Chest Generation         | `false` | When enabled, chest dungeons are generated normally (takes effect on next level load) |
+
+#### Behaviour
+
+| Option                        | Default | Description                                                                                                                                                         |
+| ----------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Auto-Collect Dropped Passives | `false` | When enabled, triggers the passive chooser screen immediately on drop instead of spawning a world item; pairs with AutoPassiveChooser for fully automatic selection |
 
 ---
 
