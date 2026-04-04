@@ -70,6 +70,22 @@ Adds an **Ore Value** tab to the in-game settings menu with a number input per o
 
 ---
 
+### Passive Drop Mod (`der_floh-passive_drop_mod`)
+
+Adds a configurable chance for each **ore tile** to drop a **PassiveUpgrade** scroll when destroyed. Also lets you toggle weapon-scroll drops from chests and disable chest generation entirely.
+
+Adds a **Passive Drop** tab to the in-game settings menu.
+
+| Option                   | Default | Description                                                                          |
+| ------------------------ | ------- | ------------------------------------------------------------------------------------ |
+| Passive Drop Chance      | `5`     | Percentage chance (0–100 %) that a destroyed ore tile drops a passive upgrade scroll |
+| Weapon Drops from Chests | `true`  | When disabled, weapon scrolls in chests are replaced with a passive upgrade instead  |
+| Chest Generation         | `true`  | When disabled, no chest dungeons are generated (takes effect on next level load)     |
+
+Ore-dropped passives use multiplier 1.0 (equivalent to a shallowest-depth chest). `load_before: der_floh-performance_mod` to ensure chest generation toggle takes full effect.
+
+---
+
 ### Pickaxe AOE Mod (`der_floh-pickaxeaoe_mod`)
 
 Makes the **electric pickaxe** and the **AOE ability** deal full damage to every tile they hit, instead of the reduced ratios vanilla applies to chained/surrounding tiles.

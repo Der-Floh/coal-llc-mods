@@ -24,3 +24,7 @@ func install_hooks() -> void:
 		"res://scenes/tilemaps/tile_map_chunk.gd",
 		extensions_dir_path.path_join("scenes/tilemaps/tile_map_chunk.hooks.gd")
 	)
+	ModLoaderMod.install_script_hooks(
+		"res://scenes/equipment/electric_shock.gd",
+		extensions_dir_path.path_join("scenes/equipment/electric_shock.hooks.gd")
+	)

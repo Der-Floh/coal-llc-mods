@@ -83,6 +83,34 @@ func _ready() -> void:
 	chunks_per_frame_slider.slider.value = mod_main.get_chunks_per_frame()
 	chunks_per_frame_slider.new_value.connect(_on_chunks_per_frame_changed)
 
+	# --- Section: Electric Pickaxe ---
+	var electric_header := RichTextLabel.new()
+	electric_header.bbcode_enabled = true
+	electric_header.text = "[b]Electric Pickaxe[/b]"
+	electric_header.fit_content = true
+	electric_header.custom_minimum_size = Vector2(0, 28)
+	vbox.add_child(electric_header)
+
+	var electric_chain_slider: SettingSlider = SLIDER_SCENE.instantiate()
+	electric_chain_slider.default = mod_main.DEFAULT_MAX_ELECTRIC_CHAIN
+	electric_chain_slider.new_value.connect(_on_max_electric_chain_changed)
+	vbox.add_child(electric_chain_slider)
+	electric_chain_slider.setting_label.text = "Max Chain Reaction Tiles"
+	electric_chain_slider.slider.min_value = 10
+	electric_chain_slider.slider.max_value = 5000
+	electric_chain_slider.slider.step = 10
+	electric_chain_slider.slider.value = mod_main.get_max_electric_chain()
+
+	var electric_visuals_slider: SettingSlider = SLIDER_SCENE.instantiate()
+	electric_visuals_slider.default = mod_main.DEFAULT_MAX_ELECTRIC_VISUALS
+	electric_visuals_slider.new_value.connect(_on_max_electric_visuals_changed)
+	vbox.add_child(electric_visuals_slider)
+	electric_visuals_slider.setting_label.text = "Max Visual Arcs (0 = no visuals; does not affect damage)"
+	electric_visuals_slider.slider.min_value = 0
+	electric_visuals_slider.slider.max_value = 1000
+	electric_visuals_slider.slider.step = 10
+	electric_visuals_slider.slider.value = mod_main.get_max_electric_visuals()
+
 
 func _on_max_mortars_changed(new_value: float) -> void:
 	var mod_main = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
@@ -127,3 +155,15 @@ func _on_chunks_per_frame_changed(new_value: float) -> void:
 	var mod_main = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
 	mod_main.set_chunks_per_frame(int(new_value))
 	ModLoaderLog.info("Chunks per frame set to %d" % int(new_value), LOG_NAME)
+
+
+func _on_max_electric_chain_changed(new_value: float) -> void:
+	var mod_main = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
+	mod_main.set_max_electric_chain(int(new_value))
+	ModLoaderLog.info("Max electric chain tiles set to %d" % int(new_value), LOG_NAME)
+
+
+func _on_max_electric_visuals_changed(new_value: float) -> void:
+	var mod_main = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
+	mod_main.set_max_electric_visuals(int(new_value))
+	ModLoaderLog.info("Max electric visual arcs set to %d" % int(new_value), LOG_NAME)

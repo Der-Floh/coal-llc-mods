@@ -8,6 +8,8 @@ const LOG_NAME := "der_floh-game_limits_mod:Main"
 const DEFAULT_MAX_MORTARS: int = 1000
 const DEFAULT_CHUNK_LOAD_RADIUS: int = 3
 const DEFAULT_CHUNKS_PER_FRAME: int = 1
+const DEFAULT_MAX_ELECTRIC_CHAIN: int = 500
+const DEFAULT_MAX_ELECTRIC_VISUALS: int = 200
 
 var mod_dir_path := ""
 var extensions_dir_path := ""
@@ -21,8 +23,8 @@ func _init() -> void:
 
 func _ready() -> void:
 	ModLoaderLog.info(
-		"Game Limits Mod ready. Max mortars: %d, Chunk radius: %d, Chunks/frame: %d" % [
-			get_max_mortars(), get_chunk_load_radius(), get_chunks_per_frame()
+		"Game Limits Mod ready. Max mortars: %d, Chunk radius: %d, Chunks/frame: %d, Max electric chain: %d, Max electric visuals: %d" % [
+			get_max_mortars(), get_chunk_load_radius(), get_chunks_per_frame(), get_max_electric_chain(), get_max_electric_visuals()
 		],
 		LOG_NAME
 	)
@@ -44,6 +46,10 @@ func install_hooks() -> void:
 	ModLoaderMod.install_script_hooks(
 		"res://scripts/PauseMenu.gd",
 		extensions_dir_path.path_join("scripts/PauseMenu.hooks.gd")
+	)
+	ModLoaderMod.install_script_hooks(
+		"res://scenes/equipment/electric_shock.gd",
+		extensions_dir_path.path_join("scenes/equipment/electric_shock.hooks.gd")
 	)
 
 
@@ -83,4 +89,24 @@ static func get_chunks_per_frame() -> int:
 static func set_chunks_per_frame(value: int) -> void:
 	var cfg := get_config()
 	cfg.data["chunks_per_frame"] = int(value)
+	ModLoaderConfig.update_config(cfg)
+
+
+static func get_max_electric_chain() -> int:
+	return int(get_config().data.get("max_electric_chain", DEFAULT_MAX_ELECTRIC_CHAIN))
+
+
+static func set_max_electric_chain(value: int) -> void:
+	var cfg := get_config()
+	cfg.data["max_electric_chain"] = int(value)
+	ModLoaderConfig.update_config(cfg)
+
+
+static func get_max_electric_visuals() -> int:
+	return int(get_config().data.get("max_electric_visuals", DEFAULT_MAX_ELECTRIC_VISUALS))
+
+
+static func set_max_electric_visuals(value: int) -> void:
+	var cfg := get_config()
+	cfg.data["max_electric_visuals"] = int(value)
 	ModLoaderConfig.update_config(cfg)
