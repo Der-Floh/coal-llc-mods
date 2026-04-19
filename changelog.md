@@ -5,6 +5,30 @@ Individual mod version histories live in each mod's own `changelog.md`.
 
 ---
 
+## [1.2.0] – 2026-04-19
+
+Game compatibility update for Coal LLC v1.4.1.1.
+
+### der_floh-performance_mod (1.1.0 → 1.2.0)
+
+#### Added
+
+- Optimised `lvl_from_global_pos_TIGHTFUNNEL` hook: computes `abs(x - 14)` once per tile instead of up to 19 times (same pattern as the existing STANDARD/FUNNEL/SKY_MINE/SHALLOW hooks)
+
+#### Changed
+
+- Updated compatible game version to 1.4.1.1
+
+---
+
+### der_floh-ore_value_mod, der_floh-effect_spread_mod, der_floh-game_limits_mod, der_floh-pickaxeaoe_mod, der_floh-passive_drop_mod
+
+#### Changed
+
+- Updated compatible game version to 1.4.1.1
+
+---
+
 ## [1.1.0] – 2026-04-04
 
 ### der_floh-passive_drop_mod (1.0.0 → 2.2.1)

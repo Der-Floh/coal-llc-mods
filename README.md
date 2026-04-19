@@ -28,6 +28,20 @@ Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside y
 
 ---
 
+## Overview
+
+| Mod                                                                | Author   | Description                                                                             |
+| ------------------------------------------------------------------ | -------- | --------------------------------------------------------------------------------------- |
+| [Ore Value Mod](#ore-value-mod-der_floh-ore_value_mod)             | der_floh | Configurable sell price multiplier per ore type                                         |
+| [Passive Drop Mod](#passive-drop-mod-der_floh-passive_drop_mod)    | der_floh | Configurable chance for ore (and other) tiles to drop a PassiveUpgrade on destruction   |
+| [Pickaxe AOE Mod](#pickaxe-aoe-mod-der_floh-pickaxeaoe_mod)        | der_floh | Electric pickaxe and AOE ability deal full damage instead of vanilla reduced ratios     |
+| [Effect Spread Mod](#effect-spread-mod-der_floh-effect_spread_mod) | der_floh | Spreads poison/fire/water ticks to nearby tiles when an affected tile is destroyed      |
+| [Game Limits Mod](#game-limits-mod-der_floh-game_limits_mod)       | der_floh | Tune performance-related caps (mortars, chunk loading, electric chain) via settings tab |
+| [Performance Mod](#performance-mod-der_floh-performance_mod)       | der_floh | Optimised chunk loading, tile effects, and level generation to reduce frame time spikes |
+| [AutoPassiveChooser](#other-mods-not-by-me)                        | NanobotZ | Automatically selects passives on level-up based on a configurable priority list        |
+
+---
+
 ## Mods by me
 
 ### Ore Value Mod (`der_floh-ore_value_mod`)
