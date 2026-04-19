@@ -2,7 +2,7 @@ name: Release Mods
 
 on:
   release:
-    types: [published]
+    types: [ published ]
 
 jobs:
   build-and-upload:
@@ -56,3 +56,4 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: out/*.zip
+          body_path: releases/${{ github.ref_name }}.md

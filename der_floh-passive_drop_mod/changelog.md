@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.2.2] – 2026-04-19
+
+### Changed
+
+- Updated compatible game version to 1.4.1.1
+
 ## [2.2.1] – 2026-04-04
 
 ### Changed

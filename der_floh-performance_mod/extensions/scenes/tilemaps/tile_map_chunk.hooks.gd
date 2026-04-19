@@ -244,6 +244,34 @@ func lvl_from_global_pos_SHALLOW(chain: ModLoaderHookChain, pos: Vector2i) -> in
 	else: return 19
 
 
+func lvl_from_global_pos_TIGHTFUNNEL(chain: ModLoaderHookChain, pos: Vector2i) -> int:
+	var x := pos.x
+	var y := pos.y
+	if y < 0:
+		return -2
+	var d := abs(x - 14)  # horizontal distance from funnel center; compute once
+	if   d < 3:   return 0
+	elif d < 5:   return 1
+	elif d < 7:   return 2
+	elif d < 9:   return 3
+	elif d < 11:  return 4
+	elif d < 13:  return 5
+	elif d < 15:  return 6
+	elif d < 17:  return 7
+	elif d < 19:  return 8
+	elif d < 21:  return 9
+	elif d < 23:  return 10
+	elif d < 75:  return 11
+	elif d < 100: return 12
+	elif d < 125: return 13
+	elif d < 150: return 14
+	elif d < 175: return 15
+	elif d < 200: return 16
+	elif d < 225: return 17
+	elif d < 250: return 18
+	else: return 19
+
+
 # ── generate_chests ───────────────────────────────────────────────────────────
 # Identical to vanilla except CHEST_SCENE (preloaded at startup) replaces the
 # blocking synchronous load("res://scenes/Chest.tscn") call per chest.

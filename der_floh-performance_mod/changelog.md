@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.2.0] – 2026-04-19
+
+### Added
+
+- Optimised `lvl_from_global_pos_TIGHTFUNNEL`: computes `abs(x - 14)` once per tile instead of up to 19 times
+
+### Changed
+
+- Updated compatible game version to 1.4.1.1
+
 ## [1.1.0] – 2026-04-04
 
 ### Added
