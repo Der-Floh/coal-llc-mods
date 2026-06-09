@@ -7,78 +7,68 @@ Individual mod version histories live in each mod's own `changelog.md`.
 
 ## [1.3.0] – 2026-06-09
 
+Two new mods, critical bug fixes for three mods that were silently inactive, and debug logging moved out of the in-game settings tab across all mods.
+
 ### der_floh-no_holes_mod (new — 1.0.2)
 
-New mod — post-processes `generate_chunk` output and fills any underground tile that
-remained `EMPTY` after generation with the correct `BASIC_*` background tile for its
-depth level. Eliminates the air-pocket holes that vanilla world generation leaves in
-roughly 30 % of underground tiles.
+New mod — fills the air-pocket holes that vanilla world generation leaves in roughly 30 % of underground tiles. Post-processes `generate_chunk`: any tile that remained `EMPTY` is replaced with the `BASIC_*` background tile for its depth level.
 
-- Depth → fill tile mapping: BASIC_CLAY 0–2 · BASIC_STONE 2–5 · BASIC_ICE 5–8 ·
-  BASIC_FIRE 8–11 · BASIC_DARK 12 · BASIC_GREEN 13 · BASIC_ORANGE 14 · BASIC_PURPLE 15 ·
-  BASIC_DARKGREEN 16 · BASIC_YELLOW 17 · BASIC_DARKBROWN 18 · BASIC_DARKBLUE 19
-- Config: `enabled` toggle (default: on), `debug_logging` (default: off)
-- `optional_dependencies: ["der_floh-performance_mod"]` — wraps as outermost hook so it
-  fills holes in whatever generate_chunk produces, regardless of whether performance_mod
-  is installed
+#### Added
+
+- Fills `EMPTY` underground tiles after each chunk generates: BASIC_CLAY 0–2 · BASIC_STONE 2–5 · BASIC_ICE 5–8 · BASIC_FIRE 8–11 · BASIC_DARK 12 · BASIC_GREEN 13 · BASIC_ORANGE 14 · BASIC_PURPLE 15 · BASIC_DARKGREEN 16 · BASIC_YELLOW 17 · BASIC_DARKBROWN 18 · BASIC_DARKBLUE 19
+- Config: `enabled` (default: on), `debug_logging` (default: off)
+- `optional_dependencies: ["der_floh-performance_mod"]` — hooks as outermost `generate_chunk` wrapper
 
 ---
 
-### Critical bug fix: hook registration failure (class_name references)
+### der_floh-tick_upgrade_mod (new — 1.2.4)
 
-Three mods were silently failing to register their hooks since their last respective
-updates, meaning the features listed below were doing nothing at runtime.
+New mod — injects "Poison Tick Speed" and "Fire Tick Speed" passive upgrade options into the in-game passive chooser (shown when a poison weapon or flamethrower is equipped). Each upgrade adds +10 % to the respective tick rate. Also keeps effects ticking on out-of-range chunks.
 
-Root cause: referencing a mod's own `class_name` (e.g. `DerFlohPickaxeAoeMod._debug`)
-from a hooks file prevents GML from loading the file — GDScript cannot resolve
-`class_name` declarations of scripts that are loaded dynamically at runtime. The fix
-in all cases is `load(MOD_MAIN_PATH)` instead.
+#### Added
 
-#### der_floh-pickaxeaoe_mod (1.1.1 → 1.1.2)
+- Passive upgrades for Poison Tick Speed and Fire Tick Speed (+10 % per level)
+- Setting: Always Tick Distant Tiles — keeps poison/fire ticking on unloaded chunks (default: on)
+- Setting: Preserve Effect Duration — scales the stored tick count by the speed multiplier so duration stays constant at higher tick rates (default: on)
+- Tick-speed bonuses shown in the Tab-menu passive bonuses panel
+- `optional_dependencies: ["der_floh-performance_mod"]`
 
-Broken since 1.1.0 (when debug logging was added). The `player_2.hooks.gd`
-class_name reference caused the entire hook to not register, so vanilla
-`mine_action` ran instead — electric pickaxe and AOE dealt reduced vanilla damage
-ratios instead of the intended 1.0× to all tiles.
+#### Fixed
 
-Also fixed in the same release: spark effect now uses
-`tilemap.sparks_manager.add_spark()` to match current vanilla (the old manual
-`Spark.tscn` × 30 pattern was from an earlier game version).
-
-#### der_floh-performance_mod (1.3.1 → 1.3.2)
-
-The `DerFlohPerfMod._debug` reference in `tile_map_manager.hooks.gd` prevented
-**both** hooks in that file from registering — `load_chunks` (skip-rebuild
-optimisation) and `apply_tile_effects` (direct dict iteration) were both inactive.
-
-#### der_floh-tick_upgrade_mod (1.2.3 → 1.2.4)
-
-The most severe case: class_name references for `_debug`, `get_preserve_duration`,
-and `get_always_tick_distant` in both `tile_map_chunk.hooks.gd` and
-`tile_map_manager.hooks.gd` prevented all four hooks from registering. Tick-speed
-scaling, Preserve Effect Duration, and Always Tick Distant Tiles were all silently
-inactive.
+- All hooks were silently not registering since 1.2.1: class name references in both hook files prevented GML from loading them. Tick-speed scaling, Preserve Effect Duration, and Always Tick Distant Tiles were all inactive. Fixed by replacing all bare class name references with `load(MOD_MAIN_PATH)`.
 
 ---
 
-### Settings cleanup: debug logging moved to config file (all mods)
+### der_floh-pickaxeaoe_mod (1.0.1 → 1.1.2)
 
-The Debug Logging toggle has been removed from the in-game settings tab in all mods.
-Toggle it by editing the config JSON directly:
+#### Fixed
 
-`%AppData%\Godot\app_userdata\Coal LLC\mods-storage\<mod_id>\configs\user.json`
+- `mine_action` hook was silently not registering since 1.1.0: `player_2.hooks.gd` referenced `DerFlohPickaxeAoeMod._debug` by class name. Electric pickaxe and AOE dealt reduced vanilla damage ratios instead of the intended 1.0× to all tiles. Fixed by replacing all class name references with `load(MOD_MAIN_PATH)`.
+- Spark effect now uses `tilemap.sparks_manager.add_spark()` pool instead of spawning 30 individual `Spark.tscn` instances per swing
 
-Set `"debug_logging": true` to enable. Affected mods and their new versions:
+#### Removed
 
-| Mod                        | Version       |
-| -------------------------- | ------------- |
-| der_floh-ore_value_mod     | 1.0.2 → 1.0.3 |
-| der_floh-effect_spread_mod | 1.0.2 → 1.0.3 |
-| der_floh-game_limits_mod   | 1.1.2 → 1.1.3 |
-| der_floh-pickaxeaoe_mod    | 1.1.0 → 1.1.1 |
-| der_floh-performance_mod   | 1.3.0 → 1.3.1 |
-| der_floh-passive_drop_mod  | 2.2.3 → 2.2.4 |
-| der_floh-tick_upgrade_mod  | 1.2.2 → 1.2.3 |
+- Settings tab (its only control was the Debug Logging toggle); toggle `debug_logging` via the config JSON instead
+
+---
+
+### der_floh-performance_mod (1.2.0 → 1.3.2)
+
+#### Fixed
+
+- `tile_map_manager.hooks.gd` referenced `DerFlohPerfMod._debug` by class name, silently preventing both hooks in that file from registering since 1.3.0 — `load_chunks` and `apply_tile_effects` were both inactive. Fixed by replacing all class name references with `load(MOD_MAIN_PATH)`.
+
+#### Removed
+
+- Settings tab (its only control was the Debug Logging toggle); toggle `debug_logging` via the config JSON instead
+
+---
+
+### der_floh-ore_value_mod (1.0.1 → 1.0.3), der_floh-effect_spread_mod (1.0.1 → 1.0.3), der_floh-game_limits_mod (1.1.1 → 1.1.3), der_floh-passive_drop_mod (2.2.2 → 2.2.4)
+
+#### Removed
+
+- Debug Logging toggle from settings tab; toggle `debug_logging` via the config JSON instead
 
 ---
 
