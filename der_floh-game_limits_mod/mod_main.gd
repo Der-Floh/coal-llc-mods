@@ -22,9 +22,10 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	_debug = get_debug_logging()
 	ModLoaderLog.info(
-		"Game Limits Mod ready. Max mortars: %d, Chunk radius: %d, Chunks/frame: %d, Max electric chain: %d, Max electric visuals: %d" % [
-			get_max_mortars(), get_chunk_load_radius(), get_chunks_per_frame(), get_max_electric_chain(), get_max_electric_visuals()
+		"Game Limits Mod ready. Max mortars: %d, Chunk radius: %d, Chunks/frame: %d, Max electric chain: %d, Max electric visuals: %d, debug_logging: %s" % [
+			get_max_mortars(), get_chunk_load_radius(), get_chunks_per_frame(), get_max_electric_chain(), get_max_electric_visuals(), str(_debug)
 		],
 		LOG_NAME
 	)
@@ -109,4 +110,17 @@ static func get_max_electric_visuals() -> int:
 static func set_max_electric_visuals(value: int) -> void:
 	var cfg := get_config()
 	cfg.data["max_electric_visuals"] = int(value)
+	ModLoaderConfig.update_config(cfg)
+
+
+static var _debug: bool = false
+
+
+static func get_debug_logging() -> bool:
+	return bool(get_config().data.get("debug_logging", false))
+
+
+static func set_debug_logging(value: bool) -> void:
+	var cfg := get_config()
+	cfg.data["debug_logging"] = value
 	ModLoaderConfig.update_config(cfg)

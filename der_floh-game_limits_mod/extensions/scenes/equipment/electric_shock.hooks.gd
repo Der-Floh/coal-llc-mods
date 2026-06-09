@@ -34,6 +34,12 @@ func _physics_process(chain: ModLoaderHookChain, _delta: float) -> void:
 
 	if (new_tiles_hit_current == []) or (self_obj._current_damage == 0) \
 			or (self_obj._tiles_hit_all.size() > max_tiles):
+		if mod_main._debug and self_obj._tiles_hit_all.size() > 0:
+			ModLoaderLog.info(
+				"ElectricShock ended: total_tiles=%d max_tiles=%d max_visuals=%d" % [
+					self_obj._tiles_hit_all.size(), max_tiles, max_visuals
+				], LOG_NAME
+			)
 		self_obj.end()
 	else:
 		self_obj._tiles_hit_current = new_tiles_hit_current

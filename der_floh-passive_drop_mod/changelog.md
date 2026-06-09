@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.2.3] – 2026-04-27
+
+### Added
+
+- Debug Logging toggle in settings tab (default: off); gates passive-drop and chest-replacement log messages
+
 ## [2.2.2] – 2026-04-19
 
 ### Changed

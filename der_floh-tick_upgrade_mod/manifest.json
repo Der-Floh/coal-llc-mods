@@ -1,0 +1,53 @@
+{
+    "name": "tick_upgrade_mod",
+    "namespace": "der_floh",
+    "version_number": "1.2.2",
+    "description": "Adds in-game passive upgrades to speed up poison and fire ticking, and keeps effects ticking on distant (unloaded) tiles.",
+    "website_url": "",
+    "dependencies": [],
+    "extra": {
+        "godot": {
+            "authors": [
+                "der_floh"
+            ],
+            "tags": [
+                "gameplay",
+                "settings"
+            ],
+            "description_rich": "",
+            "optional_dependencies": [
+                "der_floh-performance_mod"
+            ],
+            "load_before": [],
+            "incompatibilities": [],
+            "config_schema": {
+                "title": "Config",
+                "description": "Config for Tick Upgrade Mod",
+                "type": "object",
+                "properties": {
+                    "always_tick_distant": {
+                        "title": "Always Tick Distant Tiles",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "preserve_duration": {
+                        "title": "Preserve Effect Duration",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "debug_logging": {
+                        "title": "Debug Logging",
+                        "type": "boolean",
+                        "default": false
+                    }
+                }
+            },
+            "compatible_mod_loader_version": [
+                "7.0.1"
+            ],
+            "compatible_game_version": [
+                "1.4.1.1"
+            ]
+        }
+    }
+}

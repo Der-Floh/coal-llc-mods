@@ -62,7 +62,8 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	ModLoaderLog.info("Ready!", LOG_NAME)
+	_debug = get_debug_logging()
+	ModLoaderLog.info("Ready! debug_logging=%s" % str(_debug), LOG_NAME)
 
 
 func install_hooks() -> void:
@@ -132,4 +133,17 @@ static func get_auto_collect_passives() -> bool:
 static func set_auto_collect_passives(value: bool) -> void:
 	var cfg := get_config()
 	cfg.data["auto_collect_passives"] = int(value)
+	ModLoaderConfig.update_config(cfg)
+
+
+static var _debug: bool = false
+
+
+static func get_debug_logging() -> bool:
+	return bool(get_config().data.get("debug_logging", false))
+
+
+static func set_debug_logging(value: bool) -> void:
+	var cfg := get_config()
+	cfg.data["debug_logging"] = value
 	ModLoaderConfig.update_config(cfg)

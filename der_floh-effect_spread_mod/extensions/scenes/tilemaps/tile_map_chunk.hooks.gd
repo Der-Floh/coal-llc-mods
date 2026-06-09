@@ -1,5 +1,7 @@
 extends Object
 
+const LOG_NAME := "der_floh-effect_spread_mod:ChunkHook"
+
 
 func destroy_tile(chain: ModLoaderHookChain, idx: int, tile_properties: Dictionary):
 	var chunk := chain.reference_object as TileMapChunk
@@ -42,6 +44,13 @@ func destroy_tile(chain: ModLoaderHookChain, idx: int, tile_properties: Dictiona
 	var radius   := int(mod_main.get_spread_radius())
 	var inherit  := bool(mod_main.get_inherit_ticks())
 	var fresh    := int(mod_main.get_fresh_ticks())
+
+	if mod_main._debug:
+		ModLoaderLog.info(
+			"destroy_tile spread: origin=%s radius=%d poison=%s burn=%s wet=%s" % [
+				str(origin), radius, str(had_poison), str(had_burn), str(had_wet)
+			], LOG_NAME
+		)
 
 	# Divide out passive so it is applied exactly once inside poison/burn_tile_idx
 	var p_raw := 0.0

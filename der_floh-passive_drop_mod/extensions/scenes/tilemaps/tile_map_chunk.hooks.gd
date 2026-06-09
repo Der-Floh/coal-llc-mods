@@ -70,6 +70,13 @@ func destroy_tile(chain: ModLoaderHookChain, idx: int, tile_properties: Dictiona
 	var passive: Item = load(PASSIVE_RES_PATH).duplicate(true)
 	passive.itemPickupEffect.multiplier = multiplier
 
+	if mod_main._debug:
+		ModLoaderLog.info(
+			"Passive drop: loot=%s config_key=%s loot_level=%d multiplier=%.0f" % [
+				loot, config_key, loot_level, multiplier
+			], LOG_NAME
+		)
+
 	if mod_main.get_auto_collect_passives():
 		# Directly invoke the pickup effect instead of spawning a world item.
 		# This triggers Bus.choose_passive immediately, which NanobotZ-AutoPassiveChooser

@@ -1,7 +1,7 @@
 {
     "name": "performance_mod",
     "namespace": "der_floh",
-    "version_number": "1.2.0",
+    "version_number": "1.3.0",
     "description": "Optimises chunk loading and tile effects. Supersedes der_floh-game_limits_mod's load_chunks hook and reads its config automatically.",
     "website_url": "",
     "dependencies": [],
@@ -19,6 +19,18 @@
             ],
             "load_before": [],
             "incompatibilities": [],
+            "config_schema": {
+                "title": "Config",
+                "description": "Config for Performance Mod",
+                "type": "object",
+                "properties": {
+                    "debug_logging": {
+                        "title": "Debug Logging",
+                        "type": "boolean",
+                        "default": false
+                    }
+                }
+            },
             "compatible_mod_loader_version": [
                 "7.0.1"
             ],

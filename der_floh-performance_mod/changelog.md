@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.0] – 2026-04-27
+
+### Added
+
+- Settings tab with Debug Logging toggle (default: off); gates load_chunks zone-rebuild stats in `tile_map_manager.hooks.gd`
+
 ## [1.2.0] – 2026-04-19
 
 ### Added

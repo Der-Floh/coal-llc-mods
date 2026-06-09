@@ -88,6 +88,14 @@ func load_chunks(chain: ModLoaderHookChain) -> void:
 
 		_prev_chunk_ids[inst_id] = current_ids
 
+		if DerFlohPerfMod._debug:
+			ModLoaderLog.info(
+				"load_chunks zone rebuild: live=%d no_col=%d queued=%d chunks_created=%d" % [
+					tm.live_chunks.size(), tm.simple_collision_chunks.size(),
+					tm.chunk_load_queue.size(), tm.chunks_created.size()
+				], LOG_NAME
+			)
+
 	# --- Queue consumption (runs every frame regardless of zone dirty state) ------
 	for _i in range(chunks_per_frame):
 		if not tm.chunk_load_queue.is_empty():

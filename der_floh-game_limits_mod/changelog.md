@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.2] – 2026-04-27
+
+### Added
+
+- Debug Logging toggle in settings tab (default: off); gates mortar-cap and electric-chain summary log messages
+
 ## [1.1.1] – 2026-04-19
 
 ### Changed

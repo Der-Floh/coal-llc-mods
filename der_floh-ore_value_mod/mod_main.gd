@@ -35,10 +35,11 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	_debug = get_debug_logging()
 	# Re-apply price multipliers at the start of each new mining day so that
 	# settings changed during the management screen take effect immediately.
 	Bus.StartDay.connect(_on_start_day)
-	ModLoaderLog.info("Ready!", LOG_NAME)
+	ModLoaderLog.info("Ready! debug_logging=%s" % str(_debug), LOG_NAME)
 
 
 func _on_start_day() -> void:
@@ -78,4 +79,17 @@ static func set_multiplier(item_id: String, value: float) -> void:
 		return
 	var cfg := get_config()
 	cfg.data[key] = value
+	ModLoaderConfig.update_config(cfg)
+
+
+static var _debug: bool = false
+
+
+static func get_debug_logging() -> bool:
+	return bool(get_config().data.get("debug_logging", false))
+
+
+static func set_debug_logging(value: bool) -> void:
+	var cfg := get_config()
+	cfg.data["debug_logging"] = value
 	ModLoaderConfig.update_config(cfg)

@@ -35,6 +35,12 @@ func shoot_mortar(chain: ModLoaderHookChain, pos: Vector2, dmg: float) -> void:
 			mm.idx = mm.max_mortars - 1  # newly appended slot is always at the last index
 		else:
 			# Pool is at cap — buffer damage into next shot that lands
+			if load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")._debug:
+				ModLoaderLog.info(
+					"Mortar pool at cap (%d) — buffering dmg=%.1f (total buffered=%.1f)" % [
+						configured_max, dmg, mm.buffer_damage + dmg
+					], LOG_NAME
+				)
 			mm.buffer_damage += dmg
 			return
 

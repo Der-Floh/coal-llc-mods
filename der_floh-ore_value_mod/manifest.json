@@ -1,7 +1,7 @@
 {
     "name": "ore_value_mod",
     "namespace": "der_floh",
-    "version_number": "1.0.1",
+    "version_number": "1.0.2",
     "description": "Configurable sell price multipliers for all ore types. Each ore can be independently scaled relative to its vanilla price.",
     "website_url": "",
     "dependencies": [],
@@ -100,6 +100,11 @@
                         "title": "Onyx",
                         "type": "number",
                         "default": 1.0
+                    },
+                    "debug_logging": {
+                        "title": "Debug Logging",
+                        "type": "boolean",
+                        "default": false
                     }
                 }
             },

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.2] – 2026-04-27
+
+### Added
+
+- Debug Logging toggle in settings tab (default: off); gates sell-price log messages in `Gvars.gd` extension
+
 ## [1.0.1] – 2026-04-19
 
 ### Changed

@@ -1,7 +1,7 @@
 {
     "name": "effect_spread_mod",
     "namespace": "der_floh",
-    "version_number": "1.0.1",
+    "version_number": "1.0.2",
     "description": "When a tile with poison, fire or water effects is destroyed while still having ticks left, those effects spread to nearby ores in a configurable radius.",
     "website_url": "",
     "dependencies": [],
@@ -36,6 +36,11 @@
                         "title": "Fresh Ticks",
                         "type": "number",
                         "default": 10
+                    },
+                    "debug_logging": {
+                        "title": "Debug Logging",
+                        "type": "boolean",
+                        "default": false
                     }
                 }
             },

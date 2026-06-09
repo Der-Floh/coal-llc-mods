@@ -27,3 +27,9 @@ func roll_loot(chain: ModLoaderHookChain) -> void:
 
 	chest.loot = passive_upgrade
 	chest.loot_count = 1
+	if mod_main._debug:
+		ModLoaderLog.info(
+			"Chest roll_loot: replaced weapon scroll with passive (loot_level=%d multiplier=%.0f)" % [
+				chest.loot_level, passive_upgrade.itemPickupEffect.multiplier
+			], LOG_NAME
+		)

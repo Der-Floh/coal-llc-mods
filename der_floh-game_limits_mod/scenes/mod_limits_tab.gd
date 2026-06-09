@@ -5,6 +5,7 @@ extends PanelContainer
 const LOG_NAME := "der_floh-game_limits_mod:Tab"
 
 const SLIDER_SCENE = preload("res://scenes/Interfaces/Menus/setting_slider.tscn")
+const BOOL_SCENE   = preload("res://scenes/Interfaces/Menus/setting_bool.tscn")
 
 var _max_employees_slider: SettingSlider
 var _vanilla_employee_slider: SettingSlider = null
@@ -111,6 +112,21 @@ func _ready() -> void:
 	electric_visuals_slider.slider.step = 10
 	electric_visuals_slider.slider.value = mod_main.get_max_electric_visuals()
 
+	# --- Section: Debug ---
+	var debug_header := RichTextLabel.new()
+	debug_header.bbcode_enabled = true
+	debug_header.text = "[b]Debug[/b]"
+	debug_header.fit_content = true
+	debug_header.custom_minimum_size = Vector2(0, 28)
+	vbox.add_child(debug_header)
+
+	var debug_bool: SettingBool = BOOL_SCENE.instantiate()
+	debug_bool.default = false
+	vbox.add_child(debug_bool)
+	debug_bool.setting_label.text = "Debug Logging (prints mortar/electric events to modloader.log)"
+	debug_bool.check_button.button_pressed = mod_main.get_debug_logging()
+	debug_bool.new_value.connect(_on_debug_logging_changed)
+
 
 func _on_max_mortars_changed(new_value: float) -> void:
 	var mod_main = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
@@ -167,3 +183,10 @@ func _on_max_electric_visuals_changed(new_value: float) -> void:
 	var mod_main = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
 	mod_main.set_max_electric_visuals(int(new_value))
 	ModLoaderLog.info("Max electric visual arcs set to %d" % int(new_value), LOG_NAME)
+
+
+func _on_debug_logging_changed(value: bool) -> void:
+	var mod_main = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
+	mod_main.set_debug_logging(value)
+	mod_main._debug = value
+	ModLoaderLog.info("Debug logging set to %s" % str(value), LOG_NAME)

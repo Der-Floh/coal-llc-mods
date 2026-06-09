@@ -20,9 +20,10 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	_debug = get_debug_logging()
 	ModLoaderLog.info(
-		"Effect Spread Mod ready. radius=%d, inherit_ticks=%s, fresh_ticks=%d" % [
-			get_spread_radius(), str(get_inherit_ticks()), get_fresh_ticks()
+		"Effect Spread Mod ready. radius=%d, inherit_ticks=%s, fresh_ticks=%d, debug_logging=%s" % [
+			get_spread_radius(), str(get_inherit_ticks()), get_fresh_ticks(), str(_debug)
 		],
 		LOG_NAME
 	)
@@ -75,4 +76,17 @@ static func get_fresh_ticks() -> int:
 static func set_fresh_ticks(value: float) -> void:
 	var cfg := get_config()
 	cfg.data["fresh_ticks"] = int(value)
+	ModLoaderConfig.update_config(cfg)
+
+
+static var _debug: bool = false
+
+
+static func get_debug_logging() -> bool:
+	return bool(get_config().data.get("debug_logging", false))
+
+
+static func set_debug_logging(value: bool) -> void:
+	var cfg := get_config()
+	cfg.data["debug_logging"] = value
 	ModLoaderConfig.update_config(cfg)
