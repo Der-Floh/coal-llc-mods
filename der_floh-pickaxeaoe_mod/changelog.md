@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.1.2] – 2026-06-09
+
+### Fixed
+
+- Hook was silently never registered since 1.1.0: `player_2.hooks.gd` referenced
+  `DerFlohPickaxeAoeMod._debug` by class name, which GDScript cannot resolve for
+  dynamically-loaded scripts. Replaced with `load(MOD_MAIN_PATH)._debug`.
+- Spark effect after each swing now uses `tilemap.sparks_manager.add_spark()` to
+  match current vanilla, instead of manually spawning 30 un-recycled `Spark.tscn`
+  instances (regression from a game update that added `sparks_manager`).
+
 ## [1.1.1] – 2026-06-09
 
 ### Removed

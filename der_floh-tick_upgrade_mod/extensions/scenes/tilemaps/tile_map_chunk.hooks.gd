@@ -1,17 +1,22 @@
 extends Object
 
 const LOG_NAME := "der_floh-tick_upgrade_mod:ChunkHook"
+# Access mod_main via load() — dynamically-loaded class_name declarations are not
+# in GDScript's global registry, so referencing DerFlohTickUpgradeMod by name here
+# silently prevents hook registration.
+const MOD_MAIN_PATH := "res://mods-unpacked/der_floh-tick_upgrade_mod/mod_main.gd"
 
 
 func poison_tile_idx(chain: ModLoaderHookChain, idx: int, damage: float, ticks: int) -> void:
 	var speed: float = Gvars.poison_tick_speed
-	if DerFlohTickUpgradeMod._debug:
-		var new_ticks := int(ticks * speed) if (speed > 1.0 and DerFlohTickUpgradeMod.get_preserve_duration()) else ticks
+	var mod_main := load(MOD_MAIN_PATH)
+	if mod_main._debug:
+		var new_ticks := int(ticks * speed) if (speed > 1.0 and mod_main.get_preserve_duration()) else ticks
 		ModLoaderLog.info(
 			"poison_tile_idx hook called — speed=%.2f preserve=%s ticks=%d → %d" % [
-				speed, str(DerFlohTickUpgradeMod.get_preserve_duration()), ticks, new_ticks
+				speed, str(mod_main.get_preserve_duration()), ticks, new_ticks
 			], LOG_NAME)
-	if speed > 1.0 and DerFlohTickUpgradeMod.get_preserve_duration():
+	if speed > 1.0 and mod_main.get_preserve_duration():
 		chain.execute_next([idx, damage, int(ticks * speed)])
 	else:
 		chain.execute_next([idx, damage, ticks])
@@ -19,7 +24,7 @@ func poison_tile_idx(chain: ModLoaderHookChain, idx: int, damage: float, ticks: 
 
 func burn_tile_idx(chain: ModLoaderHookChain, idx: int, damage: float, ticks: int) -> void:
 	var speed: float = Gvars.fire_tick_speed
-	if speed > 1.0 and DerFlohTickUpgradeMod.get_preserve_duration():
+	if speed > 1.0 and load(MOD_MAIN_PATH).get_preserve_duration():
 		chain.execute_next([idx, damage, int(ticks * speed)])
 	else:
 		chain.execute_next([idx, damage, ticks])
@@ -27,13 +32,14 @@ func burn_tile_idx(chain: ModLoaderHookChain, idx: int, damage: float, ticks: in
 
 func apply_tile_effects(chain: ModLoaderHookChain) -> void:
 	var chunk := chain.reference_object as TileMapChunk
-	if DerFlohTickUpgradeMod._debug:
+	var mod_main := load(MOD_MAIN_PATH)
+	if mod_main._debug:
 		ModLoaderLog.info("apply_tile_effects chunk hook IS being called", LOG_NAME)
 	chain.execute_next()
 
 	var poison_speed: float = Gvars.poison_tick_speed
 	if poison_speed > 1.0 and chunk.t % TileMapChunk.POISON_TICK_LENGTH == 0:
-		if DerFlohTickUpgradeMod._debug:
+		if mod_main._debug:
 			ModLoaderLog.info(
 				"firing extra poison loops — speed=%.2f extra=%d chunk.t=%d" % [
 					poison_speed, int(poison_speed) - 1, chunk.t

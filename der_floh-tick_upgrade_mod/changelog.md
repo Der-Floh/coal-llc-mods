@@ -1,3 +1,12 @@
+## [1.2.4] – 2026-06-09
+
+### Fixed
+
+- `tile_map_chunk.hooks.gd` and `tile_map_manager.hooks.gd` referenced
+  `DerFlohTickUpgradeMod` by class name (for `_debug`, `get_preserve_duration`,
+  `get_always_tick_distant`), silently preventing all hooks from registering.
+  Replaced all references with `load(MOD_MAIN_PATH)`.
+
 ## [1.2.3] – 2026-06-09
 
 ### Removed

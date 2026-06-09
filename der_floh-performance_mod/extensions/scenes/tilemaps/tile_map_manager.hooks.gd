@@ -13,6 +13,10 @@ extends Object
 #   - Skips idle outer-ring (NO_COLLISIONS) chunks that have no queued tile work.
 
 const LOG_NAME := "der_floh-performance_mod:Hook"
+# Access mod_main via load() — dynamically-loaded class_name declarations are not
+# in GDScript's global registry, so referencing DerFlohPerfMod by name here
+# silently prevents hook registration.
+const MOD_MAIN_PATH := "res://mods-unpacked/der_floh-performance_mod/mod_main.gd"
 
 # Per-TileMapManager-instance tracking, keyed by get_instance_id().
 # Persists across frames via static vars.
@@ -88,7 +92,7 @@ func load_chunks(chain: ModLoaderHookChain) -> void:
 
 		_prev_chunk_ids[inst_id] = current_ids
 
-		if DerFlohPerfMod._debug:
+		if load(MOD_MAIN_PATH)._debug:
 			ModLoaderLog.info(
 				"load_chunks zone rebuild: live=%d no_col=%d queued=%d chunks_created=%d" % [
 					tm.live_chunks.size(), tm.simple_collision_chunks.size(),

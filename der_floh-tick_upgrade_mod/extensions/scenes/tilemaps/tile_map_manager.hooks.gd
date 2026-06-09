@@ -1,18 +1,23 @@
 extends Object
 
 const LOG_NAME := "der_floh-tick_upgrade_mod:MapManagerHook"
+# Access mod_main via load() — dynamically-loaded class_name declarations are not
+# in GDScript's global registry, so referencing DerFlohTickUpgradeMod by name here
+# silently prevents hook registration.
+const MOD_MAIN_PATH := "res://mods-unpacked/der_floh-tick_upgrade_mod/mod_main.gd"
 
 
 func apply_tile_effects(chain: ModLoaderHookChain) -> void:
 	var tilemap := chain.reference_object as TileMapManager
-	if DerFlohTickUpgradeMod._debug:
+	var mod_main := load(MOD_MAIN_PATH)
+	if mod_main._debug:
 		ModLoaderLog.info("apply_tile_effects manager hook IS being called", LOG_NAME)
 	chain.execute_next()
 
 	# After the normal pass (live + no-collision chunks), also tick any DISABLED
 	# chunk that still carries active poison or fire effects — so effects keep
 	# dealing damage even when the player has moved far away.
-	if not DerFlohTickUpgradeMod.get_always_tick_distant():
+	if not mod_main.get_always_tick_distant():
 		return
 
 	for chunk in tilemap.chunks_created.values():

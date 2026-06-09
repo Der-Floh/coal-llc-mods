@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.2] – 2026-06-09
+
+### Fixed
+
+- `tile_map_manager.hooks.gd` referenced `DerFlohPerfMod._debug` by class name,
+  silently preventing all hooks in that file (`load_chunks`, `apply_tile_effects`)
+  from registering. Replaced with `load(MOD_MAIN_PATH)._debug`.
+
 ## [1.3.1] – 2026-06-09
 
 ### Removed
