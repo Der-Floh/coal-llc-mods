@@ -28,11 +28,6 @@ func install_hooks() -> void:
 		"res://scenes/equipment/electric_shock.gd",
 		extensions_dir_path.path_join("scenes/equipment/electric_shock.hooks.gd")
 	)
-	ModLoaderMod.install_script_hooks(
-		"res://scenes/Interfaces/Menus/settings_2.gd",
-		extensions_dir_path.path_join("scenes/Interfaces/Menus/settings_2.hooks.gd")
-	)
-
 
 func _ready() -> void:
 	_debug = get_debug_logging()

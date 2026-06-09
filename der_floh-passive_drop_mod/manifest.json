@@ -1,7 +1,7 @@
 {
     "name": "passive_drop_mod",
     "namespace": "der_floh",
-    "version_number": "2.2.3",
+    "version_number": "2.2.4",
     "description": "Per-ore configurable chance for ore tiles to drop a PassiveUpgrade when destroyed; passive quality scales with layer depth. Also allows toggling weapon drops from chests and chest generation.",
     "website_url": "",
     "dependencies": [],

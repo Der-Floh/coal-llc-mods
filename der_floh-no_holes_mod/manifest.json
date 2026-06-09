@@ -1,8 +1,8 @@
 {
-    "name": "pickaxeaoe_mod",
+    "name": "no_holes_mod",
     "namespace": "der_floh",
-    "version_number": "1.1.1",
-    "description": "Makes the electric pickaxe and the AOE character deal equal damage to all ores instead of reduced damage to chained/surrounding tiles.",
+    "version_number": "1.0.2",
+    "description": "Eliminates air pockets in world generation by filling empty underground tiles with the correct background tile for their depth.",
     "website_url": "",
     "dependencies": [],
     "extra": {
@@ -12,15 +12,17 @@
             ],
             "tags": [
                 "gameplay",
-                "balance"
+                "worldgen"
             ],
             "description_rich": "",
-            "optional_dependencies": [],
+            "optional_dependencies": [
+                "der_floh-performance_mod"
+            ],
             "load_before": [],
             "incompatibilities": [],
             "config_schema": {
                 "title": "Config",
-                "description": "Config for Pickaxe AOE Mod",
+                "description": "Config for No Holes Mod",
                 "type": "object",
                 "properties": {
                     "debug_logging": {

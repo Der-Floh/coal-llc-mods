@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.3] – 2026-06-09
+
+### Removed
+
+- Debug Logging toggle from settings tab; toggle `debug_logging` via the config JSON file instead
+
 ## [1.1.2] – 2026-04-27
 
 ### Added

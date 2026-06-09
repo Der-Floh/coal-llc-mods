@@ -1,7 +1,7 @@
 {
     "name": "game_limits_mod",
     "namespace": "der_floh",
-    "version_number": "1.1.2",
+    "version_number": "1.1.3",
     "description": "Adds a 'Game Limits' tab to the settings menu to configure max mortar count, max employee entities drawn, and chunk load radius.",
     "website_url": "",
     "dependencies": [],

@@ -60,21 +60,6 @@ func _ready() -> void:
 	fresh_slider.slider.value       = mod_main.get_fresh_ticks()
 	fresh_slider.new_value.connect(_on_fresh_ticks_changed)
 
-	# ------------------------------------------------------------------- Debug
-	var debug_header := RichTextLabel.new()
-	debug_header.bbcode_enabled = true
-	debug_header.text = "[b]Debug[/b]"
-	debug_header.fit_content = true
-	debug_header.custom_minimum_size = Vector2(0, 28)
-	vbox.add_child(debug_header)
-
-	var debug_bool: SettingBool = BOOL_SCENE.instantiate()
-	debug_bool.default = false
-	vbox.add_child(debug_bool)
-	debug_bool.setting_label.text = "Debug Logging (prints effect spread events to modloader.log)"
-	debug_bool.check_button.button_pressed = mod_main.get_debug_logging()
-	debug_bool.new_value.connect(_on_debug_logging_changed)
-
 
 func _on_spread_radius_changed(value: float) -> void:
 	var mod_main = load("res://mods-unpacked/der_floh-effect_spread_mod/mod_main.gd")
@@ -94,8 +79,3 @@ func _on_fresh_ticks_changed(value: float) -> void:
 	ModLoaderLog.info("Fresh ticks set to %d" % int(value), LOG_NAME)
 
 
-func _on_debug_logging_changed(value: bool) -> void:
-	var mod_main = load("res://mods-unpacked/der_floh-effect_spread_mod/mod_main.gd")
-	mod_main.set_debug_logging(value)
-	mod_main._debug = value
-	ModLoaderLog.info("Debug logging set to %s" % str(value), LOG_NAME)

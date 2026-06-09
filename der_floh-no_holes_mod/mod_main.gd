@@ -1,12 +1,12 @@
-class_name DerFlohPickaxeAoeMod
+class_name DerFlohNoHolesMod
 extends Node
 
-const MOD_ID := "der_floh-pickaxeaoe_mod"
-const MOD_DIR := "der_floh-pickaxeaoe_mod"
-const LOG_NAME := "der_floh-pickaxeaoe_mod:Main"
+const MOD_ID := "der_floh-no_holes_mod"
+const MOD_DIR := "der_floh-no_holes_mod"
+const LOG_NAME := "der_floh-no_holes_mod:Main"
 
-var mod_dir_path := ""
-var extensions_dir_path := ""
+var mod_dir_path: String
+var extensions_dir_path: String
 
 
 func _init() -> void:
@@ -17,10 +17,9 @@ func _init() -> void:
 
 func install_hooks() -> void:
 	ModLoaderMod.install_script_hooks(
-		"res://scripts/StateMachine/Player2/player_2.gd",
-		extensions_dir_path.path_join("scripts/StateMachine/Player2/player_2.hooks.gd")
+		"res://scenes/tilemaps/tile_map_chunk.gd",
+		extensions_dir_path.path_join("scenes/tilemaps/tile_map_chunk.hooks.gd")
 	)
-	ModLoaderLog.info("Installed mine_action hook — AOE and electric pickaxe now deal equal damage to all ores.", LOG_NAME)
 
 
 func _ready() -> void:

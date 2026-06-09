@@ -38,6 +38,7 @@ Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside y
 | [Effect Spread Mod](#effect-spread-mod-der_floh-effect_spread_mod) | der_floh | Spreads poison/fire/water ticks to nearby tiles when an affected tile is destroyed      |
 | [Game Limits Mod](#game-limits-mod-der_floh-game_limits_mod)       | der_floh | Tune performance-related caps (mortars, chunk loading, electric chain) via settings tab |
 | [Performance Mod](#performance-mod-der_floh-performance_mod)       | der_floh | Optimised chunk loading, tile effects, and level generation to reduce frame time spikes |
+| [No Holes Mod](#no-holes-mod-der_floh-no_holes_mod)                | der_floh | Fills air pockets in world generation so underground rock is always solid               |
 | [AutoPassiveChooser](#other-mods-not-by-me)                        | NanobotZ | Automatically selects passives on level-up based on a configurable priority list        |
 
 ---
@@ -179,6 +180,16 @@ Replaces the vanilla chunk loading and tile effect processing with optimised imp
 - Automatically reads **Game Limits Mod** config (chunk load radius, chunks per frame) if that mod is also installed
 
 No additional configuration options - configure chunk behaviour via the Game Limits Mod.
+
+---
+
+### No Holes Mod (`der_floh-no_holes_mod`)
+
+Fills **air pockets** that vanilla world generation leaves behind. Runs a post-processing pass after each chunk is generated and fills any remaining empty underground tiles with the correct background material for their depth.
+
+No configuration options. To disable, uninstall the mod.
+
+> **Note:** Only affects newly generated chunks. Existing saves are unaffected until you enter a previously unloaded area.
 
 ---
 

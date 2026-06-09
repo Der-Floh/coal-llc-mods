@@ -70,16 +70,6 @@ func _ready() -> void:
 	auto_collect_bool.setting_label.text = "Auto-Collect Dropped Passives"
 	auto_collect_bool.check_button.button_pressed = mod_main.get_auto_collect_passives()
 
-	# --- Section: Debug ---
-	_add_section("Debug")
-
-	var debug_bool: SettingBool = BOOL_SCENE.instantiate()
-	debug_bool.default = false
-	debug_bool.new_value.connect(_on_debug_logging_changed)
-	vbox.add_child(debug_bool)
-	debug_bool.setting_label.text = "Debug Logging (prints passive drop events to modloader.log)"
-	debug_bool.check_button.button_pressed = mod_main.get_debug_logging()
-
 
 func _add_section(title: String) -> void:
 	var header := RichTextLabel.new()
@@ -127,8 +117,3 @@ func _on_auto_collect_passives_changed(value: bool) -> void:
 	mod_main.set_auto_collect_passives(value)
 
 
-func _on_debug_logging_changed(value: bool) -> void:
-	var mod_main = load("res://mods-unpacked/der_floh-passive_drop_mod/mod_main.gd")
-	mod_main.set_debug_logging(value)
-	mod_main._debug = value
-	ModLoaderLog.info("Debug logging set to %s" % str(value), LOG_NAME)

@@ -31,8 +31,6 @@ func _ready() -> void:
 	_add_ore_row("moonstone",   "Moonstone",    mod_main)
 	_add_ore_row("onyx",        "Onyx",         mod_main)
 
-	_add_debug_section(mod_main)
-
 
 func _add_section(title: String) -> void:
 	var header := RichTextLabel.new()
@@ -70,15 +68,3 @@ func _add_ore_row(item_id: String, display_name: String, mod_main) -> void:
 	spinbox.value_changed.connect(func(val: float) -> void: mod_main.set_multiplier(item_id, val))
 
 
-func _add_debug_section(mod_main) -> void:
-	const BOOL_SCENE = preload("res://scenes/Interfaces/Menus/setting_bool.tscn")
-	_add_section("Debug")
-	var debug_bool: SettingBool = BOOL_SCENE.instantiate()
-	debug_bool.default = false
-	vbox.add_child(debug_bool)
-	debug_bool.setting_label.text = "Debug Logging (prints sell price changes to modloader.log)"
-	debug_bool.check_button.button_pressed = mod_main.get_debug_logging()
-	debug_bool.new_value.connect(func(value: bool) -> void:
-		mod_main.set_debug_logging(value)
-		mod_main._debug = value
-	)
