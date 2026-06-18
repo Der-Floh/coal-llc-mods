@@ -1,3 +1,15 @@
+## [1.3.2] – 2026-06-18
+
+### Changed
+
+- Removed redundant comments from `choose_passive.hooks.gd`; kept only non-obvious WHY notes.
+
+## [1.3.1] – 2026-06-18
+
+### Fixed
+
+- Passive chooser no longer pauses the scene tree when `der_floh-passive_drop_mod` is auto-collecting passives. Previously, each auto-collected passive caused one frame of physics/camera freeze (pause set in `_ready`, unpause in button handler, but physics/camera had already run for that frame). Now reads `_suppress_chooser_pause` from passive_drop_mod (if installed) and skips `get_tree().paused = true` during auto-collect while leaving normal human-interaction pausing unchanged.
+
 ## [1.3.0] – 2026-06-18
 
 ### Added

@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.3] – 2026-06-18
+
+### Fixed
+
+- Auto-collect queue: replaced `call_deferred` chaining with `SceneTree.process_frame` (CONNECT_ONE_SHOT) to guarantee one passive per frame. Without a scene-tree pause, Godot drains the entire message queue in a single batch, so `call_deferred` from within a deferred call ran all N passives in the same frame — restoring the original lag. `process_frame` fires at the start of the next idle step regardless of queue batch behaviour. Added `_flush_scheduled` flag to prevent double-scheduling.
+
+## [2.3.2] – 2026-06-18
+
+### Fixed
+
+- Auto-collect no longer causes physics (ore gravity) and camera to stutter during batch collection. Root cause: each deferred `pickupEffect` call synchronously triggered tick_upgrade's `_ready` hook, which pauses the scene tree for human interaction — happening once per frame over N frames caused sustained physics and camera freezes. Fixed by setting a static `_suppress_chooser_pause` flag around each `pickupEffect` call so tick_upgrade knows to skip the pause.
+
 ## [2.3.1] – 2026-06-18
 
 ### Fixed

@@ -161,16 +161,34 @@ static func set_enabled(value: bool) -> void:
 
 # --- Auto-collect queue ---
 static var _passive_queue: Array = []
+# Set true while pickupEffect is running so tick_upgrade's _ready hook can skip
+# the tree pause that is only needed for human interaction, not auto-collect.
+static var _suppress_chooser_pause: bool = false
+# Guards against scheduling _flush_passive_queue more than once per frame.
+static var _flush_scheduled: bool = false
 
 static func _enqueue_auto_collect(passive: Item) -> void:
 	_passive_queue.append(passive)
-	if _passive_queue.size() == 1:
-		_flush_passive_queue.call_deferred()
+	if not _flush_scheduled:
+		_flush_scheduled = true
+		var tree := Engine.get_main_loop() as SceneTree
+		if tree:
+			# process_frame fires at the start of the next idle frame — guaranteed
+			# to be a separate frame from the current one, unlike call_deferred which
+			# drains the entire message queue in one batch when the tree isn't paused.
+			tree.process_frame.connect(_flush_passive_queue, CONNECT_ONE_SHOT)
+
 
 static func _flush_passive_queue() -> void:
+	_flush_scheduled = false
 	if _passive_queue.is_empty():
 		return
 	var passive: Item = _passive_queue.pop_front()
+	_suppress_chooser_pause = true
 	passive.itemPickupEffect.pickupEffect(passive)
-	if not _passive_queue.is_empty():
-		_flush_passive_queue.call_deferred()
+	_suppress_chooser_pause = false
+	if not _passive_queue.is_empty() and not _flush_scheduled:
+		_flush_scheduled = true
+		var tree := Engine.get_main_loop() as SceneTree
+		if tree:
+			tree.process_frame.connect(_flush_passive_queue, CONNECT_ONE_SHOT)
