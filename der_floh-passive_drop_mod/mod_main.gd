@@ -157,3 +157,20 @@ static func set_enabled(value: bool) -> void:
 	var cfg := get_config()
 	cfg.data["enabled"] = value
 	ModLoaderConfig.update_config(cfg)
+
+
+# --- Auto-collect queue ---
+static var _passive_queue: Array = []
+
+static func _enqueue_auto_collect(passive: Item) -> void:
+	_passive_queue.append(passive)
+	if _passive_queue.size() == 1:
+		_flush_passive_queue.call_deferred()
+
+static func _flush_passive_queue() -> void:
+	if _passive_queue.is_empty():
+		return
+	var passive: Item = _passive_queue.pop_front()
+	passive.itemPickupEffect.pickupEffect(passive)
+	if not _passive_queue.is_empty():
+		_flush_passive_queue.call_deferred()

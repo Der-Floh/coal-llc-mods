@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.3.1] – 2026-06-18
+
+### Fixed
+
+- Auto-collect: no longer instantiates N ChoosePassive UI scenes in a single frame when many tiles break at once. Drops are now queued and processed one per frame via a `call_deferred` chain, eliminating the per-burst spike. All passives are still collected; they just arrive over successive frames instead of all at once.
+
 ## [2.3.0] – 2026-06-18
 
 ### Added

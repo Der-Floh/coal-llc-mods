@@ -80,10 +80,7 @@ func destroy_tile(chain: ModLoaderHookChain, idx: int, tile_properties: Dictiona
 		)
 
 	if mod_main.get_auto_collect_passives():
-		# Directly invoke the pickup effect instead of spawning a world item.
-		# This triggers Bus.choose_passive immediately, which NanobotZ-AutoPassiveChooser
-		# intercepts to auto-select the best passive without player interaction.
-		passive.itemPickupEffect.pickupEffect(passive)
+		mod_main._enqueue_auto_collect(passive)
 	else:
 		# Spawn the passive as a world item the player walks over to collect.
 		var world_pos: Vector2 = chunk.to_global(chunk.map_to_local(chunk.array_to_pos(idx)))
