@@ -1,7 +1,7 @@
 {
     "name": "tick_upgrade_mod",
     "namespace": "der_floh",
-    "version_number": "1.2.4",
+    "version_number": "1.2.10",
     "description": "Adds in-game passive upgrades to speed up poison and fire ticking, and keeps effects ticking on distant (unloaded) tiles.",
     "website_url": "",
     "dependencies": [],

@@ -1,6 +1,9 @@
 extends Object
 
 const LOG_NAME := "der_floh-tick_upgrade_mod:PassiveHook"
+# Access mod_main via load() — a mod's class_name is not in GDScript's global
+# registry, so referencing DerFlohTickUpgradeMod from this script would not compile.
+const MOD_MAIN_PATH := "res://mods-unpacked/der_floh-tick_upgrade_mod/mod_main.gd"
 
 # Per-upgrade increment for each custom tick-speed passive.
 # Format mirrors ChoosePassive.ALL_PASSIVES: base_amount * multiplier = % gained.
@@ -168,18 +171,13 @@ func _handle_button(chain: ModLoaderHookChain, idx: int) -> void:
 
 	self_obj.live = false
 	var amount: float = self_obj.multiplier * MOD_PASSIVES[key]
+	var mm := load(MOD_MAIN_PATH)
 	match key:
 		"poison_tick_speed":
-			Gvars.poison_tick_speed += amount
-			ModLoaderLog.info(
-				"Poison tick speed upgraded to %.2f×" % Gvars.poison_tick_speed,
-				LOG_NAME
-			)
+			mm.add_poison_tick_speed(amount)
+			ModLoaderLog.info("Poison tick speed upgraded to %.2f×" % mm.get_poison_tick_speed(), LOG_NAME)
 		"fire_tick_speed":
-			Gvars.fire_tick_speed += amount
-			ModLoaderLog.info(
-				"Fire tick speed upgraded to %.2f×" % Gvars.fire_tick_speed,
-				LOG_NAME
-			)
+			mm.add_fire_tick_speed(amount)
+			ModLoaderLog.info("Fire tick speed upgraded to %.2f×" % mm.get_fire_tick_speed(), LOG_NAME)
 	self_obj.get_tree().paused = false
 	self_obj.queue_free()

@@ -18,7 +18,7 @@ func reset_resources() -> void:
 			_sellable.resource_path, "", ResourceLoader.CacheMode.CACHE_MODE_REPLACE
 		)
 		item.itemSellPrice *= multiplier
-		if DerFlohOreValueMod._debug:
+		if mod_main._debug:
 			ModLoaderLog.info(
 				"%s sell price x%.0f = %.0f" % [_sellable.itemID, multiplier, item.itemSellPrice],
 				LOG_NAME

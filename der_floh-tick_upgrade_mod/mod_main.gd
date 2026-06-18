@@ -18,21 +18,14 @@ func _init() -> void:
 func _ready() -> void:
 	_debug = get_debug_logging()
 	ModLoaderLog.info("Ready! poison_tick_speed=%.2f fire_tick_speed=%.2f always_distant=%s preserve_duration=%s debug_logging=%s" % [
-		Gvars.poison_tick_speed,
-		Gvars.fire_tick_speed,
-		str(DerFlohTickUpgradeMod.get_always_tick_distant()),
-		str(DerFlohTickUpgradeMod.get_preserve_duration()),
+		poison_tick_speed, fire_tick_speed,
+		str(get_always_tick_distant()),
+		str(get_preserve_duration()),
 		str(_debug),
 	], LOG_NAME)
 
 
 func install_hooks() -> void:
-	# Script Extension: add poison_tick_speed / fire_tick_speed to Gvars singleton.
-	# Gvars.gd has no class_name so extensions are safe to use.
-	ModLoaderMod.install_script_extension(
-		extensions_dir_path.path_join("scripts/Gvars.gd")
-	)
-
 	# Script Hooks: inject tick-speed passives into the passive chooser UI.
 	ModLoaderMod.install_script_hooks(
 		"res://scenes/Interfaces/in_game/choose_passive.gd",
@@ -69,7 +62,7 @@ func install_hooks() -> void:
 	var profession_hook := extensions_dir_path.path_join(
 		"resources/professions/scripts/profession.hooks.gd"
 	)
-	const PROFESSION_SCRIPTS: Array = [
+	var profession_scripts: Array[String] = [
 		"resources/professions/scripts/profession.gd",
 		"resources/professions/scripts/assassin.gd",
 		"resources/professions/scripts/barbarian.gd",
@@ -93,8 +86,34 @@ func install_hooks() -> void:
 		"resources/professions/scripts/waterbender.gd",
 		"resources/professions/scripts/wizard.gd",
 	]
-	for script_path in PROFESSION_SCRIPTS:
+	for script_path in profession_scripts:
 		ModLoaderMod.install_script_hooks("res://" + script_path, profession_hook)
+
+
+# --- Runtime tick-speed state ---
+# Stored on this mod (not as a Gvars extension) so hook files can reach it via
+# load(mod_main) without the type checker rejecting an extension-added property.
+# Multipliers (1.0 = vanilla); both persist for the process, matching the old
+# Gvars-extension behaviour (reset_game never touched them).
+
+static var poison_tick_speed: float = 1.0
+static var fire_tick_speed: float = 1.0
+
+
+static func get_poison_tick_speed() -> float:
+	return poison_tick_speed
+
+
+static func get_fire_tick_speed() -> float:
+	return fire_tick_speed
+
+
+static func add_poison_tick_speed(amount: float) -> void:
+	poison_tick_speed += amount
+
+
+static func add_fire_tick_speed(amount: float) -> void:
+	fire_tick_speed += amount
 
 
 # --- Config ---

@@ -1,3 +1,17 @@
+## [1.2.10] – 2026-06-17
+
+### Fixed
+
+- Mod failed to load entirely — hooks never registered, so the tick-speed passives
+  stopped appearing in NanobotZ-AutoPassiveChooser. Root cause: the tick-speed state was
+  stored on a `Gvars` script extension, and reading those extension-added properties from
+  other scripts kept producing compile errors (`mod_main.gd` would not compile, `new()`
+  returned null, `_init()` never ran). Fixed by dropping the `Gvars` script extension
+  entirely: `poison_tick_speed` / `fire_tick_speed` now live as `static var`s on
+  `DerFlohTickUpgradeMod`, exposed via `get_*` / `add_*` static helpers and read by hooks
+  through `load(MOD_MAIN_PATH)` — the pattern the rest of the mod suite uses. Behaviour is
+  unchanged (both default to 1.0 and persist for the process).
+
 ## [1.2.4] – 2026-06-09
 
 ### Fixed

@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.4] – 2026-06-17
+
+### Fixed
+
+- The `Gvars` script extension referenced the mod's own `class_name`
+  (`DerFlohOreValueMod._debug`) from a separate script. A mod's `class_name` is not in
+  GDScript's global registry, so this could fail to compile and silently prevent the
+  `reset_resources` override from applying — meaning sell-price multipliers may not have
+  taken effect. Now reads `_debug` via the already-loaded `mod_main` reference, matching
+  the pattern used elsewhere in the file.
+
 ## [1.0.3] – 2026-06-09
 
 ### Removed
