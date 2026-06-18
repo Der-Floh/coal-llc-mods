@@ -5,6 +5,43 @@ Individual mod version histories live in each mod's own `changelog.md`.
 
 ---
 
+## [1.4.0] – 2026-06-18
+
+Mod Enabled toggle added to every settings tab; ore sell prices apply immediately; auto-collect passive batching overhauled to fix lag and physics/camera stutter.
+
+### der_floh-effect_spread_mod (1.0.3 → 1.1.0), der_floh-game_limits_mod (1.1.3 → 1.2.0), der_floh-passive_drop_mod (2.2.4 → 2.3.3), der_floh-tick_upgrade_mod (1.2.10 → 1.3.2), der_floh-ore_value_mod (1.0.4 → 1.1.1)
+
+#### Added
+
+- Mod Enabled toggle at the top of every settings tab (default: on). Disabling skips all mod logic and falls through to vanilla.
+
+---
+
+### der_floh-ore_value_mod (1.0.4 → 1.1.1)
+
+#### Changed
+
+- Multiplier changes and toggling Mod Enabled now take effect immediately via `Gvars.reset_resources()` — no need to start a new day.
+
+---
+
+### der_floh-passive_drop_mod (2.2.4 → 2.3.3)
+
+#### Fixed
+
+- Auto-collect: passives are now queued and processed one per frame via `SceneTree.process_frame` instead of all at once, eliminating the burst lag spike.
+- Auto-collect: physics (ore gravity) and camera no longer stutter during batch collection. Root cause was tick_upgrade's chooser hook pausing the scene tree once per frame; fixed by a `_suppress_chooser_pause` flag that passive_drop sets while flushing its queue.
+
+---
+
+### der_floh-tick_upgrade_mod (1.2.10 → 1.3.2)
+
+#### Fixed
+
+- Passive chooser no longer pauses the scene tree when passive_drop_mod's auto-collect queue is active. Reads `_suppress_chooser_pause` from passive_drop_mod at call time; normal human-interaction pausing is unchanged.
+
+---
+
 ## [1.3.0] – 2026-06-09
 
 Two new mods, critical bug fixes for three mods that were silently inactive, and debug logging moved out of the in-game settings tab across all mods.
