@@ -1,3 +1,9 @@
+## [1.3.0] – 2026-06-18
+
+### Added
+
+- New setting: **Mod Enabled** toggle (default on). When off, tick-speed passives are not injected into the passive chooser, no extra tick loops run, and distant-tile ticking is suspended.
+
 ## [1.2.10] – 2026-06-17
 
 ### Fixed

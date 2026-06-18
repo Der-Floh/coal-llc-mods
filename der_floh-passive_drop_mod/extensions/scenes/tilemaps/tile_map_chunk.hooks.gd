@@ -32,6 +32,8 @@ func destroy_tile(chain: ModLoaderHookChain, idx: int, tile_properties: Dictiona
 	chain.execute_next([idx, tile_properties])
 
 	var mod_main := load("res://mods-unpacked/der_floh-passive_drop_mod/mod_main.gd")
+	if not mod_main.get_enabled():
+		return
 
 	var loot: String = tile_properties.get("loot", "none")
 
@@ -91,8 +93,7 @@ func destroy_tile(chain: ModLoaderHookChain, idx: int, tile_properties: Dictiona
 
 func generate_chests(chain: ModLoaderHookChain, current_block_chest_locations: Array[Vector2i]) -> Array:
 	var mod_main := load("res://mods-unpacked/der_floh-passive_drop_mod/mod_main.gd")
-	if not mod_main.get_chest_generation_enabled():
-		# Skip all downstream hooks and vanilla — no chest spawned this chunk
+	if not mod_main.get_enabled() or not mod_main.get_chest_generation_enabled():
 		return current_block_chest_locations
 
 	chain.execute_next([current_block_chest_locations])

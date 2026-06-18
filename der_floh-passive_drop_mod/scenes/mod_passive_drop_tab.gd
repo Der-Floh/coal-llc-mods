@@ -13,6 +13,13 @@ const SLIDER_SCENE = preload("res://scenes/Interfaces/Menus/setting_slider.tscn"
 func _ready() -> void:
 	var mod_main = load("res://mods-unpacked/der_floh-passive_drop_mod/mod_main.gd")
 
+	var enabled_bool: SettingBool = BOOL_SCENE.instantiate()
+	enabled_bool.default = true
+	vbox.add_child(enabled_bool)
+	enabled_bool.setting_label.text = "Mod Enabled"
+	enabled_bool.check_button.button_pressed = mod_main.get_enabled()
+	enabled_bool.new_value.connect(_on_enabled_changed)
+
 	# --- Section: Coal ---
 	_add_section("Coal")
 	_add_chance_row("coal",         "Coal",         mod_main)
@@ -116,4 +123,9 @@ func _on_auto_collect_passives_changed(value: bool) -> void:
 	var mod_main = load("res://mods-unpacked/der_floh-passive_drop_mod/mod_main.gd")
 	mod_main.set_auto_collect_passives(value)
 
+
+func _on_enabled_changed(value: bool) -> void:
+	var mod_main = load("res://mods-unpacked/der_floh-passive_drop_mod/mod_main.gd")
+	mod_main.set_enabled(value)
+	ModLoaderLog.info("Mod enabled set to %s" % str(value), LOG_NAME)
 

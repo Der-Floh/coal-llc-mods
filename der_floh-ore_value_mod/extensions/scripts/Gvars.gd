@@ -7,6 +7,8 @@ func reset_resources() -> void:
 	super.reset_resources()
 
 	var mod_main := load("res://mods-unpacked/der_floh-ore_value_mod/mod_main.gd")
+	if not mod_main.get_enabled():
+		return
 	for _sellable in all_sellables:
 		var multiplier: float = mod_main.get_multiplier(_sellable.itemID)
 		if multiplier == 1.0:

@@ -9,6 +9,9 @@ const MOD_MAIN_PATH := "res://mods-unpacked/der_floh-tick_upgrade_mod/mod_main.g
 
 func poison_tile_idx(chain: ModLoaderHookChain, idx: int, damage: float, ticks: int) -> void:
 	var mod_main := load(MOD_MAIN_PATH)
+	if not mod_main.get_enabled():
+		chain.execute_next([idx, damage, ticks])
+		return
 	var speed: float = mod_main.get_poison_tick_speed()
 	if mod_main._debug:
 		var new_ticks := int(ticks * speed) if (speed > 1.0 and mod_main.get_preserve_duration()) else ticks
@@ -23,8 +26,12 @@ func poison_tile_idx(chain: ModLoaderHookChain, idx: int, damage: float, ticks: 
 
 
 func burn_tile_idx(chain: ModLoaderHookChain, idx: int, damage: float, ticks: int) -> void:
-	var speed: float = load(MOD_MAIN_PATH).get_fire_tick_speed()
-	if speed > 1.0 and load(MOD_MAIN_PATH).get_preserve_duration():
+	var mod_main := load(MOD_MAIN_PATH)
+	if not mod_main.get_enabled():
+		chain.execute_next([idx, damage, ticks])
+		return
+	var speed: float = mod_main.get_fire_tick_speed()
+	if speed > 1.0 and mod_main.get_preserve_duration():
 		chain.execute_next([idx, damage, int(ticks * speed)])
 	else:
 		chain.execute_next([idx, damage, ticks])
@@ -36,6 +43,8 @@ func apply_tile_effects(chain: ModLoaderHookChain) -> void:
 	if mod_main._debug:
 		ModLoaderLog.info("apply_tile_effects chunk hook IS being called", LOG_NAME)
 	chain.execute_next()
+	if not mod_main.get_enabled():
+		return
 
 	var poison_speed: float = mod_main.get_poison_tick_speed()
 	if poison_speed > 1.0 and chunk.t % TileMapChunk.POISON_TICK_LENGTH == 0:

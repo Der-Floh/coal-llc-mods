@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.0] – 2026-06-18
+
+### Added
+
+- New setting: **Mod Enabled** toggle (default on). When off, spread logic is fully bypassed while vanilla `destroy_tile` still runs normally.
+
 ## [1.0.3] – 2026-06-09
 
 ### Removed

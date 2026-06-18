@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.0] – 2026-06-18
+
+### Added
+
+- New setting: **Mod Enabled** toggle (default on). When off, `reset_resources` skips all multiplier application and vanilla prices are used.
+
 ## [1.0.4] – 2026-06-17
 
 ### Fixed

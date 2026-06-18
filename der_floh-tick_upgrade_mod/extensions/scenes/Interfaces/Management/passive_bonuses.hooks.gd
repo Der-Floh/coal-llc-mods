@@ -9,12 +9,15 @@ const MOD_MAIN_PATH := "res://mods-unpacked/der_floh-tick_upgrade_mod/mod_main.g
 func refresh(chain: ModLoaderHookChain) -> void:
 	chain.execute_next()
 
+	var mod_main := load(MOD_MAIN_PATH)
+	if not mod_main.get_enabled():
+		return
+
 	var self_obj := chain.reference_object as PassiveBonuses
 
 	# Append labels for our custom passives if the player has taken any upgrades.
 	# delta = amount above the 1.0 baseline — e.g. 1.2 → "+20%"
 	# We call the vanilla add_label() helper so the format matches the other rows.
-	var mod_main := load(MOD_MAIN_PATH)
 	var poison_delta: float = mod_main.get_poison_tick_speed() - 1.0
 	if poison_delta > 0.0:
 		self_obj.add_label("poison_tick_speed", poison_delta)

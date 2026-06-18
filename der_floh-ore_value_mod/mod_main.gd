@@ -93,3 +93,13 @@ static func set_debug_logging(value: bool) -> void:
 	var cfg := get_config()
 	cfg.data["debug_logging"] = value
 	ModLoaderConfig.update_config(cfg)
+
+
+static func get_enabled() -> bool:
+	return bool(get_config().data.get("enabled", true))
+
+
+static func set_enabled(value: bool) -> void:
+	var cfg := get_config()
+	cfg.data["enabled"] = value
+	ModLoaderConfig.update_config(cfg)

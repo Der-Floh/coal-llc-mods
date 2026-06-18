@@ -13,6 +13,13 @@ const BOOL_SCENE   = preload("res://scenes/Interfaces/Menus/setting_bool.tscn")
 func _ready() -> void:
 	var mod_main = load("res://mods-unpacked/der_floh-effect_spread_mod/mod_main.gd")
 
+	var enabled_bool: SettingBool = BOOL_SCENE.instantiate()
+	enabled_bool.default = true
+	vbox.add_child(enabled_bool)
+	enabled_bool.setting_label.text = "Mod Enabled"
+	enabled_bool.check_button.button_pressed = mod_main.get_enabled()
+	enabled_bool.new_value.connect(_on_enabled_changed)
+
 	# ------------------------------------------------------------------ Spread
 	var spread_header := RichTextLabel.new()
 	spread_header.bbcode_enabled = true
@@ -78,4 +85,9 @@ func _on_fresh_ticks_changed(value: float) -> void:
 	mod_main.set_fresh_ticks(value)
 	ModLoaderLog.info("Fresh ticks set to %d" % int(value), LOG_NAME)
 
+
+func _on_enabled_changed(value: bool) -> void:
+	var mod_main = load("res://mods-unpacked/der_floh-effect_spread_mod/mod_main.gd")
+	mod_main.set_enabled(value)
+	ModLoaderLog.info("Mod enabled set to %s" % str(value), LOG_NAME)
 

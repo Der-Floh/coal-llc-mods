@@ -18,6 +18,10 @@ const FIRE_TICK_WEAPONS: Array   = ["flamethrower"]
 
 
 func _ready(chain: ModLoaderHookChain) -> void:
+	if not load(MOD_MAIN_PATH).get_enabled():
+		chain.execute_next()
+		return
+
 	var self_obj := chain.reference_object as ChoosePassive
 	# Full replacement — do NOT call chain.execute_next().
 	# Replicates vanilla _ready() then injects our tick-speed passives into

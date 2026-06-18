@@ -9,6 +9,8 @@ func roll_loot(chain: ModLoaderHookChain) -> void:
 	chain.execute_next()
 
 	var mod_main := load("res://mods-unpacked/der_floh-passive_drop_mod/mod_main.gd")
+	if not mod_main.get_enabled():
+		return
 	if mod_main.get_golden_weapons_enabled():
 		return  # weapon scrolls allowed — nothing to change
 

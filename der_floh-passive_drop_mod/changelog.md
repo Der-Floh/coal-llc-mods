@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.3.0] – 2026-06-18
+
+### Added
+
+- New setting: **Mod Enabled** toggle (default on). When off, no passive drops from tiles or chests and chest generation is skipped, while vanilla destroy/chest logic still runs.
+
 ## [2.2.4] – 2026-06-09
 
 ### Removed

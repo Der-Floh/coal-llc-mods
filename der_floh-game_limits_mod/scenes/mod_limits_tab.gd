@@ -5,6 +5,7 @@ extends PanelContainer
 const LOG_NAME := "der_floh-game_limits_mod:Tab"
 
 const SLIDER_SCENE = preload("res://scenes/Interfaces/Menus/setting_slider.tscn")
+const BOOL_SCENE   = preload("res://scenes/Interfaces/Menus/setting_bool.tscn")
 var _max_employees_slider: SettingSlider
 var _vanilla_employee_slider: SettingSlider = null
 var _syncing := false
@@ -14,6 +15,13 @@ var _syncing := false
 
 func _ready() -> void:
 	var mod_main = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
+
+	var enabled_bool: SettingBool = BOOL_SCENE.instantiate()
+	enabled_bool.default = true
+	vbox.add_child(enabled_bool)
+	enabled_bool.setting_label.text = "Mod Enabled"
+	enabled_bool.check_button.button_pressed = mod_main.get_enabled()
+	enabled_bool.new_value.connect(_on_enabled_changed)
 
 	# --- Section: Mortar ---
 	var mortar_header := RichTextLabel.new()
@@ -167,4 +175,9 @@ func _on_max_electric_visuals_changed(new_value: float) -> void:
 	mod_main.set_max_electric_visuals(int(new_value))
 	ModLoaderLog.info("Max electric visual arcs set to %d" % int(new_value), LOG_NAME)
 
+
+func _on_enabled_changed(value: bool) -> void:
+	var mod_main = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
+	mod_main.set_enabled(value)
+	ModLoaderLog.info("Mod enabled set to %s" % str(value), LOG_NAME)
 

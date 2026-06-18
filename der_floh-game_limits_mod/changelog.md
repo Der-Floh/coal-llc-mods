@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.0] – 2026-06-18
+
+### Added
+
+- New setting: **Mod Enabled** toggle (default on). When off, all hooks (mortar cap, chunk radius, electric chain, pause-menu fix) fall through to vanilla.
+
 ## [1.1.3] – 2026-06-09
 
 ### Removed

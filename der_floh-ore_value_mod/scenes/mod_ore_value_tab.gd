@@ -4,11 +4,20 @@ extends PanelContainer
 
 const LOG_NAME := "der_floh-ore_value_mod:Tab"
 
+const BOOL_SCENE = preload("res://scenes/Interfaces/Menus/setting_bool.tscn")
+
 @onready var vbox: VBoxContainer = $Margin/Scroll/VBox
 
 
 func _ready() -> void:
 	var mod_main := load("res://mods-unpacked/der_floh-ore_value_mod/mod_main.gd")
+
+	var enabled_bool: SettingBool = BOOL_SCENE.instantiate()
+	enabled_bool.default = true
+	vbox.add_child(enabled_bool)
+	enabled_bool.setting_label.text = "Mod Enabled"
+	enabled_bool.check_button.button_pressed = mod_main.get_enabled()
+	enabled_bool.new_value.connect(_on_enabled_changed)
 
 	_add_section("Coal")
 	_add_ore_row("Coal", "Coal", mod_main)
@@ -39,6 +48,12 @@ func _add_section(title: String) -> void:
 	header.fit_content = true
 	header.custom_minimum_size = Vector2(0, 28)
 	vbox.add_child(header)
+
+
+func _on_enabled_changed(value: bool) -> void:
+	var mod_main := load("res://mods-unpacked/der_floh-ore_value_mod/mod_main.gd")
+	mod_main.set_enabled(value)
+	ModLoaderLog.info("Mod enabled set to %s" % str(value), LOG_NAME)
 
 
 func _add_ore_row(item_id: String, display_name: String, mod_main) -> void:

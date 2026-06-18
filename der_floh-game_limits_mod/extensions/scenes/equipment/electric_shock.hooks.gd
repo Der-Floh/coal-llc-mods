@@ -10,6 +10,9 @@ const LOG_NAME := "der_floh-game_limits_mod:ElectricShockHook"
 func _physics_process(chain: ModLoaderHookChain, _delta: float) -> void:
 	var self_obj := chain.reference_object as ElectricShock
 	var mod_main = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
+	if not mod_main.get_enabled():
+		chain.execute_next([_delta])
+		return
 
 	var max_tiles:   int = mod_main.get_max_electric_chain()
 	var max_visuals: int = mod_main.get_max_electric_visuals()

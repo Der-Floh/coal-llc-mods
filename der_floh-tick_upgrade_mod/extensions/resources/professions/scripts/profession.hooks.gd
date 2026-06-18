@@ -11,7 +11,7 @@ const MOD_PASSIVES: Array = ["poison_tick_speed", "fire_tick_speed"]
 func _profession_effect(chain: ModLoaderHookChain, _data: Dictionary) -> Dictionary:
 	var result: Dictionary = chain.execute_next([_data])
 
-	if result.has("unlocked_passives"):
+	if result.has("unlocked_passives") and load("res://mods-unpacked/der_floh-tick_upgrade_mod/mod_main.gd").get_enabled():
 		for key in MOD_PASSIVES:
 			if key not in result["unlocked_passives"]:
 				result["unlocked_passives"].append(key)

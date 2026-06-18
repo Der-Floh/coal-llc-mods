@@ -40,6 +40,8 @@ func destroy_tile(chain: ModLoaderHookChain, idx: int, tile_properties: Dictiona
 		return
 
 	var mod_main := load("res://mods-unpacked/der_floh-effect_spread_mod/mod_main.gd")
+	if not mod_main.get_enabled():
+		return
 	var origin   := chunk.array_to_global_pos(idx)
 	var radius   := int(mod_main.get_spread_radius())
 	var inherit  := bool(mod_main.get_inherit_ticks())

@@ -12,6 +12,10 @@ func load_chunks(chain: ModLoaderHookChain) -> void:
 	var tm := chain.reference_object as TileMapManager
 
 	var mod_main = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
+	if not mod_main.get_enabled():
+		chain.execute_next()
+		return
+
 	var r: int = mod_main.get_chunk_load_radius()
 	var chunks_per_frame: int = mod_main.get_chunks_per_frame()
 

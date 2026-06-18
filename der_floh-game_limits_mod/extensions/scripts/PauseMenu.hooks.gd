@@ -4,6 +4,9 @@ const LOG_NAME := "der_floh-game_limits_mod:PauseMenuHook"
 
 
 func on_pressed_resume(chain: ModLoaderHookChain) -> void:
+	if not load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd").get_enabled():
+		chain.execute_next()
+		return
 	# PauseMenu._process() forces get_tree().paused = true every frame.
 	# When on_pressed_resume is triggered by _shortcut_input (Escape key),
 	# the input phase runs before _process in the same frame. This means

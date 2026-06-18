@@ -8,9 +8,12 @@ const LOG_NAME := "der_floh-game_limits_mod:MortarHook"
 func shoot_mortar(chain: ModLoaderHookChain, pos: Vector2, dmg: float) -> void:
 	var mm := chain.reference_object as MortarManager
 
-	var configured_max: int = load(
-		"res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd"
-	).get_max_mortars()
+	var mod_main = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
+	if not mod_main.get_enabled():
+		chain.execute_next([pos, dmg])
+		return
+
+	var configured_max: int = mod_main.get_max_mortars()
 
 	# --- Find a free slot (same logic as vanilla) ---
 	var new_required := true
@@ -35,7 +38,7 @@ func shoot_mortar(chain: ModLoaderHookChain, pos: Vector2, dmg: float) -> void:
 			mm.idx = mm.max_mortars - 1  # newly appended slot is always at the last index
 		else:
 			# Pool is at cap — buffer damage into next shot that lands
-			if load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")._debug:
+			if mod_main._debug:
 				ModLoaderLog.info(
 					"Mortar pool at cap (%d) — buffering dmg=%.1f (total buffered=%.1f)" % [
 						configured_max, dmg, mm.buffer_damage + dmg

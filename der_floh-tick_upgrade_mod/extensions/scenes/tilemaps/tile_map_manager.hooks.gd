@@ -13,6 +13,8 @@ func apply_tile_effects(chain: ModLoaderHookChain) -> void:
 	if mod_main._debug:
 		ModLoaderLog.info("apply_tile_effects manager hook IS being called", LOG_NAME)
 	chain.execute_next()
+	if not mod_main.get_enabled():
+		return
 
 	# After the normal pass (live + no-collision chunks), also tick any DISABLED
 	# chunk that still carries active poison or fire effects — so effects keep
