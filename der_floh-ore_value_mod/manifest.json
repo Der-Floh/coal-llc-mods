@@ -1,7 +1,7 @@
 {
     "name": "ore_value_mod",
     "namespace": "der_floh",
-    "version_number": "1.1.0",
+    "version_number": "1.1.1",
     "description": "Configurable sell price multipliers for all ore types. Each ore can be independently scaled relative to its vanilla price.",
     "website_url": "",
     "dependencies": [],

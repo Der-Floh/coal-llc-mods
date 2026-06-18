@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1] – 2026-06-18
+
+### Fixed
+
+- Changing a sell-price multiplier or toggling Mod Enabled in the settings tab now takes effect immediately via `Gvars.reset_resources()`, instead of waiting for the next day start.
+
 ## [1.1.0] – 2026-06-18
 
 ### Added
