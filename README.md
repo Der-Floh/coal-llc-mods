@@ -20,7 +20,7 @@ All mods require **Godot Mod Loader (GML)** by NanobotZ to be installed first:<b
 5. In Steam, open Coal LLC's properties and add this into launch options:
 `--script "addons/mod_loader/mod_loader_setup.gd"`
 
-Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside your Coal LLC game directory and launch the game.
+Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside your Coal LLC game directory and launch the game (do not extract the zip).
 
 > **IMPORTANT:** For now it's a good idea to delete "mod-hooks.zip" file from the game folder each time the game updates!
 >
