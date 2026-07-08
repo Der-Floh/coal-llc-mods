@@ -14,10 +14,10 @@ All mods require **Godot Mod Loader (GML)** by NanobotZ to be installed first:<b
 1. Download the mod loader here (choose the version for your operating system): [https://github.com/NanobotZ/godot-mod-loader/releases/latest](https://github.com/NanobotZ/godot-mod-loader/releases/latest)
 
 2. Extract the mod loader and copy the addons folder into both of these locations:
-C:\Program Files (x86)\Steam\steamapps\common\Coal LLC\
-C:\Program Files (x86)\Steam\steamapps\common\Coal LLC\Coal LLC\
+`C:\Program Files (x86)\Steam\steamapps\common\Coal LLC\` and 
+`C:\Program Files (x86)\Steam\steamapps\common\Coal LLC\Coal LLC\`
 
-3. In Steam, open Coal LLC's properties and add this into launch options:
+5. In Steam, open Coal LLC's properties and add this into launch options:
 `--script "addons/mod_loader/mod_loader_setup.gd"`
 
 Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside your Coal LLC game directory and launch the game.
