@@ -378,4 +378,6 @@ garethwhite-prog's mods come from [garethwhite-prog/coal-llc-mods](https://githu
 
 Both work with PowerShell 7 (`pwsh`) on Windows, Linux and macOS, and with the Windows PowerShell 5.1 that ships with Windows. Pass `-OutputDirectory <folder>` to build somewhere else (older zips of the same mod there are replaced) and `-ZipDirectory <folder>` to validate that folder. If Windows PowerShell refuses to run scripts, start it with `powershell -ExecutionPolicy Bypass -File build\build.ps1`.
 
+In VS Code, **Ctrl+Shift+B** runs the build, and **Tasks: Run Test Task** builds and then validates.
+
 GitHub runs both scripts on every push to `main` and every pull request, and the release workflow runs them before attaching the zips to a release.

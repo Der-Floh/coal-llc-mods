@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build mods",
+            "type": "process",
+            "command": "pwsh",
+            "args": ["-NoProfile", "-File", "${workspaceFolder}/build/build.ps1"],
+            "windows": {
+                "command": "powershell.exe",
+                "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/build/build.ps1"]
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Validate mods",
+            "type": "process",
+            "command": "pwsh",
+            "args": ["-NoProfile", "-File", "${workspaceFolder}/build/validate.ps1"],
+            "windows": {
+                "command": "powershell.exe",
+                "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/build/validate.ps1"]
+            },
+            "dependsOn": "Build mods",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
