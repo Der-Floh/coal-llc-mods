@@ -1,0 +1,46 @@
+{
+    "name": "axe_glare_toggle_mod",
+    "namespace": "ingenitus",
+    "version_number": "1.0.0",
+    "description": "Turn off the glare particles the axe and battleaxe whirl emits at full spin, which can hide what you are mining. Spin and damage are unchanged.",
+    "website_url": "",
+    "dependencies": [],
+    "extra": {
+        "godot": {
+            "authors": [
+                "Ingenitus"
+            ],
+            "tags": [
+                "visual",
+                "settings"
+            ],
+            "description_rich": "",
+            "optional_dependencies": [],
+            "load_before": [],
+            "incompatibilities": [],
+            "config_schema": {
+                "title": "Config",
+                "description": "Config for Axe Glare Toggle Mod",
+                "type": "object",
+                "properties": {
+                    "show_glare": {
+                        "title": "Show Axe Spin Glare",
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "enabled": {
+                        "title": "Enabled",
+                        "type": "boolean",
+                        "default": true
+                    }
+                }
+            },
+            "compatible_mod_loader_version": [
+                "7.0.1"
+            ],
+            "compatible_game_version": [
+                "1.4.1.1"
+            ]
+        }
+    }
+}

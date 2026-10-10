@@ -40,6 +40,7 @@ Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside y
 | [Performance Mod](#performance-mod-der_floh-performance_mod)       | der_floh | Optimised chunk loading, tile effects, and level generation to reduce frame time spikes |
 | [No Holes Mod](#no-holes-mod-der_floh-no_holes_mod)                | der_floh | Fills air pockets in world generation so underground rock is always solid               |
 | [Custom Seed Mod](#custom-seed-mod-ingenitus-custom_seed_mod)      | Ingenitus | World seed for reproducible mines, independent of exploration order                    |
+| [Axe Glare Toggle Mod](#axe-glare-toggle-mod-ingenitus-axe_glare_toggle_mod) | Ingenitus | Hide the axe/battleaxe full-spin glare particles                                |
 | [AutoPassiveChooser](#other-mods-not-by-me)                        | NanobotZ | Automatically selects passives on level-up based on a configurable priority list        |
 
 ---
@@ -208,6 +209,18 @@ Adds a **World Seed** tab to the in-game settings menu.
 | Same mine every day  | `false` | When enabled, every day uses the same mine instead of a new seeded one |
 
 > **Note:** Takes effect from the next mining day.
+
+---
+
+### Axe Glare Toggle Mod (`ingenitus-axe_glare_toggle_mod`)
+
+Hides the **glare particles** the axe and battleaxe whirl emits at full spin, which can cover the tiles you are mining. Spin, movement and damage are unchanged.
+
+Adds an **Axe Glare** tab to the in-game settings menu.
+
+| Option     | Default | Description                                  |
+| ---------- | ------- | -------------------------------------------- |
+| Show glare | `false` | Turn the glare back on without removing the mod |
 
 ---
 
