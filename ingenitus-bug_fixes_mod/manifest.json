@@ -1,0 +1,91 @@
+{
+    "name": "bug_fixes_mod",
+    "namespace": "ingenitus",
+    "version_number": "1.1.1",
+    "description": "Fixes vanilla bugs: late-day coal quota overflow, progress loss from a corrupt save, stuck pause after Esc, negative cash, duplicated loot, loot cap ignored during nukes, clipped explosion edges, x0 employee boxes, chest upgrade cards with the wrong multiplier and the AOE miner gap. Each fix can be switched off.",
+    "website_url": "",
+    "dependencies": [],
+    "extra": {
+        "godot": {
+            "authors": [
+                "Ingenitus"
+            ],
+            "tags": [
+                "bugfix",
+                "settings"
+            ],
+            "description_rich": "",
+            "optional_dependencies": [],
+            "load_before": [],
+            "incompatibilities": [],
+            "config_schema": {
+                "title": "Config",
+                "description": "Config for Bug Fixes Mod",
+                "type": "object",
+                "properties": {
+                    "fix_quota_overflow": {
+                        "title": "Coal quota no longer overflows on late days",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "fix_save_restore": {
+                        "title": "Restore a missing or corrupt save from its backup",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "fix_pause_resume": {
+                        "title": "Resuming with Esc can no longer leave the game paused",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "fix_negative_cash": {
+                        "title": "Buying can no longer leave cash below zero",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "fix_loot_duplication": {
+                        "title": "Merged or collected loot can no longer be counted twice",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "fix_loot_burst": {
+                        "title": "Loot cap holds during one-frame bursts",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "fix_blast_edges": {
+                        "title": "Explosions reach their bottom and right edges",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "fix_zero_employee_boxes": {
+                        "title": "Hide employee boxes that show x0",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "fix_card_multiplier": {
+                        "title": "Chest upgrade cards keep their own chest's multiplier",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "fix_aoe_gap": {
+                        "title": "AOE miners also hit the tiles right next to their target",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "enabled": {
+                        "title": "Enabled",
+                        "type": "boolean",
+                        "default": true
+                    }
+                }
+            },
+            "compatible_mod_loader_version": [
+                "7.0.1"
+            ],
+            "compatible_game_version": [
+                "1.4.1.1"
+            ]
+        }
+    }
+}

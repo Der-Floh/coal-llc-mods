@@ -41,6 +41,7 @@ Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside y
 | [No Holes Mod](#no-holes-mod-der_floh-no_holes_mod)                | der_floh | Fills air pockets in world generation so underground rock is always solid               |
 | [Custom Seed Mod](#custom-seed-mod-ingenitus-custom_seed_mod)      | Ingenitus | World seed for reproducible mines, independent of exploration order                    |
 | [Axe Glare Toggle Mod](#axe-glare-toggle-mod-ingenitus-axe_glare_toggle_mod) | Ingenitus | Hide the axe/battleaxe full-spin glare particles                                |
+| [Bug Fixes Mod](#bug-fixes-mod-ingenitus-bug_fixes_mod)            | Ingenitus | Fixes quota overflow, save loss, stuck pause, loot duplication and more (each toggleable) |
 | [AutoPassiveChooser](#other-mods-not-by-me)                        | NanobotZ | Automatically selects passives on level-up based on a configurable priority list        |
 
 ---
@@ -221,6 +222,25 @@ Adds an **Axe Glare** tab to the in-game settings menu.
 | Option     | Default | Description                                  |
 | ---------- | ------- | -------------------------------------------- |
 | Show glare | `false` | Turn the glare back on without removing the mod |
+
+---
+
+### Bug Fixes Mod (`ingenitus-bug_fixes_mod`)
+
+Fixes vanilla bugs. Each fix can be switched off on its own in the **Bug Fixes** tab of the in-game settings menu.
+
+| Fix                   | What goes wrong in vanilla                                                                      |
+| --------------------- | ----------------------------------------------------------------------------------------------- |
+| Coal quota overflow   | From day 62 the coal quota goes negative (integer overflow)                                     |
+| Save restore          | A missing or corrupt save loads defaults although an intact backup exists, then the backup is overwritten too |
+| Stuck pause           | Resuming with Esc can leave the game paused with no menu                                        |
+| Negative cash         | Buying the maximum affordable employees can leave cash below zero                               |
+| Loot duplication      | Loot merged or collected in the same frame can be counted twice                                 |
+| Loot cap during bursts| Nukes and earthquakes spawn thousands of pickups because the loot cap never engages within a frame |
+| Explosion edges       | Explosions never reach the bottom row and right column of their circle                          |
+| x0 employee boxes     | Float leftovers after promotions show "x0" boxes with a sell button                             |
+| Upgrade-card multiplier | A chest's upgrade card takes the multiplier of whichever chest was rolled last                |
+| AOE miner gap         | AOE miners never hit the tiles directly beside their target (4 of 8 tiles at range 1)           |
 
 ---
 
