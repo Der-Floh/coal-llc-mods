@@ -1,0 +1,41 @@
+{
+    "name": "employee_balance_mod",
+    "namespace": "ingenitus",
+    "version_number": "1.0.0",
+    "description": "Bomber and elementalist employees mine faster as their tier rises, like every other employee line, instead of all tiers swinging at the intern's 0.5 speed.",
+    "website_url": "",
+    "dependencies": [],
+    "extra": {
+        "godot": {
+            "authors": [
+                "Ingenitus"
+            ],
+            "tags": [
+                "gameplay",
+                "balance"
+            ],
+            "description_rich": "",
+            "optional_dependencies": [],
+            "load_before": [],
+            "incompatibilities": [],
+            "config_schema": {
+                "title": "Config",
+                "description": "Config for Employee Balance Mod",
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "title": "Enabled",
+                        "type": "boolean",
+                        "default": true
+                    }
+                }
+            },
+            "compatible_mod_loader_version": [
+                "7.0.1"
+            ],
+            "compatible_game_version": [
+                "1.4.1.1"
+            ]
+        }
+    }
+}

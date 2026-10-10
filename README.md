@@ -44,6 +44,7 @@ Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside y
 | [Bug Fixes Mod](#bug-fixes-mod-ingenitus-bug_fixes_mod)            | Ingenitus | Fixes quota overflow, save loss, stuck pause, loot duplication and more (each toggleable) |
 | [Chest QoL Mod](#chest-qol-mod-ingenitus-chest_qol_mod)            | Ingenitus | Open/loot chests on touch, reach them from their protective tiles, no outclassed scrolls |
 | [Number Format Mod](#number-format-mod-ingenitus-number_format_mod) | Ingenitus | Large numbers as `1.23e10` instead of `1.23457e+10`                                   |
+| [Employee Balance Mod](#employee-balance-mod-ingenitus-employee_balance_mod) | Ingenitus | Bomber and elementalist tiers mine faster as they rank up                   |
 | [AutoPassiveChooser](#other-mods-not-by-me)                        | NanobotZ | Automatically selects passives on level-up based on a configurable priority list        |
 
 ---
@@ -262,6 +263,20 @@ Less fiddly chests. Adds a **Chests** tab to the in-game settings menu.
 ### Number Format Mod (`ingenitus-number_format_mod`)
 
 Large numbers (cash, coal, prices) show as short scientific notation like `1.23e10` instead of Godot's `1.23457e+10`. Numbers shown with thousands separators are unchanged.
+
+No configuration options besides `enabled` in the config file.
+
+---
+
+### Employee Balance Mod (`ingenitus-employee_balance_mod`)
+
+In vanilla every bomber and elementalist tier swings at the intern's mining speed (`0.5`), while miners and barbarians speed up with tier. This mod gives them the same kind of ladder. Their bombs and elemental globs are unchanged.
+
+| Employee | Vanilla | Modded |
+| -------- | ------- | ------ |
+| Weak / Medium / Strong / Fast Bomber | `0.5` | `0.6` / `0.7` / `0.8` / `0.9` |
+| Artillery | `0.5` | `1.0` |
+| Weak / Medium / Strong Elementalist | `0.5` | `0.6` / `0.8` / `1.0` |
 
 No configuration options besides `enabled` in the config file.
 
