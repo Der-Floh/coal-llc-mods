@@ -1,0 +1,57 @@
+{
+    "name": "custom_seed_mod",
+    "namespace": "ingenitus",
+    "version_number": "1.0.0",
+    "description": "Set a world seed for reproducible mines. Every chunk is generated from the seed, the day and its own position, so the same seed gives the same terrain and chests however you explore. 0 = random (vanilla).",
+    "website_url": "",
+    "dependencies": [],
+    "extra": {
+        "godot": {
+            "authors": [
+                "Ingenitus"
+            ],
+            "tags": [
+                "gameplay",
+                "worldgen",
+                "settings"
+            ],
+            "description_rich": "",
+            "optional_dependencies": [],
+            "load_before": [],
+            "incompatibilities": [],
+            "config_schema": {
+                "title": "Config",
+                "description": "Config for Custom Seed Mod",
+                "type": "object",
+                "properties": {
+                    "seed": {
+                        "title": "World Seed (0 = random)",
+                        "type": "integer",
+                        "default": 0
+                    },
+                    "same_every_day": {
+                        "title": "Same Mine Every Day",
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "debug_logging": {
+                        "title": "Debug Logging",
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "enabled": {
+                        "title": "Enabled",
+                        "type": "boolean",
+                        "default": true
+                    }
+                }
+            },
+            "compatible_mod_loader_version": [
+                "7.0.1"
+            ],
+            "compatible_game_version": [
+                "1.4.1.1"
+            ]
+        }
+    }
+}

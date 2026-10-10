@@ -39,6 +39,7 @@ Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside y
 | [Game Limits Mod](#game-limits-mod-der_floh-game_limits_mod)       | der_floh | Tune performance-related caps (mortars, chunk loading, electric chain) via settings tab |
 | [Performance Mod](#performance-mod-der_floh-performance_mod)       | der_floh | Optimised chunk loading, tile effects, and level generation to reduce frame time spikes |
 | [No Holes Mod](#no-holes-mod-der_floh-no_holes_mod)                | der_floh | Fills air pockets in world generation so underground rock is always solid               |
+| [Custom Seed Mod](#custom-seed-mod-ingenitus-custom_seed_mod)      | Ingenitus | World seed for reproducible mines, independent of exploration order                    |
 | [AutoPassiveChooser](#other-mods-not-by-me)                        | NanobotZ | Automatically selects passives on level-up based on a configurable priority list        |
 
 ---
@@ -190,6 +191,23 @@ Fills **air pockets** that vanilla world generation leaves behind. Runs a post-p
 No configuration options. To disable, uninstall the mod.
 
 > **Note:** Only affects newly generated chunks. Existing saves are unaffected until you enter a previously unloaded area.
+
+---
+
+## Contributed Mods
+
+### Custom Seed Mod (`ingenitus-custom_seed_mod`)
+
+Set a **world seed** to get the same mine again. Every chunk is generated from the seed, the day and the chunk's own position, so terrain, ore layers and chests come out identical however you explore. The rest of gameplay (loot rolls, employees, ...) stays random.
+
+Adds a **World Seed** tab to the in-game settings menu.
+
+| Option               | Default | Description                                                            |
+| -------------------- | ------- | ---------------------------------------------------------------------- |
+| World Seed           | `0`     | `0` = random (vanilla); any other number gives a reproducible mine     |
+| Same mine every day  | `false` | When enabled, every day uses the same mine instead of a new seeded one |
+
+> **Note:** Takes effect from the next mining day.
 
 ---
 
