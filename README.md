@@ -46,6 +46,7 @@ Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside y
 | [Number Format Mod](#number-format-mod-ingenitus-number_format_mod) | Ingenitus | Large numbers as `1.23e10` instead of `1.23457e+10`                                   |
 | [Employee Balance Mod](#employee-balance-mod-ingenitus-employee_balance_mod) | Ingenitus | Bomber and elementalist tiers mine faster as they rank up                   |
 | [Extra Passives Mod](#extra-passives-mod-ingenitus-extra_passives_mod) | Ingenitus | Ten new passives for guns, axes, vacuum, drill, earthquake and bombs              |
+| [Move Speed Slider Mod](#move-speed-slider-mod-ingenitus-move_speed_slider_mod) | Ingenitus | Walk Speed slider (Tab) that can raise walking up to sprint speed                  |
 | [AutoPassiveChooser](#other-mods-not-by-me)                        | NanobotZ | Automatically selects passives on level-up based on a configurable priority list        |
 
 ---
@@ -301,6 +302,14 @@ Ten new level-up passives for weapons and tools that had few or none. A passive 
 | Bomb Radius       | bombs, nuke                      | Bigger blasts, with a dial-back slider in the passive bonuses panel |
 
 All bomb and earthquake blasts are limited to 48 tiles (the loaded area around the player). Assassins can also be offered Wet Damage. Works with AutoPassiveChooser and the Tick Upgrade Mod.
+
+---
+
+### Move Speed Slider Mod (`ingenitus-move_speed_slider_mod`)
+
+Adds a **Walk Speed** slider to the passive bonuses panel (Tab). Walking can be raised up to your current sprint speed and never past it: the sprint passive, the sprint slider and the speed quest reward all count. Handy with auto-sprint, or to move at sprint pace without holding the key.
+
+The value is stored in the mod config (`walk_speed_bonus`, set by the slider), not in your save, so removing the mod leaves saves untouched. Besides that, only `enabled` in the config file.
 
 ---
 
