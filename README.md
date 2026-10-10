@@ -42,6 +42,7 @@ Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside y
 | [Custom Seed Mod](#custom-seed-mod-ingenitus-custom_seed_mod)      | Ingenitus | World seed for reproducible mines, independent of exploration order                    |
 | [Axe Glare Toggle Mod](#axe-glare-toggle-mod-ingenitus-axe_glare_toggle_mod) | Ingenitus | Hide the axe/battleaxe full-spin glare particles                                |
 | [Bug Fixes Mod](#bug-fixes-mod-ingenitus-bug_fixes_mod)            | Ingenitus | Fixes quota overflow, save loss, stuck pause, loot duplication and more (each toggleable) |
+| [Chest QoL Mod](#chest-qol-mod-ingenitus-chest_qol_mod)            | Ingenitus | Open/loot chests on touch, reach them from their protective tiles, no outclassed scrolls |
 | [AutoPassiveChooser](#other-mods-not-by-me)                        | NanobotZ | Automatically selects passives on level-up based on a configurable priority list        |
 
 ---
@@ -241,6 +242,19 @@ Fixes vanilla bugs. Each fix can be switched off on its own in the **Bug Fixes**
 | x0 employee boxes     | Float leftovers after promotions show "x0" boxes with a sell button                             |
 | Upgrade-card multiplier | A chest's upgrade card takes the multiplier of whichever chest was rolled last                |
 | AOE miner gap         | AOE miners never hit the tiles directly beside their target (4 of 8 tiles at range 1)           |
+
+---
+
+### Chest QoL Mod (`ingenitus-chest_qol_mod`)
+
+Less fiddly chests. Adds a **Chests** tab to the in-game settings menu.
+
+| Option                   | Default | Description                                                                                       |
+| ------------------------ | ------- | ------------------------------------------------------------------------------------------------- |
+| Open on touch            | `true`  | Touching a chest opens it without pressing interact                                              |
+| Loot on touch            | `true`  | With One-Click Looting owned, touching a chest loots it straight to your inventory                |
+| Protective-ring reach    | `true`  | Once one of a chest's eight protective tiles is mined, standing on any of them takes the chest    |
+| No outclassed scrolls    | `true`  | Power-up scrolls for weapons no stronger than one you own become passive-upgrade cards            |
 
 ---
 

@@ -1,0 +1,64 @@
+{
+    "name": "chest_qol_mod",
+    "namespace": "ingenitus",
+    "version_number": "1.0.0",
+    "description": "Chests open when you touch them (and loot straight to your inventory if you own One-Click Looting), can be taken from any of their eight protective tiles once one is mined, and never offer power-up scrolls for weapons weaker than yours.",
+    "website_url": "",
+    "dependencies": [],
+    "extra": {
+        "godot": {
+            "authors": [
+                "Ingenitus"
+            ],
+            "tags": [
+                "gameplay",
+                "qol",
+                "settings"
+            ],
+            "description_rich": "",
+            "optional_dependencies": [
+                "der_floh-passive_drop_mod"
+            ],
+            "load_before": [],
+            "incompatibilities": [],
+            "config_schema": {
+                "title": "Config",
+                "description": "Config for Chest QoL Mod",
+                "type": "object",
+                "properties": {
+                    "auto_open": {
+                        "title": "Open Chests On Touch",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "auto_grab": {
+                        "title": "Loot On Touch With One-Click Looting",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "ring_reach": {
+                        "title": "Reach Chests From Their Protective Tiles",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "skip_weaker_scrolls": {
+                        "title": "Replace Scrolls For Weaker Weapons",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "enabled": {
+                        "title": "Enabled",
+                        "type": "boolean",
+                        "default": true
+                    }
+                }
+            },
+            "compatible_mod_loader_version": [
+                "7.0.1"
+            ],
+            "compatible_game_version": [
+                "1.4.1.1"
+            ]
+        }
+    }
+}
