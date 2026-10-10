@@ -45,6 +45,7 @@ Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside y
 | [Chest QoL Mod](#chest-qol-mod-ingenitus-chest_qol_mod)            | Ingenitus | Open/loot chests on touch, reach them from their protective tiles, no outclassed scrolls |
 | [Number Format Mod](#number-format-mod-ingenitus-number_format_mod) | Ingenitus | Large numbers as `1.23e10` instead of `1.23457e+10`                                   |
 | [Employee Balance Mod](#employee-balance-mod-ingenitus-employee_balance_mod) | Ingenitus | Bomber and elementalist tiers mine faster as they rank up                   |
+| [Extra Passives Mod](#extra-passives-mod-ingenitus-extra_passives_mod) | Ingenitus | Ten new passives for guns, axes, vacuum, drill, earthquake and bombs              |
 | [AutoPassiveChooser](#other-mods-not-by-me)                        | NanobotZ | Automatically selects passives on level-up based on a configurable priority list        |
 
 ---
@@ -279,6 +280,27 @@ In vanilla every bomber and elementalist tier swings at the intern's mining spee
 | Weak / Medium / Strong Elementalist | `0.5` | `0.6` / `0.8` / `1.0` |
 
 No configuration options besides `enabled` in the config file.
+
+---
+
+### Extra Passives Mod (`ingenitus-extra_passives_mod`)
+
+Ten new level-up passives for weapons and tools that had few or none. A passive is only offered while you own an item it applies to (or a vacuum), and leaves the offers once it is capped.
+
+| Passive           | Offered with                     | Effect                                                              |
+| ----------------- | -------------------------------- | ------------------------------------------------------------------- |
+| Gun Fire Rate     | pistol, shotgun, rifle, minigun  | Shorter gun cooldown (never below 0.05 s)                          |
+| Extra Projectiles | guns                             | Extra bullets per shot                                             |
+| Bullet Pierce     | guns                             | Bullets pass through extra breakable blocks                        |
+| Axe Spin-Up Speed | axe, battleaxe                   | Reaches full spin faster                                           |
+| Vacuum Range      | a vacuum                         | Longer hose                                                        |
+| Vacuum Suction    | a vacuum                         | Wider grab area                                                    |
+| Drill Speed       | drill                            | Drills dig faster                                                  |
+| Earthquake Damage | earthquake inducer               | More damage                                                        |
+| Earthquake Radius | earthquake inducer               | Bigger radius                                                      |
+| Bomb Radius       | bombs, nuke                      | Bigger blasts, with a dial-back slider in the passive bonuses panel |
+
+All bomb and earthquake blasts are limited to 48 tiles (the loaded area around the player). Assassins can also be offered Wet Damage. Works with AutoPassiveChooser and the Tick Upgrade Mod.
 
 ---
 

@@ -1,0 +1,44 @@
+{
+    "name": "extra_passives_mod",
+    "namespace": "ingenitus",
+    "version_number": "1.0.0",
+    "description": "Ten new level-up passives for weapons and tools that had few or none: gun fire rate, extra projectiles, bullet pierce, axe spin-up, vacuum range and suction, drill speed, earthquake damage and radius, and bomb radius (capped at 48 tiles, with a dial-back slider). Offered only while you own an item they apply to.",
+    "website_url": "",
+    "dependencies": [],
+    "extra": {
+        "godot": {
+            "authors": [
+                "Ingenitus"
+            ],
+            "tags": [
+                "gameplay",
+                "passives"
+            ],
+            "description_rich": "",
+            "optional_dependencies": [
+                "der_floh-tick_upgrade_mod",
+                "NanobotZ-AutoPassiveChooser"
+            ],
+            "load_before": [],
+            "incompatibilities": [],
+            "config_schema": {
+                "title": "Config",
+                "description": "Config for Extra Passives Mod",
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "title": "Enabled",
+                        "type": "boolean",
+                        "default": true
+                    }
+                }
+            },
+            "compatible_mod_loader_version": [
+                "7.0.1"
+            ],
+            "compatible_game_version": [
+                "1.4.1.1"
+            ]
+        }
+    }
+}
