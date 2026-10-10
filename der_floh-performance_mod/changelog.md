@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.3.3] – 2026-09-25
+
+### Fixed
+
+- `tile_map_chunk.hooks.gd` failed to parse on game load (`var d := abs(x - 14)` infers a
+  type from a Variant, which Godot treats as an error), so none of its hooks
+  (`generate_chunk`, `lvl_from_global_pos_*`, `generate_chests`) were ever installed.
+- With the file loading again, terrain generation now matches vanilla exactly (tiles, sprite
+  variants, RNG stream and chest placement, verified on all seven maps with fixed seeds):
+  - `lvl_from_global_pos_STANDARD/FUNNEL/SKY_MINE/SHALLOW` are no longer hooked. Sharing one
+    jitter draw per tile changed where layer boundaries fall and shifted the RNG stream for
+    everything generated after it. `TIGHTFUNNEL` (no jitter) stays optimised.
+  - SPARSE / SPARSE SKY MINE: `generate_chunk` rolls the skip chance for every passing tile, as
+    vanilla does, instead of stopping at the first accepted one.
+- `generate_chunk` remains about 6x faster than vanilla (median ~3-5 ms vs ~19-24 ms per chunk).
+
 ## [1.3.2] – 2026-06-09
 
 ### Fixed

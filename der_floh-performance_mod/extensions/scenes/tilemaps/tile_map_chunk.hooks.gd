@@ -5,16 +5,17 @@ extends Object
 #   - Replaces the 192-tile inner loop (no break) with a per-level pre-filtered
 #     bucket (≤16 tiles) sorted rarest-first, then breaks on first noise match.
 #     Equivalent result: the rarest ore that passes its noise test wins, same as
-#     the original "last in array wins" semantics.
+#     the original "last in array wins" semantics. SPARSE levels keep vanilla's
+#     per-tile coin flips (one randf() per passing tile, no break).
 #   - Inlines the set_cell() call so build_tile() is not called during initial
 #     generation, removing the duplicate tiles_health write and the dead
 #     atlas-coord early-return check (always misses on fresh chunks, source=-1).
 #   - Falls back to vanilla for the `only_coal` hard modifier (complex path,
 #     not worth duplicating here).
 #
-# lvl_from_global_pos_STANDARD/FUNNEL/SKY_MINE/SHALLOW():
-#   - Computes the boundary jitter (cos + randf) ONCE per tile instead of
-#     independently in every elif branch (up to 19× trig+RNG per deep tile).
+# lvl_from_global_pos_TIGHTFUNNEL():
+#   - Computes the funnel distance once instead of in every elif branch. The
+#     other variants stay vanilla (see the note above TIGHTFUNNEL below).
 #
 # generate_chests():
 #   - Replaces the blocking synchronous load("res://scenes/Chest.tscn") with a
@@ -89,14 +90,26 @@ func generate_chunk(chain: ModLoaderHookChain, noise: Noise) -> void:
 			# only_clay forces everything into the clay biome (level 1).
 			var effective_lvl: int = clampi(1 if _data["only_clay"] else lvl, 0, 19)  # must be a valid bucket index
 
-			# Iterate pre-filtered bucket (rarest first); break on first noise match.
-			for tile in _tiles_by_level[effective_lvl]:
-				var tp: Dictionary = TileMapChunk.TILE_PROPERTIES[tile]
-				if (tp["rarity"] * 2.0) - 1.0 > noise.get_noise_3d(xy.x, xy.y, tp["noiseZIndex"]):
-					if is_sparse and randf() >= 0.5:
-						continue  # SPARSE levels randomly skip half the tiles
-					chosen_tile = tile
-					break  # rarest-first order: first match is the winner
+			var bucket: Array = _tiles_by_level[effective_lvl]
+			if is_sparse:
+				# Vanilla rolls randf() for EVERY noise-passing tile, in
+				# GENERATIVE_TILES order, and the last success wins. Walk the
+				# bucket in that order without breaking, so the same draws are
+				# consumed and the global RNG stream stays in step with vanilla.
+				for i in range(bucket.size() - 1, -1, -1):
+					var tile = bucket[i]
+					var tp: Dictionary = TileMapChunk.TILE_PROPERTIES[tile]
+					if (tp["rarity"] * 2.0) - 1.0 > noise.get_noise_3d(xy.x, xy.y, tp["noiseZIndex"]):
+						if randf() < 0.5:  # SPARSE levels randomly skip half the tiles
+							chosen_tile = tile
+			else:
+				# No RNG involved: iterate rarest first and break on the first
+				# noise match, which is the tile vanilla's full scan keeps last.
+				for tile in bucket:
+					var tp: Dictionary = TileMapChunk.TILE_PROPERTIES[tile]
+					if (tp["rarity"] * 2.0) - 1.0 > noise.get_noise_3d(xy.x, xy.y, tp["noiseZIndex"]):
+						chosen_tile = tile
+						break
 
 		chunk.tiles[idx] = chosen_tile
 		var props: Dictionary = TileMapChunk.TILE_PROPERTIES[chosen_tile]
@@ -119,129 +132,14 @@ func generate_chunk(chain: ModLoaderHookChain, noise: Noise) -> void:
 
 
 # ── lvl_from_global_pos variants ─────────────────────────────────────────────
-# Each variant computed the boundary jitter independently per elif branch,
-# consuming up to 19 cos() + 19 randf() calls per tile at max depth.
-# Fix: compute the angle once and reuse it for every threshold comparison.
-
-func lvl_from_global_pos_STANDARD(chain: ModLoaderHookChain, pos: Vector2i) -> int:
-	var x := pos.x
-	var y := pos.y
-	if y < 0:
-		return -2
-	var c := cos(x / 20.0 + randf())  # jitter shared across all depth thresholds
-	var yj5 := float(y) + 5.0 * c   # first threshold uses amplitude 5
-	var yj  := float(y) + 6.0 * c   # all remaining thresholds use amplitude 6
-	if   yj5 < 10.0:  return 0
-	elif yj  < 30.0:  return 1
-	elif yj  < 35.0:  return 2
-	elif yj  < 40.0:  return 3
-	elif yj  < 65.0:  return 4
-	elif yj  < 70.0:  return 5
-	elif yj  < 80.0:  return 6
-	elif yj  < 110.0: return 7
-	elif yj  < 115.0: return 8
-	elif yj  < 120.0: return 9
-	elif yj  < 135.0: return 10
-	elif yj  < 300.0: return 11
-	elif yj  < 450.0: return 12
-	elif yj  < 600.0: return 13
-	elif yj  < 750.0: return 14
-	elif yj  < 900.0: return 15
-	elif yj  < 1050.0: return 16
-	elif yj  < 1200.0: return 17
-	elif yj  < 1350.0: return 18
-	else: return 19
-
-
-func lvl_from_global_pos_FUNNEL(chain: ModLoaderHookChain, pos: Vector2i) -> int:
-	var x := pos.x
-	var y := pos.y
-	if y < 0:
-		return -2
-	var base := float(abs(x - 14))  # horizontal distance from funnel center (tile 14)
-	var yj := base + 5.0 * cos(x / 20.0 + randf())  # jitter shared across all thresholds; FUNNEL uses amplitude 5.0 throughout
-	if   yj < 10.0:  return 0
-	elif yj < 30.0:  return 1
-	elif yj < 35.0:  return 2
-	elif yj < 40.0:  return 3
-	elif yj < 65.0:  return 4
-	elif yj < 70.0:  return 5
-	elif yj < 80.0:  return 6
-	elif yj < 110.0: return 7
-	elif yj < 115.0: return 8
-	elif yj < 120.0: return 9
-	elif yj < 135.0: return 10
-	elif yj < 200.0: return 11
-	elif yj < 250.0: return 12
-	elif yj < 300.0: return 13
-	elif yj < 350.0: return 14
-	elif yj < 400.0: return 15
-	elif yj < 450.0: return 16
-	elif yj < 500.0: return 17
-	elif yj < 550.0: return 18
-	else: return 19
-
-
-func lvl_from_global_pos_SKY_MINE(chain: ModLoaderHookChain, pos: Vector2i) -> int:
-	var x := pos.x
-	var y := pos.y
-	if y > -10:
-		return -2
-	var c := cos(x / 20.0 + randf())  # jitter shared across all depth thresholds
-	var yj5 := float(y) + 5.0 * c   # first threshold uses amplitude 5
-	var yj  := float(y) + 6.0 * c   # remainder use amplitude 6
-	# SKY_MINE depths are negative; comparisons are reversed (> instead of <).
-	if   yj5 > -10.0:  return 0
-	elif yj  > -30.0:  return 1
-	elif yj  > -35.0:  return 2
-	elif yj  > -40.0:  return 3
-	elif yj  > -65.0:  return 4
-	elif yj  > -70.0:  return 5
-	elif yj  > -80.0:  return 6
-	elif yj  > -110.0: return 7
-	elif yj  > -115.0: return 8
-	elif yj  > -120.0: return 9
-	elif yj  > -135.0: return 10
-	elif yj  > -300.0: return 11
-	elif yj  > -450.0: return 12
-	elif yj  > -600.0: return 13
-	elif yj  > -750.0: return 14
-	elif yj  > -900.0: return 15
-	elif yj  > -1050.0: return 16
-	elif yj  > -1200.0: return 17
-	elif yj  > -1350.0: return 18
-	else: return 19
-
-
-func lvl_from_global_pos_SHALLOW(chain: ModLoaderHookChain, pos: Vector2i) -> int:
-	var x := pos.x
-	var y := pos.y
-	if y < 0:
-		return -2
-	# SHALLOW uses varying amplitudes per threshold; share the angle, vary amplitude.
-	var a := x / 20.0 + randf()  # angle shared across all thresholds
-	var c := cos(a)
-	var fy := float(y)
-	if   fy + 1.0 * c < 1.0:  return 0
-	elif fy + 2.0 * c < 3.0:  return 1
-	elif fy + 3.0 * c < 5.0:  return 2
-	elif fy + 4.0 * c < 7.0:  return 3
-	elif fy + 6.0 * c < 9.0:  return 4
-	elif fy + 6.0 * c < 11.0: return 5
-	elif fy + 6.0 * c < 13.0: return 6
-	elif fy + 6.0 * c < 15.0: return 7
-	elif fy + 6.0 * c < 17.0: return 8
-	elif fy + 6.0 * c < 19.0: return 9
-	elif fy + 6.0 * c < 21.0: return 10
-	elif fy + 6.0 * c < 30.0: return 11
-	elif fy + 6.0 * c < 40.0: return 12
-	elif fy + 6.0 * c < 50.0: return 13
-	elif fy + 6.0 * c < 60.0: return 14
-	elif fy + 6.0 * c < 70.0: return 15
-	elif fy + 6.0 * c < 80.0: return 16
-	elif fy + 6.0 * c < 90.0: return 17
-	elif fy + 6.0 * c < 100.0: return 18
-	else: return 19
+# STANDARD/FUNNEL/SKY_MINE/SHALLOW are deliberately NOT hooked. Vanilla draws a
+# fresh randf() jitter for every depth threshold it tests, so layer boundaries
+# are a noisy band and a tile consumes a variable number of RNG draws. Sharing
+# one draw per tile sharpens those bands and shifts the global RNG stream for
+# everything generated after it (sparse-level tile skips, sprite variants,
+# chests), so the "optimised" versions produced different terrain. Keeping the
+# per-threshold draws leaves nothing worth optimising, so vanilla runs as is.
+# TIGHTFUNNEL has no random jitter, so hoisting the distance is exact.
 
 
 func lvl_from_global_pos_TIGHTFUNNEL(chain: ModLoaderHookChain, pos: Vector2i) -> int:
@@ -249,7 +147,7 @@ func lvl_from_global_pos_TIGHTFUNNEL(chain: ModLoaderHookChain, pos: Vector2i) -
 	var y := pos.y
 	if y < 0:
 		return -2
-	var d := abs(x - 14)  # horizontal distance from funnel center; compute once
+	var d: int = absi(x - 14)  # horizontal distance from funnel center; compute once
 	if   d < 3:   return 0
 	elif d < 5:   return 1
 	elif d < 7:   return 2
