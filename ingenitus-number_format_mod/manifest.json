@@ -1,0 +1,41 @@
+{
+    "name": "number_format_mod",
+    "namespace": "ingenitus",
+    "version_number": "1.0.0",
+    "description": "Large numbers (cash, coal, prices) show as clean short scientific notation like 1.23e11 instead of Godot's 1.23457e+11.",
+    "website_url": "",
+    "dependencies": [],
+    "extra": {
+        "godot": {
+            "authors": [
+                "Ingenitus"
+            ],
+            "tags": [
+                "visual",
+                "ui"
+            ],
+            "description_rich": "",
+            "optional_dependencies": [],
+            "load_before": [],
+            "incompatibilities": [],
+            "config_schema": {
+                "title": "Config",
+                "description": "Config for Number Format Mod",
+                "type": "object",
+                "properties": {
+                    "enabled": {
+                        "title": "Enabled",
+                        "type": "boolean",
+                        "default": true
+                    }
+                }
+            },
+            "compatible_mod_loader_version": [
+                "7.0.1"
+            ],
+            "compatible_game_version": [
+                "1.4.1.1"
+            ]
+        }
+    }
+}

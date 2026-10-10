@@ -43,6 +43,7 @@ Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside y
 | [Axe Glare Toggle Mod](#axe-glare-toggle-mod-ingenitus-axe_glare_toggle_mod) | Ingenitus | Hide the axe/battleaxe full-spin glare particles                                |
 | [Bug Fixes Mod](#bug-fixes-mod-ingenitus-bug_fixes_mod)            | Ingenitus | Fixes quota overflow, save loss, stuck pause, loot duplication and more (each toggleable) |
 | [Chest QoL Mod](#chest-qol-mod-ingenitus-chest_qol_mod)            | Ingenitus | Open/loot chests on touch, reach them from their protective tiles, no outclassed scrolls |
+| [Number Format Mod](#number-format-mod-ingenitus-number_format_mod) | Ingenitus | Large numbers as `1.23e10` instead of `1.23457e+10`                                   |
 | [AutoPassiveChooser](#other-mods-not-by-me)                        | NanobotZ | Automatically selects passives on level-up based on a configurable priority list        |
 
 ---
@@ -255,6 +256,14 @@ Less fiddly chests. Adds a **Chests** tab to the in-game settings menu.
 | Loot on touch            | `true`  | With One-Click Looting owned, touching a chest loots it straight to your inventory                |
 | Protective-ring reach    | `true`  | Once one of a chest's eight protective tiles is mined, standing on any of them takes the chest    |
 | No outclassed scrolls    | `true`  | Power-up scrolls for weapons no stronger than one you own become passive-upgrade cards            |
+
+---
+
+### Number Format Mod (`ingenitus-number_format_mod`)
+
+Large numbers (cash, coal, prices) show as short scientific notation like `1.23e10` instead of Godot's `1.23457e+10`. Numbers shown with thousands separators are unchanged.
+
+No configuration options besides `enabled` in the config file.
 
 ---
 
