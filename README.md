@@ -39,6 +39,7 @@ Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside y
 | [Game Limits Mod](#game-limits-mod-der_floh-game_limits_mod)       | der_floh | Tune performance-related caps (mortars, chunk loading, electric chain) via settings tab |
 | [Performance Mod](#performance-mod-der_floh-performance_mod)       | der_floh | Optimised chunk loading, tile effects, and level generation to reduce frame time spikes |
 | [No Holes Mod](#no-holes-mod-der_floh-no_holes_mod)                | der_floh | Fills air pockets in world generation so underground rock is always solid               |
+| [Tick Upgrade Mod](#tick-upgrade-mod-der_floh-tick_upgrade_mod)    | der_floh | Passives that speed up poison/fire ticking; effects keep ticking on unloaded tiles      |
 | [Custom Seed Mod](#custom-seed-mod-ingenitus-custom_seed_mod)      | Ingenitus | World seed for reproducible mines, independent of exploration order                    |
 | [Axe Glare Toggle Mod](#axe-glare-toggle-mod-ingenitus-axe_glare_toggle_mod) | Ingenitus | Hide the axe/battleaxe full-spin glare particles                                |
 | [Bug Fixes Mod](#bug-fixes-mod-ingenitus-bug_fixes_mod)            | Ingenitus | Fixes quota overflow, save loss, stuck pause, loot duplication and more (each toggleable) |
@@ -201,6 +202,21 @@ No configuration options. To disable, uninstall the mod.
 
 ---
 
+### Tick Upgrade Mod (`der_floh-tick_upgrade_mod`)
+
+Adds two level-up passives, **Poison Tick Speed** and **Fire Tick Speed**, each adding +10 % to its tick rate per level. They are only offered while you have a poison gun or poison staff (poison) or a flamethrower (fire), show up in the passive bonuses panel (Tab), and can be prioritised in AutoPassiveChooser.
+
+Also keeps poison and fire **ticking on distant tiles** outside the loaded area, instead of pausing them when you walk away.
+
+Adds a **Tick Upgrades** tab to the in-game settings menu.
+
+| Option                    | Default | Description                                                                                    |
+| ------------------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| Always Tick Distant Tiles | `true`  | Poison and fire keep ticking on out-of-range (unloaded) chunks                                 |
+| Preserve Effect Duration  | `true`  | Scales the stored tick count with the tick speed, so effects tick faster but last just as long |
+
+---
+
 ## Contributed Mods
 
 ### Custom Seed Mod (`ingenitus-custom_seed_mod`)
@@ -320,3 +336,15 @@ These mods are not part of this repository but are listed here regardless.
 | Mod                                                                          | Author   | Description                                                                                                                                                 |
 | ---------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [AutoPassiveChooser](https://github.com/NanobotZ/CoalLLC-AutoPassiveChooser) | NanobotZ | Automatically selects passives on level-up based on a configurable priority list, so you never have to click through the passive selection screen manually. |
+
+---
+
+## Building from source
+
+[`build/build.ps1`](build/build.ps1) packs every mod in `src/<author>/<mod>/` into `out/<namespace>-<name>-<version>.zip`, ready to drop into the game's `mods/` folder. The GitHub release workflow runs the same script.
+
+```powershell
+./build/build.ps1
+```
+
+It works with PowerShell 7 (`pwsh`) on Windows, Linux and macOS, and with the Windows PowerShell 5.1 that ships with Windows. Pass `-OutputDirectory <folder>` to write the zips somewhere else. If Windows PowerShell refuses to run scripts, start it with `powershell -ExecutionPolicy Bypass -File build\build.ps1`.
