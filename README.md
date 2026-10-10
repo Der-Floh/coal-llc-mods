@@ -14,10 +14,9 @@ All mods require **Godot Mod Loader (GML)** by NanobotZ to be installed first:<b
 1. Download the mod loader here (choose the version for your operating system): [https://github.com/NanobotZ/godot-mod-loader/releases/latest](https://github.com/NanobotZ/godot-mod-loader/releases/latest)
 
 2. Extract the mod loader and copy the addons folder into both of these locations:
-`C:\Program Files (x86)\Steam\steamapps\common\Coal LLC\` and 
-`C:\Program Files (x86)\Steam\steamapps\common\Coal LLC\Coal LLC\`
+`C:\Program Files (x86)\Steam\steamapps\common\Coal LLC\` and `C:\Program Files (x86)\Steam\steamapps\common\Coal LLC\Coal LLC\`
 
-5. In Steam, open Coal LLC's properties and add this into launch options:
+3. In Steam, open Coal LLC's properties and add this into launch options:
 `--script "addons/mod_loader/mod_loader_setup.gd"`
 
 Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside your Coal LLC game directory and launch the game (do not extract the zip).
@@ -49,6 +48,7 @@ Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside y
 | [Extra Passives Mod](#extra-passives-mod-ingenitus-extra_passives_mod) | Ingenitus | Ten new passives for guns, axes, vacuum, drill, earthquake and bombs              |
 | [Move Speed Slider Mod](#move-speed-slider-mod-ingenitus-move_speed_slider_mod) | Ingenitus | Walk Speed slider (Tab) that can raise walking up to sprint speed                  |
 | [AutoPassiveChooser](#other-mods-not-by-me)                        | NanobotZ | Automatically selects passives on level-up based on a configurable priority list        |
+| [garethwhite-prog's mods](#other-mods-not-by-me)                   | garethwhite-prog | 26 mods: weapons, explosives, employees, shop upgrades, utilities and more              |
 
 ---
 
@@ -333,9 +333,37 @@ The value is stored in the mod config (`walk_speed_bonus`, set by the slider), n
 
 These mods are not part of this repository but are listed here regardless.
 
-| Mod                                                                          | Author   | Description                                                                                                                                                 |
-| ---------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [AutoPassiveChooser](https://github.com/NanobotZ/CoalLLC-AutoPassiveChooser) | NanobotZ | Automatically selects passives on level-up based on a configurable priority list, so you never have to click through the passive selection screen manually. |
+garethwhite-prog's mods come from [garethwhite-prog/coal-llc-mods](https://github.com/garethwhite-prog/coal-llc-mods); the ready-to-use zips are in its [`mods/`](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods) folder.
+
+| Mod                                                                                                                                     | Author           | Description                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [AutoPassiveChooser](https://github.com/NanobotZ/CoalLLC-AutoPassiveChooser)                                                            | NanobotZ         | Automatically selects passives on level-up based on a configurable priority list, so you never have to click through the passive selection screen manually. |
+| [Bouncing Grenade Arsenal](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-grenade_mod)                | garethwhite-prog | 15 tiers of grenades that bounce off walls and explode on a timed fuse                                                                                      |
+| [Buyable Vacuums](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-buyable_vacuums_mod)                 | garethwhite-prog | Vacuum quest upgrades can also be bought in the Bonus shop; adds vacuum levels 5 to 8 (up to 600 tiles)                                                     |
+| [Career Leaderboard](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-leaderboard_mod)                  | garethwhite-prog | All-time records and quest rewards for collectors, mortars, combat and wealth, shown in the settings menu                                                   |
+| [Cosmic Collectors](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-more_collectors_mod)               | garethwhite-prog | 4 higher-tier Collector drones with more flight speed and capacity; needs Mod Settings System                                                               |
+| [Dual Multipliers](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-dual_multipliers_mod)               | garethwhite-prog | Second scaling multipliers for drill speed, axe speed and gun fire rate, for stronger late-game scaling                                                     |
+| [Elemental Transmutation](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-elemental_transmutation_mod) | garethwhite-prog | Breaking a burning tile pays 35 cash, a poisoned (corroded) one 15                                                                                          |
+| [Excavation Frenzy](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-excavation_frenzy_mod)             | garethwhite-prog | Mining combo that speeds up movement and swings and triggers shockwaves; needs [Pickaxe AOE Mod](#pickaxe-aoe-mod-der_floh-pickaxeaoe_mod)                  |
+| [Executive Employees](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-more_employees_mod)              | garethwhite-prog | 4 executive Miner tiers above Senior VP, up to Titan Miner; needs Mod Settings System                                                                       |
+| [High-Yield Drills](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-more_drills_mod)                   | garethwhite-prog | Drill tiers 5 to 10, up to 50 billion damage                                                                                                                |
+| [Hydrogen Bomb](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-hydrogen_bomb_mod)                     | garethwhite-prog | 15 tiers of Hydrogen Bombs (Shoddy to Onyx) with huge blast radii for clearing caverns                                                                      |
+| [InfiniPlatform](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-infini_platform_mod)                  | garethwhite-prog | Platform that extends left and right across gaps until it hits a wall (up to 200 blocks)                                                                    |
+| [Martial Legends](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-martial_legends_mod)                 | garethwhite-prog | Martial Artist gloves and kicks themed after Mike Tyson, Jean-Claude Van Damme and Chuck Norris                                                             |
+| [Mod Settings System](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-mod_settings_mod)                | garethwhite-prog | Adds a "Gareth Mods" settings tab with toggles and sliders for these mods                                                                                   |
+| [More Inventory Slots](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-more_inventory_slots_mod)       | garethwhite-prog | Inventory slot upgrades 4 to 10 (+20 up to +250 slots)                                                                                                      |
+| [More Inventory Stacks](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-more_inventory_stacks_mod)     | garethwhite-prog | Stack size upgrades 7 to 16 for very large item counts                                                                                                      |
+| [More Layer Shifts](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-more_layer_shifts_mod)             | garethwhite-prog | Shift Rock Layers upgrades 6 to 12, bringing deeper ores within reach                                                                                       |
+| [More Nukes](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-more_nukes_mod)                           | garethwhite-prog | 15 tiers of Tactical Nukes (Shoddy to Onyx)                                                                                                                 |
+| [More Vacuum Quests](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-more_vacuum_quests_mod)           | garethwhite-prog | Continues the vacuum questline past Diamond with Uranium, Moonstone, Onyx and Abyssal upgrades                                                              |
+| [Mortar Gun Arsenal](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-more_mortars_mod)                 | garethwhite-prog | Mortar Gun tiers 6 to 10, up to 500 billion damage                                                                                                          |
+| [Neutron Bomb](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-neutron_bomb_mod)                       | garethwhite-prog | 15 tiers of Neutron Bombs (Shoddy to Onyx) with small, extremely strong blasts that break bedrock                                                           |
+| [Plasma Raygun](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-plasma_raygun_mod)                     | garethwhite-prog | Right-click plasma beam that cuts through several layers of rock                                                                                            |
+| [Prospector's Beacon](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-prospectors_beacon_mod)          | garethwhite-prog | Every 4.5 seconds a pulse deals a little damage to a random tile just below you                                                                             |
+| [Seismic Hazards](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-seismic_hazards_mod)                 | garethwhite-prog | Digging out a tile with open space on both sides can make the ceiling above it cave in                                                                      |
+| [Tank Arsenal](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-tank_arsenal_mod)                       | garethwhite-prog | 45 Incendiary, Caustic and Depleted Uranium tanks for the Tanker, with chest drops                                                                          |
+| [Vacuum Collector Depot](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-vacuum_depot_mod)             | garethwhite-prog | Collectors unload at the vacuum nozzle instead of the surface when it is closer                                                                             |
+| [Weapon Stacker](https://github.com/garethwhite-prog/coal-llc-mods/tree/main/mods-unpacked/gareth-weapon_stacker_mod)                   | garethwhite-prog | Miniguns and water guns get stronger the more of them you stack                                                                                             |
 
 ---
 
