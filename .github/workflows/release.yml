@@ -21,7 +21,7 @@ jobs:
           OUT_DIR="$GITHUB_WORKSPACE/out"
           mkdir -p "$OUT_DIR"
 
-          for mod_dir in */; do
+          for mod_dir in src/*/*/; do
             # Skip non-mod directories
             manifest="$mod_dir/manifest.json"
             if [ ! -f "$manifest" ]; then
@@ -41,7 +41,7 @@ jobs:
             zip_path="$OUT_DIR/$zip_name"
 
             # Stage under mods-unpacked/<folder>/ as required by GML
-            folder_name="${mod_dir%/}"
+            folder_name=$(basename "$mod_dir")
             staging=$(mktemp -d)
             mkdir -p "$staging/mods-unpacked/$folder_name"
             cp -r "$mod_dir"* "$staging/mods-unpacked/$folder_name/"
