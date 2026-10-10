@@ -341,10 +341,13 @@ These mods are not part of this repository but are listed here regardless.
 
 ## Building from source
 
-[`build/build.ps1`](build/build.ps1) packs every mod in `src/<author>/<mod>/` into `out/<namespace>-<name>-<version>.zip`, ready to drop into the game's `mods/` folder. The GitHub release workflow runs the same script.
+[`build/build.ps1`](build/build.ps1) packs every mod in `src/<author>/<mod>/` into `out/<namespace>-<name>-<version>.zip`, ready to drop into the game's `mods/` folder. [`build/validate.ps1`](build/validate.ps1) then checks that every zip matches its source folder and has the layout and manifest Godot Mod Loader expects.
 
 ```powershell
 ./build/build.ps1
+./build/validate.ps1
 ```
 
-It works with PowerShell 7 (`pwsh`) on Windows, Linux and macOS, and with the Windows PowerShell 5.1 that ships with Windows. Pass `-OutputDirectory <folder>` to write the zips somewhere else. If Windows PowerShell refuses to run scripts, start it with `powershell -ExecutionPolicy Bypass -File build\build.ps1`.
+Both work with PowerShell 7 (`pwsh`) on Windows, Linux and macOS, and with the Windows PowerShell 5.1 that ships with Windows. Pass `-OutputDirectory <folder>` to build somewhere else (older zips of the same mod there are replaced) and `-ZipDirectory <folder>` to validate that folder. If Windows PowerShell refuses to run scripts, start it with `powershell -ExecutionPolicy Bypass -File build\build.ps1`.
+
+GitHub runs both scripts on every push to `main` and every pull request, and the release workflow runs them before attaching the zips to a release.
