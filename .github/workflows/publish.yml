@@ -1,0 +1,27 @@
+name: Publish Release
+
+on:
+  release:
+    types: [published]
+
+concurrency:
+  group: nexus-publish
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  publish:
+    uses: Der-Floh/Der-Floh/.github/workflows/nexus-publish.yml@v1
+    with:
+      build-command: pwsh -NoProfile -File build/build.ps1 && pwsh -NoProfile -File build/validate.ps1
+      package-dir: out
+      mods-file: .github/nexus-mods.json
+      mods-dir: out/der_floh
+      primary-mod-manager-download: true
+      changelog: ${{ github.event.release.html_url }}
+    secrets:
+      NEXUSMODS_API_KEY: ${{ secrets.NEXUSMODS_API_KEY }}

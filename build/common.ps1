@@ -24,6 +24,12 @@ function Get-ModDirectory {
     $modDirectories
 }
 
+function Get-ModAuthor {
+    param([Parameter(Mandatory)][System.IO.DirectoryInfo]$ModDirectory)
+
+    $ModDirectory.Parent.Name
+}
+
 function Get-ModItem {
     param([Parameter(Mandatory)][System.IO.DirectoryInfo]$ModDirectory)
 

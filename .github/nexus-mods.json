@@ -1,0 +1,50 @@
+{
+    "der_floh-effect_spread_mod": {
+        "file-id": "",
+        "mod-id": "",
+        "file-name": "Effect Spread Mod",
+        "file-description": "Spreads poison/fire/water ticks to nearby tiles when an affected tile is destroyed"
+    },
+    "der_floh-game_limits_mod": {
+        "file-id": "",
+        "mod-id": "",
+        "file-name": "Game Limits Mod",
+        "file-description": "Tune performance-related caps (mortars, chunk loading, electric chain) via settings tab"
+    },
+    "der_floh-no_holes_mod": {
+        "file-id": "",
+        "mod-id": "",
+        "file-name": "No Holes Mod",
+        "file-description": "Fills air pockets in world generation so underground rock is always solid"
+    },
+    "der_floh-ore_value_mod": {
+        "file-id": "",
+        "mod-id": "",
+        "file-name": "Ore Value Mod",
+        "file-description": "Configurable sell price multiplier per ore type"
+    },
+    "der_floh-passive_drop_mod": {
+        "file-id": "",
+        "mod-id": "",
+        "file-name": "Passive Drop Mod",
+        "file-description": "Configurable chance for ore (and other) tiles to drop a PassiveUpgrade on destruction"
+    },
+    "der_floh-performance_mod": {
+        "file-id": "",
+        "mod-id": "",
+        "file-name": "Performance Mod",
+        "file-description": "Optimised chunk loading, tile effects, and level generation to reduce frame time spikes"
+    },
+    "der_floh-pickaxeaoe_mod": {
+        "file-id": "",
+        "mod-id": "",
+        "file-name": "Pickaxe AOE Mod",
+        "file-description": "Electric pickaxe and AOE ability deal full damage instead of vanilla reduced ratios"
+    },
+    "der_floh-tick_upgrade_mod": {
+        "file-id": "",
+        "mod-id": "",
+        "file-name": "Tick Upgrade Mod",
+        "file-description": "Passives that speed up poison/fire ticking; effects keep ticking on unloaded tiles"
+    }
+}

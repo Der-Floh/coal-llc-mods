@@ -3,13 +3,13 @@
 Packs every mod in src/<author>/<mod>/ into a zip for Godot Mod Loader.
 
 .DESCRIPTION
-Each zip is named <namespace>-<name>-<version_number>.zip from the mod's manifest.json and holds the mod folder under mods-unpacked/, the layout GML expects. Zips of other versions of the same mod are removed from the output folder.
+Each zip is named <namespace>-<name>-<version_number>.zip from the mod's manifest.json and holds the mod folder under mods-unpacked/, the layout GML expects. It is written to the folder of the mod's author in the output folder, <author>/ like src/<author>/, and zips of other versions of the same mod are removed from there.
 
 .PARAMETER SourceDirectory
 Folder holding the author folders. Defaults to src/ in the repository root.
 
 .PARAMETER OutputDirectory
-Folder the zips are written to. Defaults to out/ in the repository root.
+Folder the author folders with the zips are written to. Defaults to out/ in the repository root.
 
 .EXAMPLE
 ./build/build.ps1 -OutputDirectory ./dist
@@ -93,8 +93,10 @@ $outputRoot = New-Item -ItemType Directory -Path $OutputDirectory -Force
 
 foreach ($modDirectory in Get-ModDirectory -Path $SourceDirectory) {
     $identity = Read-ModIdentity -ManifestPath (Join-Path $modDirectory.FullName $ManifestFileName)
+    $author = Get-ModAuthor -ModDirectory $modDirectory
+    $authorDirectory = New-Item -ItemType Directory -Path (Join-Path $outputRoot.FullName $author) -Force
     $zipName = "$($identity.ModId)-$($identity.Version).zip"
-    Remove-ModZip -Directory $outputRoot.FullName -ModId $identity.ModId
-    New-ModZip -ModDirectory $modDirectory -ZipPath (Join-Path $outputRoot.FullName $zipName)
-    Write-Host "Packed: $zipName"
+    Remove-ModZip -Directory $authorDirectory.FullName -ModId $identity.ModId
+    New-ModZip -ModDirectory $modDirectory -ZipPath (Join-Path $authorDirectory.FullName $zipName)
+    Write-Host "Packed: $author/$zipName"
 }

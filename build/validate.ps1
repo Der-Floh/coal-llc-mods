@@ -3,7 +3,8 @@
 Checks the zips built by build.ps1 against the mod sources and against what Godot Mod Loader needs to load them.
 
 .DESCRIPTION
-Every mod in src/<author>/<mod>/ needs exactly one zip, and every zip must:
+Every mod in src/<author>/<mod>/ needs a namespace named like its author folder and exactly one zip, and every zip must:
+- sit in the folder of its mod's author, <author>/ like src/<author>/,
 - contain the files of its source folder, unchanged, and nothing else,
 - keep them under mods-unpacked/<namespace>-<name>/ with '/' separators,
 - include mod_main.gd and a manifest.json that passes the checks of GML 7.0.1 (NanobotZ build),
@@ -14,7 +15,7 @@ Every mod in src/<author>/<mod>/ needs exactly one zip, and every zip must:
 Folder holding the author folders. Defaults to src/ in the repository root.
 
 .PARAMETER ZipDirectory
-Folder holding the zips to check. Defaults to out/ in the repository root.
+Folder holding the author folders with the zips to check. Defaults to out/ in the repository root.
 #>
 [CmdletBinding()]
 param(
@@ -84,8 +85,32 @@ function ConvertFrom-Utf8 {
     [System.Text.Encoding]::UTF8.GetString($Bytes).TrimStart([char]0xFEFF)
 }
 
+function Get-ZipFile {
+    param([Parameter(Mandatory)][string]$Path)
+
+    $root = (Get-Item -LiteralPath $Path).FullName.TrimEnd('\', '/')
+    foreach ($zipFile in Get-ChildItem -LiteralPath $root -Filter '*.zip' -File -Recurse) {
+        [pscustomobject]@{
+            File         = $zipFile
+            RelativePath = $zipFile.FullName.Substring($root.Length + 1).Replace('\', '/')
+        }
+    }
+}
+
+function Get-ZipAuthorFolder {
+    param([Parameter(Mandatory)][string]$ZipPath)
+
+    $pathSegments = $ZipPath.Split('/')
+    if ($pathSegments.Count -eq 2) {
+        $pathSegments[0]
+    }
+}
+
 function Read-ModZip {
-    param([Parameter(Mandatory)][System.IO.FileInfo]$ZipFile)
+    param(
+        [Parameter(Mandatory)][System.IO.FileInfo]$ZipFile,
+        [Parameter(Mandatory)][string]$RelativePath
+    )
 
     $files = New-OrdinalDictionary
     $directories = [System.Collections.Generic.List[string]]::new()
@@ -107,6 +132,7 @@ function Read-ModZip {
     $entryNames = @($files.Keys) + @($directories)
     [pscustomobject]@{
         ZipName    = $ZipFile.Name
+        ZipPath    = $RelativePath
         Files      = $files
         EntryNames = $entryNames
         ModFolders = @(
@@ -168,6 +194,24 @@ function Test-ZipPath {
     }
     $folderPrefix = $Path.TrimEnd('/') + '/'
     [bool]($Package.EntryNames | Where-Object { $_.StartsWith($folderPrefix, [System.StringComparison]::Ordinal) } | Select-Object -First 1)
+}
+
+function Test-ZipFolder {
+    param([Parameter(Mandatory)]$Package)
+
+    if (-not (Get-ZipAuthorFolder -ZipPath $Package.ZipPath)) {
+        "zip is not in an author folder; build.ps1 writes every zip to <author>/, so delete this one and rebuild"
+    }
+}
+
+function Test-ZipAuthor {
+    param([Parameter(Mandatory)]$Package, [Parameter(Mandatory)][System.IO.DirectoryInfo]$ModDirectory)
+
+    $zipAuthor = Get-ZipAuthorFolder -ZipPath $Package.ZipPath
+    $modAuthor = Get-ModAuthor -ModDirectory $ModDirectory
+    if ($zipAuthor -and $zipAuthor -cne $modAuthor) {
+        "zip is in $zipAuthor/, but its mod is in src/$modAuthor/; delete it and rebuild"
+    }
 }
 
 function Test-ZipLayout {
@@ -392,6 +436,7 @@ function Test-ModZip {
         [Parameter(Mandatory)]$PackagesByModFolder
     )
 
+    Test-ZipFolder -Package $Package
     Test-ZipLayout -Package $Package
     if ($Package.ModFolders.Count -ne 1) {
         return
@@ -400,6 +445,7 @@ function Test-ModZip {
     $modFolder = $Package.ModFolders[0]
     Test-ManifestEntry -Package $Package -ModFolder $modFolder
     if ($ModDirectoriesByName.ContainsKey($modFolder)) {
+        Test-ZipAuthor -Package $Package -ModDirectory $ModDirectoriesByName[$modFolder]
         Test-MatchesSource -Package $Package -ModDirectory $ModDirectoriesByName[$modFolder]
     }
     else {
@@ -409,6 +455,16 @@ function Test-ModZip {
     Test-HookScript -Package $Package
 }
 
+function Test-ModAuthor {
+    param([Parameter(Mandatory)][System.IO.DirectoryInfo]$ModDirectory)
+
+    $author = Get-ModAuthor -ModDirectory $ModDirectory
+    $namespace = $ModDirectory.Name.Split('-')[0]
+    if ($namespace -cne $author) {
+        "src/$author/$($ModDirectory.Name) has the namespace $namespace, so it belongs in src/$namespace/"
+    }
+}
+
 function Test-ModInventory {
     param([Parameter(Mandatory)][System.IO.DirectoryInfo[]]$ModDirectories, [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Packages)
 
@@ -416,12 +472,13 @@ function Test-ModInventory {
         "mod folder name '$($_.Name)' is used by more than one author folder"
     }
     foreach ($modDirectory in $ModDirectories) {
+        Test-ModAuthor -ModDirectory $modDirectory
         $modZips = @($Packages | Where-Object { $_.ModFolders -ccontains $modDirectory.Name })
         if ($modZips.Count -eq 0) {
             "src/$($modDirectory.Parent.Name)/$($modDirectory.Name) has no zip"
         }
         elseif ($modZips.Count -gt 1) {
-            "src/$($modDirectory.Parent.Name)/$($modDirectory.Name) has $($modZips.Count) zips ($(@($modZips | ForEach-Object { $_.ZipName }) -join ', ')); delete the stale ones and rebuild"
+            "src/$($modDirectory.Parent.Name)/$($modDirectory.Name) has $($modZips.Count) zips ($(@($modZips | ForEach-Object { $_.ZipPath }) -join ', ')); delete the stale ones and rebuild"
         }
     }
 }
@@ -438,13 +495,13 @@ foreach ($modDirectory in $modDirectories) {
 
 $problemsByZip = [ordered]@{}
 $packages = [System.Collections.Generic.List[object]]::new()
-foreach ($zipFile in Get-ChildItem -LiteralPath $ZipDirectory -Filter '*.zip' -File | Sort-Object Name) {
+foreach ($zip in Get-ZipFile -Path $ZipDirectory | Sort-Object RelativePath) {
     try {
-        $packages.Add((Read-ModZip -ZipFile $zipFile))
-        $problemsByZip[$zipFile.Name] = @()
+        $packages.Add((Read-ModZip -ZipFile $zip.File -RelativePath $zip.RelativePath))
+        $problemsByZip[$zip.RelativePath] = @()
     }
     catch {
-        $problemsByZip[$zipFile.Name] = @("cannot be read as a zip: $($_.Exception.Message)")
+        $problemsByZip[$zip.RelativePath] = @("cannot be read as a zip: $($_.Exception.Message)")
     }
 }
 
@@ -456,7 +513,7 @@ foreach ($package in $packages) {
 }
 
 foreach ($package in $packages) {
-    $problemsByZip[$package.ZipName] = @(Test-ModZip -Package $package -ModDirectoriesByName $modDirectoriesByName -PackagesByModFolder $packagesByModFolder)
+    $problemsByZip[$package.ZipPath] = @(Test-ModZip -Package $package -ModDirectoriesByName $modDirectoriesByName -PackagesByModFolder $packagesByModFolder)
 }
 $inventoryProblems = @(Test-ModInventory -ModDirectories $modDirectories -Packages $packages.ToArray())
 
@@ -478,7 +535,7 @@ foreach ($problem in $inventoryProblems) {
 }
 
 if ($failedZipCount -gt 0 -or $inventoryProblems.Count -gt 0) {
-    Write-Host "Validation failed: $failedZipCount of $($problemsByZip.Count) zip(s) have problems, plus $($inventoryProblems.Count) problem(s) with missing or duplicate mods."
+    Write-Host "Validation failed: $failedZipCount of $($problemsByZip.Count) zip(s) have problems, plus $($inventoryProblems.Count) problem(s) with missing, duplicate or misplaced mods."
     exit 1
 }
-Write-Host "All $($problemsByZip.Count) zips match their sources and the GML mod structure."
+Write-Host "All $($problemsByZip.Count) zips are in their author's folder and match their sources and the GML mod structure."
