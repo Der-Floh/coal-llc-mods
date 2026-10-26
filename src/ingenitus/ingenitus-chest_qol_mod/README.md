@@ -1,5 +1,7 @@
 # Chest QoL Mod
 
+> **Credit:** Ingenitus created this mod and handed it over to me. Thank you, Ingenitus, for your work!
+
 Less fiddly chests: they open when you touch them, can loot straight to your inventory, can be taken from their protective tiles once one of them is mined, and stop offering power-up scrolls for weapons you have already outclassed.
 
 ## Settings

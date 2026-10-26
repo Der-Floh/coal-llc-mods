@@ -1,5 +1,7 @@
 # Axe Glare Toggle Mod
 
+> **Credit:** Ingenitus created this mod and handed it over to me. Thank you, Ingenitus, for your work!
+
 Hides the **glare particles** the axe and battleaxe whirl emits at full spin, which can cover the tiles you are mining. Spin, movement and damage are unchanged.
 
 ## Settings

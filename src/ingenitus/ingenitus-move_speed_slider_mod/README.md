@@ -1,5 +1,7 @@
 # Move Speed Slider Mod
 
+> **Credit:** Ingenitus created this mod and handed it over to me. Thank you, Ingenitus, for your work!
+
 Adds a **Walk Speed** slider to the passive bonuses panel (Tab). Walking can be raised up to your current sprint speed and never past it: the sprint passive, the sprint slider and the speed quest reward all count. Handy with Auto Sprint, or to move at sprint pace without holding the key.
 
 ## Slider

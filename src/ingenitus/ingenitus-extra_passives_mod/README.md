@@ -1,5 +1,7 @@
 # Extra Passives Mod
 
+> **Credit:** Ingenitus created this mod and handed it over to me. Thank you, Ingenitus, for your work!
+
 Ten new level-up passives for weapons and tools that had few or none. A passive is only offered while you hold an item it applies to (or own a vacuum), and a passive with a cap is no longer offered once it reaches it.
 
 ## Passives

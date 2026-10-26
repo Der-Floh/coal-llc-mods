@@ -1,5 +1,7 @@
 # Custom Seed Mod
 
+> **Credit:** Ingenitus created this mod and handed it over to me. Thank you, Ingenitus, for your work!
+
 Set a **world seed** to get the same mine again. Every chunk is generated from the seed, the day and the chunk's own position, so terrain, ore layers and chest positions come out the same however you explore. Chest contents and the rest of the game, such as employees, stay random.
 
 ## Settings

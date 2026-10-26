@@ -1,5 +1,7 @@
 # Bug Fixes Mod
 
+> **Credit:** Ingenitus created this mod and handed it over to me. Thank you, Ingenitus, for your work!
+
 Fixes ten bugs of the vanilla game, from the coal quota overflowing on late days to lost saves and duplicated loot. Each fix can be switched off on its own.
 
 ## Settings
