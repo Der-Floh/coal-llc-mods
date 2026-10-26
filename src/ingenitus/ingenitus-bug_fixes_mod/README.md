@@ -23,8 +23,8 @@ The save restore runs when the game starts, so switching it on or off only matte
 
 ## Compatibility
 
-- Works with der_floh's [Ore Value Mod](../../der_floh/der_floh-ore_value_mod/README.md). Before 1.1.0, the first start with both installed failed to load player skins and settings.
-- der_floh's [Game Limits Mod](../../der_floh/der_floh-game_limits_mod/README.md) contains the same stuck-pause fix, so while it is installed and enabled, switching off this mod's toggle doesn't bring the vanilla behaviour back. Running both is harmless.
+- Works with the [Ore Value Mod](../../der_floh/der_floh-ore_value_mod/README.md). Before 1.1.0, the first start with both installed failed to load player skins and settings.
+- The [Game Limits Mod](../../der_floh/der_floh-game_limits_mod/README.md) contains the same stuck-pause fix, so while it is installed and enabled, switching off this mod's toggle doesn't bring the vanilla behaviour back. Running both is harmless.
 - The explosion fix also covers blasts enlarged by the [Extra Passives Mod](../ingenitus-extra_passives_mod/README.md).
 
 ## Installation

@@ -20,7 +20,6 @@ jobs:
       build-command: pwsh -NoProfile -File .vscode/build/build.ps1 && pwsh -NoProfile -File .vscode/build/validate.ps1
       package-dir: out
       mods-file: .github/nexus-mods.json
-      mods-dir: out/der_floh
       primary-mod-manager-download: true
       changelog: ${{ github.event.release.html_url }}
     secrets:

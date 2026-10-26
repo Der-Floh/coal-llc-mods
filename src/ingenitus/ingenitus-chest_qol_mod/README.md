@@ -18,7 +18,7 @@ Looting on touch and reaching chests from their protective tiles only work while
 
 ## Compatibility
 
-- der_floh's [Passive Drop Mod](../../der_floh/der_floh-passive_drop_mod/README.md) turns chest generation off by default, so there are no chests at all until you switch its **Chest Generation** on or its **Mod Enabled** off. With its **Weapon Drops from Chests** off, every scroll is already a card and the scroll option has nothing left to do.
+- The [Passive Drop Mod](../../der_floh/der_floh-passive_drop_mod/README.md) turns chest generation off by default, so there are no chests at all until you switch its **Chest Generation** on or its **Mod Enabled** off. With its **Weapon Drops from Chests** off, every scroll is already a card and the scroll option has nothing left to do.
 - [AutoPassiveChooser](https://github.com/NanobotZ/CoalLLC-AutoPassiveChooser) loots a chest as soon as one of its protective tiles is destroyed, so with it installed the protective-tile option rarely gets a chance.
 - Works with the [Bug Fixes Mod](../ingenitus-bug_fixes_mod/README.md), which also fixes the multiplier of chest upgrade cards.
 

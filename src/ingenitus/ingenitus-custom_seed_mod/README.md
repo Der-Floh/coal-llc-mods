@@ -28,9 +28,9 @@ Edit the file while the game is closed.
 
 ## Compatibility
 
-- Works with der_floh's [Performance Mod](../../der_floh/der_floh-performance_mod/README.md) and [Game Limits Mod](../../der_floh/der_floh-game_limits_mod/README.md): chunks are seeded by their position, so the order they load in doesn't matter.
-- With der_floh's [No Holes Mod](../../der_floh/der_floh-no_holes_mod/README.md) mines stay reproducible, but a seed builds a different mine than without it.
-- der_floh's [Passive Drop Mod](../../der_floh/der_floh-passive_drop_mod/README.md) turns chest generation off by default: until you switch its **Chest Generation** on or its **Mod Enabled** off, mines have no chests whatever the seed.
+- Works with the [Performance Mod](../../der_floh/der_floh-performance_mod/README.md) and the [Game Limits Mod](../../der_floh/der_floh-game_limits_mod/README.md): chunks are seeded by their position, so the order they load in doesn't matter.
+- With the [No Holes Mod](../../der_floh/der_floh-no_holes_mod/README.md) mines stay reproducible, but a seed builds a different mine than without it.
+- The [Passive Drop Mod](../../der_floh/der_floh-passive_drop_mod/README.md) turns chest generation off by default: until you switch its **Chest Generation** on or its **Mod Enabled** off, mines have no chests whatever the seed.
 
 ## Installation
 

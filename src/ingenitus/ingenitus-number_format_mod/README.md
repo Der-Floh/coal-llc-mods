@@ -16,7 +16,7 @@ Edit the file while the game is closed.
 
 ## Compatibility
 
-- Handy with der_floh's [Ore Value Mod](../../der_floh/der_floh-ore_value_mod/README.md), whose price multipliers quickly produce numbers this large.
+- Handy with the [Ore Value Mod](../../der_floh/der_floh-ore_value_mod/README.md), whose price multipliers quickly produce numbers this large.
 
 ## Installation
 
