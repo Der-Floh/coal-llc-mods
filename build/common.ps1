@@ -6,6 +6,7 @@ Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
 $RepositoryRoot = Split-Path $PSScriptRoot -Parent
 $DefaultSourceDirectory = Join-Path $RepositoryRoot 'src'
 $DefaultZipDirectory = Join-Path $RepositoryRoot 'out'
+$NexusDirectoryName = 'nexus'
 $ZipModsRoot = 'mods-unpacked'
 $ManifestFileName = 'manifest.json'
 

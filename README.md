@@ -378,20 +378,20 @@ garethwhite-prog's mods come from [garethwhite-prog/coal-llc-mods](https://githu
 
 ## Building from source
 
-[`build/build.ps1`](build/build.ps1) packs every mod in `src/<author>/<mod>/` into `out/<author>/<namespace>-<name>-<version>.zip`, ready to drop into the game's `mods/` folder. [`build/validate.ps1`](build/validate.ps1) then checks that every zip is in the folder of its mod's author, matches its source folder and has the layout and manifest Godot Mod Loader expects.
+[`build/build.ps1`](build/build.ps1) packs every mod in `src/<author>/<mod>/` into `out/<author>/<namespace>-<name>-<version>.zip`, ready to drop into the game's `mods/` folder, and writes the Nexus Mods descriptions to `out/nexus/` (see below). [`build/validate.ps1`](build/validate.ps1) then checks that every zip is in the folder of its mod's author, matches its source folder and has the layout and manifest Godot Mod Loader expects.
 
 ```powershell
 ./build/build.ps1
 ./build/validate.ps1
 ```
 
-Both work with PowerShell 7 (`pwsh`) on Windows, Linux and macOS, and with the Windows PowerShell 5.1 that ships with Windows. Pass `-OutputDirectory <folder>` to build somewhere else (the author folders go inside it, and older zips of the same mod there are replaced) and `-ZipDirectory <folder>` to validate that folder. Validation fails for a zip outside its author's folder, such as one an older build left directly in `out/`; delete it. If Windows PowerShell refuses to run scripts, start it with `powershell -ExecutionPolicy Bypass -File build\build.ps1`.
+Both work with PowerShell 7 (`pwsh`) on Windows, Linux and macOS, and with the Windows PowerShell 5.1 that ships with Windows. Pass `-OutputDirectory <folder>` to build somewhere else (the author folders and `nexus/` go inside it, and older zips of the same mod there are replaced) and `-ZipDirectory <folder>` to validate that folder. Validation fails for a zip outside its author's folder, such as one an older build left directly in `out/`; delete it. If Windows PowerShell refuses to run scripts, start it with `powershell -ExecutionPolicy Bypass -File build\build.ps1`.
 
 In VS Code, **Ctrl+Shift+B** runs the build, and **Tasks: Run Test Task** builds and then validates.
 
 GitHub runs both scripts on every push to `main` and every pull request. When a release is published, [`publish.yml`](.github/workflows/publish.yml) runs them again and attaches every zip to the release, attested. My mods, those in `out/der_floh/`, also go to their Nexus Mods page when [`.github/nexus-mods.json`](.github/nexus-mods.json) gives them a file id, unless Nexus Mods already has that version; prereleases only get the GitHub release.
 
-Every mod folder has a `README.md`, which is packed into the zip like every other file of the mod. [`build/nexus-descriptions.ps1`](build/nexus-descriptions.ps1) converts the README of every mod in `.github/nexus-mods.json` into the BBCode Nexus Mods descriptions use, as `out/nexus/<namespace>-<name>.txt`: headings become sizes, tables become lists, and relative links point to the file on GitHub. Paste a description into the mod page's description editor in BBCode mode. In VS Code it is the **Nexus descriptions** task.
+Every mod folder has a `README.md`, which is packed into the zip like every other file of the mod. [`build/nexus-descriptions.ps1`](build/nexus-descriptions.ps1) converts the README of every mod in `.github/nexus-mods.json` into the BBCode Nexus Mods descriptions use, as `out/nexus/<namespace>-<name>.txt`: headings become sizes, tables become lists, and relative links point to the file on GitHub. Paste a description into the mod page's description editor in BBCode mode. The build runs it after packing; to regenerate only the descriptions, run it on its own, in VS Code with the **Nexus descriptions** task.
 
 ```powershell
 ./build/nexus-descriptions.ps1

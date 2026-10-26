@@ -1,15 +1,17 @@
 <#
 .SYNOPSIS
-Packs every mod in src/<author>/<mod>/ into a zip for Godot Mod Loader.
+Packs every mod in src/<author>/<mod>/ into a zip for Godot Mod Loader and writes the Nexus Mods descriptions.
 
 .DESCRIPTION
 Each zip is named <namespace>-<name>-<version_number>.zip from the mod's manifest.json and holds the mod folder under mods-unpacked/, the layout GML expects. It is written to the folder of the mod's author in the output folder, <author>/ like src/<author>/, and zips of other versions of the same mod are removed from there.
+
+After packing, nexus-descriptions.ps1 converts the README of every mod in .github/nexus-mods.json into its Nexus Mods description, written to nexus/ in the output folder.
 
 .PARAMETER SourceDirectory
 Folder holding the author folders. Defaults to src/ in the repository root.
 
 .PARAMETER OutputDirectory
-Folder the author folders with the zips are written to. Defaults to out/ in the repository root.
+Folder the author folders with the zips and the nexus/ folder with the descriptions are written to. Defaults to out/ in the repository root.
 
 .EXAMPLE
 ./build/build.ps1 -OutputDirectory ./dist
@@ -100,3 +102,5 @@ foreach ($modDirectory in Get-ModDirectory -Path $SourceDirectory) {
     New-ModZip -ModDirectory $modDirectory -ZipPath (Join-Path $authorDirectory.FullName $zipName)
     Write-Host "Packed: $author/$zipName"
 }
+
+& (Join-Path $PSScriptRoot 'nexus-descriptions.ps1') -SourceDirectory $SourceDirectory -OutputDirectory (Join-Path $outputRoot.FullName $NexusDirectoryName)

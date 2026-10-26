@@ -7,6 +7,8 @@ Nexus Mods descriptions are BBCode and have no tables, so each mod's README.md i
 
 The converter handles the Markdown the mod READMEs use: headings, paragraphs, bold, italic, inline code, links, lists (nested by indentation), blockquotes, tables, horizontal rules and fenced code blocks.
 
+build.ps1 runs this script after packing the zips. Run it on its own to regenerate only the descriptions.
+
 .PARAMETER SourceDirectory
 Folder holding the author folders. Defaults to src/ in the repository root.
 
@@ -25,7 +27,7 @@ param(
 . (Join-Path $PSScriptRoot 'common.ps1')
 
 if (-not $SourceDirectory) { $SourceDirectory = $DefaultSourceDirectory }
-if (-not $OutputDirectory) { $OutputDirectory = Join-Path $DefaultZipDirectory 'nexus' }
+if (-not $OutputDirectory) { $OutputDirectory = Join-Path $DefaultZipDirectory $NexusDirectoryName }
 
 $RepositoryUrl = 'https://github.com/Der-Floh/coal-llc-mods'
 $NexusModsFile = Join-Path $RepositoryRoot '.github/nexus-mods.json'
