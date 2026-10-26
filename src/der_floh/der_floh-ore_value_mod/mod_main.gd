@@ -24,6 +24,24 @@ const ITEM_ID_TO_KEY := {
 	"onyx":        "onyx",
 }
 
+const ITEM_PATHS := {
+	"Coal":        "res://resources/Items/Coal.tres",
+	"CopperOre":   "res://resources/Items/Minerals/Copper.tres",
+	"IronOre":     "res://resources/Items/Minerals/Iron.tres",
+	"SilverOre":   "res://resources/Items/Minerals/Silver.tres",
+	"GoldOre":     "res://resources/Items/Minerals/Gold.tres",
+	"Amethyst":    "res://resources/Items/Gems/Amethyst.tres",
+	"Sapphire":    "res://resources/Items/Gems/Sapphire.tres",
+	"Emerald":     "res://resources/Items/Gems/Emerald.tres",
+	"Ruby":        "res://resources/Items/Gems/Ruby.tres",
+	"Diamond":     "res://resources/Items/Gems/Diamond.tres",
+	"PinkDiamond": "res://resources/Items/Gems/PinkDiamond.tres",
+	"spinel":      "res://resources/Items/Gems/Spinel.tres",
+	"uranium":     "res://resources/Items/Gems/Uranium.tres",
+	"moonstone":   "res://resources/Items/Gems/Moonstone.tres",
+	"onyx":        "res://resources/Items/Gems/Onyx.tres",
+}
+
 var mod_dir_path: String
 var extensions_dir_path: String
 
@@ -36,15 +54,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	_debug = get_debug_logging()
-	# Re-apply price multipliers at the start of each new mining day so that
-	# settings changed during the management screen take effect immediately.
-	Bus.StartDay.connect(_on_start_day)
 	ModLoaderLog.info("Ready! debug_logging=%s" % str(_debug), LOG_NAME)
-
-
-func _on_start_day() -> void:
-	Gvars.reset_resources()
-	ModLoaderLog.debug("Ore sell prices refreshed for new day.", LOG_NAME)
 
 
 func install_hooks() -> void:
@@ -55,6 +65,41 @@ func install_hooks() -> void:
 		"res://scenes/Interfaces/Menus/settings_2.gd",
 		extensions_dir_path.path_join("scenes/Interfaces/Menus/settings_2.hooks.gd")
 	)
+
+
+# --- Prices ---
+
+# Keeps the priced items alive: the game holds no reference to some ores, and a freed item reloads at its vanilla price.
+static var _items := {}
+static var _vanilla_items := {}
+
+
+static func apply_prices() -> void:
+	var enabled := get_enabled()
+	for item_id in ITEM_PATHS:
+		var item = load(ITEM_PATHS[item_id])
+		var vanilla_item = _vanilla_item(item_id)
+		if item == null or vanilla_item == null:
+			continue
+		_items[item_id] = item
+		var base_price: float = _coal_value() if item_id == "Coal" else vanilla_item.itemSellPrice
+		var multiplier: float = get_multiplier(item_id) if enabled else 1.0
+		item.itemSellPrice = base_price * multiplier
+		if _debug and multiplier != 1.0:
+			ModLoaderLog.info("%s sell price x%s = %.0f" % [item_id, str(multiplier), item.itemSellPrice], LOG_NAME)
+
+
+static func _vanilla_item(item_id: String):
+	if not _vanilla_items.has(item_id):
+		_vanilla_items[item_id] = ResourceLoader.load(ITEM_PATHS[item_id], "", ResourceLoader.CacheMode.CACHE_MODE_IGNORE)
+	return _vanilla_items[item_id]
+
+
+static func _coal_value() -> float:
+	var hard_modifier = Gvars.hard_modifier
+	if hard_modifier == null:
+		return 1.0
+	return float(hard_modifier._hard_modifier_effect({"coal_value": 1})["coal_value"])
 
 
 # --- Config ---

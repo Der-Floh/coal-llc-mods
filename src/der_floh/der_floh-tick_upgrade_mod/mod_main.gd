@@ -4,6 +4,7 @@ extends Node
 const MOD_ID  := "der_floh-tick_upgrade_mod"
 const MOD_DIR := "der_floh-tick_upgrade_mod"
 const LOG_NAME := "der_floh-tick_upgrade_mod:Main"
+const SAVE_KEY := "der_floh_tick_upgrade"
 
 var mod_dir_path: String
 var extensions_dir_path: String
@@ -26,6 +27,11 @@ func _ready() -> void:
 
 
 func install_hooks() -> void:
+	# Script Extension: expose the tick speeds as passives and save them with the run.
+	ModLoaderMod.install_script_extension(
+		extensions_dir_path.path_join("resources/passive_effects/passives.gd")
+	)
+
 	# Script Hooks: inject tick-speed passives into the passive chooser UI.
 	ModLoaderMod.install_script_hooks(
 		"res://scenes/Interfaces/in_game/choose_passive.gd",
@@ -93,8 +99,7 @@ func install_hooks() -> void:
 # --- Runtime tick-speed state ---
 # Stored on this mod (not as a Gvars extension) so hook files can reach it via
 # load(mod_main) without the type checker rejecting an extension-added property.
-# Multipliers (1.0 = vanilla); both persist for the process, matching the old
-# Gvars-extension behaviour (reset_game never touched them).
+# Multipliers (1.0 = vanilla), saved with the run by the Passives extension.
 
 static var poison_tick_speed: float = 1.0
 static var fire_tick_speed: float = 1.0
@@ -114,6 +119,32 @@ static func add_poison_tick_speed(amount: float) -> void:
 
 static func add_fire_tick_speed(amount: float) -> void:
 	fire_tick_speed += amount
+
+
+static func get_tick_bonus(key: String):
+	match key:
+		"poison_tick_speed":
+			return poison_tick_speed - 1.0
+		"fire_tick_speed":
+			return fire_tick_speed - 1.0
+	return null
+
+
+static func reset_tick_speeds() -> void:
+	poison_tick_speed = 1.0
+	fire_tick_speed = 1.0
+
+
+static func save_data() -> Dictionary:
+	return {"poison_tick_speed": poison_tick_speed, "fire_tick_speed": fire_tick_speed}
+
+
+static func load_data(data) -> void:
+	reset_tick_speeds()
+	if data is Dictionary:
+		poison_tick_speed = float(data.get("poison_tick_speed", 1.0))
+		fire_tick_speed = float(data.get("fire_tick_speed", 1.0))
+	ModLoaderLog.info("Tick speeds loaded: poison=%.2f fire=%.2f" % [poison_tick_speed, fire_tick_speed], LOG_NAME)
 
 
 # --- Config ---

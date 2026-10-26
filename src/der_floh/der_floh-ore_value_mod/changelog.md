@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.2] – 2026-10-26
+
+### Fixed
+
+- The mod no longer reloads the game's items at the start of every day. That brought bought one-time upgrades back into the shop and locked items unlocked during the run again, and the next save kept that state. Saves that were already affected keep it.
+- The Spinel, Uranium, Moonstone and Onyx multipliers now change their sell prices.
+- Coal stays worthless under the "Coal is worthless" hard modifier, whatever its multiplier.
+- Changing a setting at the main menu no longer causes a script error.
+
 ## [1.1.1] – 2026-06-18
 
 ### Fixed

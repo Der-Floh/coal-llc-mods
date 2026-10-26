@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.4] – 2026-10-26
+
+### Fixed
+
+- Turning **Mod Enabled** off no longer turns chests off too. With the mod off, chests are generated as in vanilla.
+- The **Chest Generation** label now says the setting applies to newly generated chunks. It never needed a level reload.
+
 ## [2.3.3] – 2026-06-18
 
 ### Fixed

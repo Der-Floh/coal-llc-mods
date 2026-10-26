@@ -1,3 +1,12 @@
+## [1.3.3] – 2026-10-26
+
+### Fixed
+
+- The tick speeds are saved with the run. They are restored when you continue, a new run starts at +0%, and quitting before the end of a day no longer keeps upgrades picked that day. Saves from before this version load at +0%.
+- Poison Tick Speed and Fire Tick Speed are only offered again while you own a matching weapon: a poison gun or poison staff, or a flamethrower. Since 1.1.0 they were offered without one.
+- AutoPassiveChooser's **Up to** limit works for both passives. Before, a value there caused a script error and the first card was picked.
+- With the Extra Passives Mod installed, the tick passives are labelled with their real +10% step instead of +5%.
+
 ## [1.3.2] – 2026-06-18
 
 ### Changed

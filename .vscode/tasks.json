@@ -31,6 +31,17 @@
                 "isDefault": true
             },
             "problemMatcher": []
+        },
+        {
+            "label": "Nexus descriptions",
+            "type": "process",
+            "command": "pwsh",
+            "args": ["-NoProfile", "-File", "${workspaceFolder}/build/nexus-descriptions.ps1"],
+            "windows": {
+                "command": "powershell.exe",
+                "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/build/nexus-descriptions.ps1"]
+            },
+            "problemMatcher": []
         }
     ]
 }

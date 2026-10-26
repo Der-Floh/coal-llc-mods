@@ -4,6 +4,7 @@ extends Node
 const MOD_ID := "der_floh-game_limits_mod"
 const MOD_DIR := "der_floh-game_limits_mod"
 const LOG_NAME := "der_floh-game_limits_mod:Main"
+const PERFORMANCE_MOD_ID := "der_floh-performance_mod"
 
 const DEFAULT_MAX_MORTARS: int = 1000
 const DEFAULT_CHUNK_LOAD_RADIUS: int = 3
@@ -23,9 +24,10 @@ func _init() -> void:
 
 func _ready() -> void:
 	_debug = get_debug_logging()
+	_defer_to_performance = ModLoaderMod.is_mod_active(PERFORMANCE_MOD_ID)
 	ModLoaderLog.info(
-		"Game Limits Mod ready. Max mortars: %d, Chunk radius: %d, Chunks/frame: %d, Max electric chain: %d, Max electric visuals: %d, debug_logging: %s" % [
-			get_max_mortars(), get_chunk_load_radius(), get_chunks_per_frame(), get_max_electric_chain(), get_max_electric_visuals(), str(_debug)
+		"Game Limits Mod ready. Max mortars: %d, Chunk radius: %d, Chunks/frame: %d, Max electric chain: %d, Max electric visuals: %d, debug_logging: %s, defer_to_performance: %s" % [
+			get_max_mortars(), get_chunk_load_radius(), get_chunks_per_frame(), get_max_electric_chain(), get_max_electric_visuals(), str(_debug), str(_defer_to_performance)
 		],
 		LOG_NAME
 	)
@@ -134,3 +136,10 @@ static func set_enabled(value: bool) -> void:
 	var cfg := get_config()
 	cfg.data["enabled"] = value
 	ModLoaderConfig.update_config(cfg)
+
+
+static var _defer_to_performance: bool = false
+
+
+static func defers_to_performance() -> bool:
+	return _defer_to_performance

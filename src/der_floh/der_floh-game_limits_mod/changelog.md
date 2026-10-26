@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.1] – 2026-10-26
+
+### Fixed
+
+- While the Performance Mod is active, this mod's chunk loading and electric chain code now steps aside for the Performance Mod's faster versions, which use the same settings. Depending on the load order, the slower versions here often ran instead. Update both mods together.
+
 ## [1.2.0] – 2026-06-18
 
 ### Added

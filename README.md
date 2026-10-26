@@ -1,6 +1,6 @@
 # Coal LLC Mods
 
-Collection of mods for the game [Coal LLC](https://store.steampowered.com/app/2443540/Coal_LLC/).
+Collection of mods for the game [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
 
 > **IMPORTANT:** You use mods at your own risk. I am not responsible for any issues or damage caused by using mods. This is not an official modding method yet, the game author ByeByeOcean is also not responsible for any issues or damage caused by mods.
 
@@ -29,12 +29,14 @@ Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside y
 
 ## Overview
 
+Every mod in this repository has its own README with all its settings, linked from its heading below.
+
 | Mod                                                                | Author   | Description                                                                             |
 | ------------------------------------------------------------------ | -------- | --------------------------------------------------------------------------------------- |
 | [Ore Value Mod](#ore-value-mod-der_floh-ore_value_mod)             | der_floh | Configurable sell price multiplier per ore type                                         |
 | [Passive Drop Mod](#passive-drop-mod-der_floh-passive_drop_mod)    | der_floh | Configurable chance for ore (and other) tiles to drop a PassiveUpgrade on destruction   |
 | [Pickaxe AOE Mod](#pickaxe-aoe-mod-der_floh-pickaxeaoe_mod)        | der_floh | Electric pickaxe and AOE ability deal full damage instead of vanilla reduced ratios     |
-| [Effect Spread Mod](#effect-spread-mod-der_floh-effect_spread_mod) | der_floh | Spreads poison/fire/water ticks to nearby tiles when an affected tile is destroyed      |
+| [Effect Spread Mod](#effect-spread-mod-der_floh-effect_spread_mod) | der_floh | Spreads poison, fire and wetness to nearby tiles when an affected tile is destroyed     |
 | [Game Limits Mod](#game-limits-mod-der_floh-game_limits_mod)       | der_floh | Tune performance-related caps (mortars, chunk loading, electric chain) via settings tab |
 | [Performance Mod](#performance-mod-der_floh-performance_mod)       | der_floh | Optimised chunk loading, tile effects, and level generation to reduce frame time spikes |
 | [No Holes Mod](#no-holes-mod-der_floh-no_holes_mod)                | der_floh | Fills air pockets in world generation so underground rock is always solid               |
@@ -54,11 +56,11 @@ Once GML is set up, drop the mod `.zip` file(s) into the `mods/` folder inside y
 
 ## Mods by me
 
-### Ore Value Mod (`der_floh-ore_value_mod`)
+### [Ore Value Mod](src/der_floh/der_floh-ore_value_mod/README.md) (`der_floh-ore_value_mod`)
 
 Configurable sell price **multiplier** for every ore type. Each ore can be scaled independently relative to its vanilla price - set Coal to `1000000` to make it sell for 1,000,000x vanilla, or leave everything at `1` for pure vanilla prices.
 
-> **Note:** The value updates at the beginning of each new day.
+> **Note:** A changed multiplier applies immediately. Under the **Coal Is Worthless** hard modifier, coal sells for 0 whatever its multiplier.
 
 Adds an **Ore Value** tab to the in-game settings menu with a number input per ore.
 
@@ -94,11 +96,13 @@ Adds an **Ore Value** tab to the in-game settings menu with a number input per o
 
 ---
 
-### Passive Drop Mod (`der_floh-passive_drop_mod`)
+### [Passive Drop Mod](src/der_floh/der_floh-passive_drop_mod/README.md) (`der_floh-passive_drop_mod`)
 
 Adds a configurable chance for each **ore type** (and optionally any block) to drop a **PassiveUpgrade** scroll when destroyed. The **quality** of the dropped passive scales with the layer depth of the destroyed tile — just like vanilla chests give better loot deeper down.
 
 Adds a **Passive Drop** tab to the in-game settings menu with a slider (0–100 %) per ore type.
+
+> **Note:** By default the mod turns chest generation off, so mines have no chests at all until you switch **Chest Generation** on or **Mod Enabled** off.
 
 > **Optional:** Install [AutoPassiveChooser](https://github.com/NanobotZ/CoalLLC-AutoPassiveChooser) alongside this mod and enable **Auto-Collect Dropped Passives** to have the passive chooser trigger instantly on each drop and auto-select the best option without any player interaction.
 
@@ -130,7 +134,7 @@ Individual sliders for each ore type. Defaults reflect ore rarity:
 | Option                   | Default | Description                                                                           |
 | ------------------------ | ------- | ------------------------------------------------------------------------------------- |
 | Weapon Drops from Chests | `true`  | When disabled, weapon-scroll chest drops are replaced with a passive upgrade          |
-| Chest Generation         | `false` | When enabled, chest dungeons are generated normally (takes effect on next level load) |
+| Chest Generation         | `false` | When enabled, chest dungeons are generated normally in every newly generated chunk    |
 
 #### Behaviour
 
@@ -140,7 +144,7 @@ Individual sliders for each ore type. Defaults reflect ore rarity:
 
 ---
 
-### Pickaxe AOE Mod (`der_floh-pickaxeaoe_mod`)
+### [Pickaxe AOE Mod](src/der_floh/der_floh-pickaxeaoe_mod/README.md) (`der_floh-pickaxeaoe_mod`)
 
 Makes the **electric pickaxe** and the **AOE ability** deal full damage to every tile they hit, instead of the reduced ratios vanilla applies to chained/surrounding tiles.
 
@@ -151,9 +155,9 @@ No configuration options.
 
 ---
 
-### Effect Spread Mod (`der_floh-effect_spread_mod`)
+### [Effect Spread Mod](src/der_floh/der_floh-effect_spread_mod/README.md) (`der_floh-effect_spread_mod`)
 
-When a tile that has **poison**, **fire**, or **water** ticks remaining is destroyed, those effects spread to nearby tiles in a configurable radius - so you don't waste pre-applied effects.
+When a tile that still has **poison** or **fire** ticks left, or is **wet**, is destroyed, those effects spread to the breakable tiles in a configurable square around it - so you don't waste pre-applied effects.
 
 Adds an **Effect Spread** tab to the in-game settings menu.
 
@@ -165,46 +169,51 @@ Adds an **Effect Spread** tab to the in-game settings menu.
 
 ---
 
-### Game Limits Mod (`der_floh-game_limits_mod`)
+### [Game Limits Mod](src/der_floh/der_floh-game_limits_mod/README.md) (`der_floh-game_limits_mod`)
 
-Adds a **Game Limits** tab to the in-game settings menu, letting you tune performance-related caps without editing files.
+Adds a **Game Limits** tab to the in-game settings menu, letting you tune performance-related caps without editing files. It also fixes resuming with Esc sometimes leaving the game paused with no menu.
 
-| Option            | Default | Description                                                                |
-| ----------------- | ------- | -------------------------------------------------------------------------- |
-| Max Mortars       | `1000`  | Maximum number of mortar entities active at once                           |
-| Chunk Load Radius | `3`     | How many chunks around the player are loaded                               |
-| Chunks Per Frame  | `1`     | How many chunks are loaded each frame (higher = faster load, more stutter) |
+| Option                      | Default | Description                                                                                 |
+| --------------------------- | ------- | ------------------------------------------------------------------------------------------- |
+| Max Active Mortars          | `1000`  | Maximum number of mortar shells active at once (50 to 10000)                                |
+| Max Employee Entities Drawn | `500`   | The game's own employee draw limit from the Gameplay tab, raised to up to 10000             |
+| Chunk Load Radius           | `3`     | How many chunks around you and every other chunk loader are loaded (1 to 100)               |
+| Chunks Generated Per Frame  | `1`     | How many chunks are generated each frame (higher = faster load, more stutter; 1 to 10)      |
+| Max Chain Reaction Tiles    | `500`   | How many tiles one electric pickaxe chain can reach (10 to 5000)                            |
+| Max Visual Arcs             | `200`   | How many tiles of a chain get an electricity arc; doesn't affect damage (0 to 1000)          |
 
-> **Note:** The chunk loading settings are superseded by the Performance Mod (see below) if both are installed. The Performance Mod reads the Game Limits config automatically, so install both together for the full effect.
+> **Note:** The Performance Mod (see below) uses these settings for its faster chunk loading and electric chains, so install both together for the full effect and update them together.
 
 ---
 
-### Performance Mod (`der_floh-performance_mod`)
+### [Performance Mod](src/der_floh/der_floh-performance_mod/README.md) (`der_floh-performance_mod`)
 
 Replaces the vanilla chunk loading and tile effect processing with optimised implementations. Reduces frame time spikes when moving through the world or when many tile effects are active.
 
 - Replaces `load_chunks` with a more efficient version
 - Replaces `apply_tile_effects` with a more efficient version
-- Also replaces `generate_chunk`, `lvl_from_global_pos_*`, and `generate_chests`
-- Automatically reads **Game Limits Mod** config (chunk load radius, chunks per frame) if that mod is also installed
+- Also replaces `generate_chunk` (about 6x faster, with identical terrain), `lvl_from_global_pos_TIGHTFUNNEL` and `generate_chests`
+- Speeds up electric pickaxe chains
+- Uses the **Game Limits Mod** settings (chunk load radius, chunks per frame, electric chain limits) while that mod is installed and enabled, and the vanilla values otherwise
+- Loads before the No Holes, Passive Drop and Tick Upgrade mods, so their changes apply on top of its own
 
 No additional configuration options - configure chunk behaviour via the Game Limits Mod.
 
 ---
 
-### No Holes Mod (`der_floh-no_holes_mod`)
+### [No Holes Mod](src/der_floh/der_floh-no_holes_mod/README.md) (`der_floh-no_holes_mod`)
 
 Fills **air pockets** that vanilla world generation leaves behind. Runs a post-processing pass after each chunk is generated and fills any remaining empty underground tiles with the correct background material for their depth.
 
 No configuration options. To disable, uninstall the mod.
 
-> **Note:** Only affects newly generated chunks. Existing saves are unaffected until you enter a previously unloaded area.
+> **Note:** The game doesn't save mines; it builds a new one every time, so the mod applies from the next mine you enter.
 
 ---
 
-### Tick Upgrade Mod (`der_floh-tick_upgrade_mod`)
+### [Tick Upgrade Mod](src/der_floh/der_floh-tick_upgrade_mod/README.md) (`der_floh-tick_upgrade_mod`)
 
-Adds two level-up passives, **Poison Tick Speed** and **Fire Tick Speed**, each adding +10 % to its tick rate per level. They are only offered while you have a poison gun or poison staff (poison) or a flamethrower (fire), show up in the passive bonuses panel (Tab), and can be prioritised in AutoPassiveChooser.
+Adds two level-up passives, **Poison Tick Speed** and **Fire Tick Speed**, each adding +10 % to its tick rate per level. They are offered while you have a poison gun or poison staff (poison) or a flamethrower (fire), are saved with your run, show up in the passive bonuses panel (Tab), and can be prioritised in AutoPassiveChooser.
 
 Also keeps poison and fire **ticking on distant tiles** outside the loaded area, instead of pausing them when you walk away.
 
@@ -219,7 +228,7 @@ Adds a **Tick Upgrades** tab to the in-game settings menu.
 
 ## Contributed Mods
 
-### Custom Seed Mod (`ingenitus-custom_seed_mod`)
+### [Custom Seed Mod](src/ingenitus/ingenitus-custom_seed_mod/README.md) (`ingenitus-custom_seed_mod`)
 
 Set a **world seed** to get the same mine again. Every chunk is generated from the seed, the day and the chunk's own position, so terrain, ore layers and chests come out identical however you explore. The rest of gameplay (loot rolls, employees, ...) stays random.
 
@@ -234,7 +243,7 @@ Adds a **World Seed** tab to the in-game settings menu.
 
 ---
 
-### Axe Glare Toggle Mod (`ingenitus-axe_glare_toggle_mod`)
+### [Axe Glare Toggle Mod](src/ingenitus/ingenitus-axe_glare_toggle_mod/README.md) (`ingenitus-axe_glare_toggle_mod`)
 
 Hides the **glare particles** the axe and battleaxe whirl emits at full spin, which can cover the tiles you are mining. Spin, movement and damage are unchanged.
 
@@ -246,7 +255,7 @@ Adds an **Axe Glare** tab to the in-game settings menu.
 
 ---
 
-### Bug Fixes Mod (`ingenitus-bug_fixes_mod`)
+### [Bug Fixes Mod](src/ingenitus/ingenitus-bug_fixes_mod/README.md) (`ingenitus-bug_fixes_mod`)
 
 Fixes vanilla bugs. Each fix can be switched off on its own in the **Bug Fixes** tab of the in-game settings menu.
 
@@ -265,7 +274,7 @@ Fixes vanilla bugs. Each fix can be switched off on its own in the **Bug Fixes**
 
 ---
 
-### Chest QoL Mod (`ingenitus-chest_qol_mod`)
+### [Chest QoL Mod](src/ingenitus/ingenitus-chest_qol_mod/README.md) (`ingenitus-chest_qol_mod`)
 
 Less fiddly chests. Adds a **Chests** tab to the in-game settings menu.
 
@@ -278,7 +287,7 @@ Less fiddly chests. Adds a **Chests** tab to the in-game settings menu.
 
 ---
 
-### Number Format Mod (`ingenitus-number_format_mod`)
+### [Number Format Mod](src/ingenitus/ingenitus-number_format_mod/README.md) (`ingenitus-number_format_mod`)
 
 Large numbers (cash, coal, prices) show as short scientific notation like `1.23e10` instead of Godot's `1.23457e+10`. Numbers shown with thousands separators are unchanged.
 
@@ -286,7 +295,7 @@ No configuration options besides `enabled` in the config file.
 
 ---
 
-### Employee Balance Mod (`ingenitus-employee_balance_mod`)
+### [Employee Balance Mod](src/ingenitus/ingenitus-employee_balance_mod/README.md) (`ingenitus-employee_balance_mod`)
 
 In vanilla every bomber and elementalist tier swings at the intern's mining speed (`0.5`), while miners and barbarians speed up with tier. This mod gives them the same kind of ladder. Their bombs and elemental globs are unchanged.
 
@@ -300,9 +309,9 @@ No configuration options besides `enabled` in the config file.
 
 ---
 
-### Extra Passives Mod (`ingenitus-extra_passives_mod`)
+### [Extra Passives Mod](src/ingenitus/ingenitus-extra_passives_mod/README.md) (`ingenitus-extra_passives_mod`)
 
-Ten new level-up passives for weapons and tools that had few or none. A passive is only offered while you own an item it applies to (or a vacuum), and leaves the offers once it is capped.
+Ten new level-up passives for weapons and tools that had few or none. A passive is only offered while you own an item it applies to (or a vacuum), and a passive with a cap is no longer offered once it reaches it.
 
 | Passive           | Offered with                     | Effect                                                              |
 | ----------------- | -------------------------------- | ------------------------------------------------------------------- |
@@ -321,7 +330,7 @@ All bomb and earthquake blasts are limited to 48 tiles (the loaded area around t
 
 ---
 
-### Move Speed Slider Mod (`ingenitus-move_speed_slider_mod`)
+### [Move Speed Slider Mod](src/ingenitus/ingenitus-move_speed_slider_mod/README.md) (`ingenitus-move_speed_slider_mod`)
 
 Adds a **Walk Speed** slider to the passive bonuses panel (Tab). Walking can be raised up to your current sprint speed and never past it: the sprint passive, the sprint slider and the speed quest reward all count. Handy with auto-sprint, or to move at sprint pace without holding the key.
 
@@ -381,3 +390,9 @@ Both work with PowerShell 7 (`pwsh`) on Windows, Linux and macOS, and with the W
 In VS Code, **Ctrl+Shift+B** runs the build, and **Tasks: Run Test Task** builds and then validates.
 
 GitHub runs both scripts on every push to `main` and every pull request. When a release is published, [`publish.yml`](.github/workflows/publish.yml) runs them again and attaches every zip to the release, attested. My mods, those in `out/der_floh/`, also go to their Nexus Mods page when [`.github/nexus-mods.json`](.github/nexus-mods.json) gives them a file id, unless Nexus Mods already has that version; prereleases only get the GitHub release.
+
+Every mod folder has a `README.md`, which is packed into the zip like every other file of the mod. [`build/nexus-descriptions.ps1`](build/nexus-descriptions.ps1) converts the README of every mod in `.github/nexus-mods.json` into the BBCode Nexus Mods descriptions use, as `out/nexus/<namespace>-<name>.txt`: headings become sizes, tables become lists, and relative links point to the file on GitHub. Paste a description into the mod page's description editor in BBCode mode. In VS Code it is the **Nexus descriptions** task.
+
+```powershell
+./build/nexus-descriptions.ps1
+```

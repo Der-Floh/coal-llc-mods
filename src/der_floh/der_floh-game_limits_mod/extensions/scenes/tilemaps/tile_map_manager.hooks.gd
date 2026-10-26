@@ -4,6 +4,8 @@ extends Object
 # the hardcoded range(-3, 4) = ±3 and the hardcoded 1 chunk/frame.
 # The inner LIVE zone (full collision) remains at ±1 (3×3 chunks) regardless of
 # the configured radius — only the outer NO_COLLISIONS ring is extended.
+# While performance_mod is active this hook defers to its version, which reads
+# the same settings.
 
 const LOG_NAME := "der_floh-game_limits_mod:ChunkHook"
 
@@ -12,7 +14,7 @@ func load_chunks(chain: ModLoaderHookChain) -> void:
 	var tm := chain.reference_object as TileMapManager
 
 	var mod_main = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
-	if not mod_main.get_enabled():
+	if mod_main.defers_to_performance() or not mod_main.get_enabled():
 		chain.execute_next()
 		return
 

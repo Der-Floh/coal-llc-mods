@@ -53,7 +53,7 @@ func _add_section(title: String) -> void:
 func _on_enabled_changed(value: bool) -> void:
 	var mod_main := load("res://mods-unpacked/der_floh-ore_value_mod/mod_main.gd")
 	mod_main.set_enabled(value)
-	Gvars.reset_resources()
+	mod_main.apply_prices()
 	ModLoaderLog.info("Mod enabled set to %s" % str(value), LOG_NAME)
 
 
@@ -83,7 +83,7 @@ func _add_ore_row(item_id: String, display_name: String, mod_main) -> void:
 	row.add_child(spinbox)
 	spinbox.value_changed.connect(func(val: float) -> void:
 		mod_main.set_multiplier(item_id, val)
-		Gvars.reset_resources()
+		mod_main.apply_prices()
 	)
 
 

@@ -4,6 +4,8 @@ extends Node
 const MOD_ID := "der_floh-performance_mod"
 const MOD_DIR := "der_floh-performance_mod"
 const LOG_NAME := "der_floh-performance_mod:Main"
+const GAME_LIMITS_ID := "der_floh-game_limits_mod"
+const GAME_LIMITS_MAIN_PATH := "res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd"
 
 var mod_dir_path: String
 var extensions_dir_path: String
@@ -31,7 +33,25 @@ func install_hooks() -> void:
 
 func _ready() -> void:
 	_debug = get_debug_logging()
-	ModLoaderLog.info("Ready! debug_logging=%s" % str(_debug), LOG_NAME)
+	_game_limits = _find_game_limits()
+	ModLoaderLog.info("Ready! debug_logging=%s, game_limits_mod found=%s" % [str(_debug), str(_game_limits != null)], LOG_NAME)
+
+
+# --- Game Limits ---
+
+static var _game_limits = null
+
+
+static func get_enabled_game_limits():
+	if _game_limits == null or not _game_limits.get_enabled():
+		return null
+	return _game_limits
+
+
+static func _find_game_limits():
+	if ModLoaderMod.is_mod_active(GAME_LIMITS_ID) and ResourceLoader.exists(GAME_LIMITS_MAIN_PATH):
+		return load(GAME_LIMITS_MAIN_PATH)
+	return null
 
 
 # --- Config ---

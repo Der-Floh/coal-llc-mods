@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.4] – 2026-10-26
+
+### Fixed
+
+- With the Game Limits Mod installed, chunk loading and electric chains now always use this mod's faster versions. Depending on the load order, Game Limits' own versions often ran instead. Update both mods together.
+- Now loads before the No Holes, Passive Drop and Tick Upgrade mods, so their changes always apply on top of this mod's chunk generation, chest generation and tile effects. In some setups the order was left to chance, and Passive Drop's Chest Generation setting could be ignored.
+- Without the Game Limits Mod, the log is no longer flooded with errors about its missing script.
+
+### Changed
+
+- Game Limits' settings only apply while its Mod Enabled is on, and a changed chunk load radius applies right away instead of when you next enter another chunk.
+
 ## [1.3.3] – 2026-09-25
 
 ### Fixed

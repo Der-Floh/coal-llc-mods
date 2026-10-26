@@ -8,11 +8,12 @@ extends Object
 #      reached, bounding GPU cost from accumulated ShaderMaterial Sprite2Ds without
 #      affecting damage at all.
 #
-# Fully supersedes both the vanilla method and game_limits_mod's electric_shock
-# hook.  Both caps are read from game_limits_mod config when present; GDScript
-# resource caching means the load() call costs only a dict lookup per frame.
+# Fully replaces the vanilla method; game_limits_mod's electric_shock hook defers
+# to this one while this mod is active. Both caps are read from game_limits_mod
+# config while that mod is enabled.
 
 const LOG_NAME := "der_floh-performance_mod:ElectricShockHook"
+const MOD_MAIN_PATH := "res://mods-unpacked/der_floh-performance_mod/mod_main.gd"
 
 # Per-instance O(1) membership set, keyed by ElectricShock.get_instance_id().
 # Lazily seeded on the first _physics_process frame; erased when the chain ends
@@ -36,13 +37,13 @@ func _physics_process(chain: ModLoaderHookChain, _delta: float) -> void:
 
 	var hit_set: Dictionary = _hit_sets[iid]
 
-	# Read caps from game_limits_mod config; fall back to vanilla/perf defaults.
-	var limits_script = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
+	# Read caps from game_limits_mod config while it is enabled; fall back to vanilla/perf defaults.
+	var game_limits = load(MOD_MAIN_PATH).get_enabled_game_limits()
 	var max_tiles:   int = 500
 	var max_visuals: int = 200
-	if limits_script != null:
-		max_tiles   = limits_script.get_max_electric_chain()
-		max_visuals = limits_script.get_max_electric_visuals()
+	if game_limits != null:
+		max_tiles   = game_limits.get_max_electric_chain()
+		max_visuals = game_limits.get_max_electric_visuals()
 
 	var new_tiles_hit_current: Array[Vector2i] = []
 	for tile: Vector2i in self_obj._tiles_hit_current:
@@ -91,4 +92,4 @@ func _physics_process(chain: ModLoaderHookChain, _delta: float) -> void:
 		self_obj._current_damage = self_obj._current_damage * self_obj.damage_ratio
 		self_obj.lightning_audio.volume_db = min(14, self_obj.lightning_audio.volume_db + 1.0)
 		self_obj.lightning_audio.pitch_scale = max(0.1, self_obj.lightning_audio.pitch_scale - 0.03)
-	# chain.execute_next() intentionally omitted — fully supersedes vanilla + game_limits_mod hook.
+	# chain.execute_next() intentionally omitted — fully replaces vanilla.

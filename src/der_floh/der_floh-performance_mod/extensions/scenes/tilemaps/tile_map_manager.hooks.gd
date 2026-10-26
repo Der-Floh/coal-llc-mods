@@ -5,8 +5,8 @@ extends Object
 # load_chunks():
 #   - Skips the zone rebuild entirely when no chunkloader has moved to a new chunk.
 #   - Replaces the O(n) chunk_load_queue.has() scan with an O(1) shadow dict.
-#   - Supersedes der_floh-game_limits_mod's load_chunks hook (load order guaranteed
-#     by folder name: "performance_mod" sorts after "game_limits_mod").
+#   - Also rebuilds when the radius changes, so game_limits_mod settings apply at once.
+#   - game_limits_mod's load_chunks hook defers to this one while this mod is active.
 #
 # apply_tile_effects():
 #   - Iterates chunks_created dict instead of allocating get_children() every tick.
@@ -23,19 +23,20 @@ const MOD_MAIN_PATH := "res://mods-unpacked/der_floh-performance_mod/mod_main.gd
 static var _prev_chunk_ids: Dictionary = {}  # inst_id → Dictionary[Vector2i, bool]
 static var _queued_set: Dictionary = {}      # inst_id → Dictionary[Vector2i, bool]
                                              # O(1) shadow of tm.chunk_load_queue
+static var _prev_radius: Dictionary = {}     # inst_id → int
 
 
 func load_chunks(chain: ModLoaderHookChain) -> void:
 	var tm := chain.reference_object as TileMapManager
 	var inst_id := tm.get_instance_id()
 
-	# Read config from game_limits_mod when present; fall back to vanilla defaults.
+	# Read config from game_limits_mod while it is enabled; fall back to vanilla defaults.
 	var r: int = 3
 	var chunks_per_frame: int = 1
-	var limits_script = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
-	if limits_script != null:
-		r = limits_script.get_chunk_load_radius()
-		chunks_per_frame = limits_script.get_chunks_per_frame()
+	var game_limits = load(MOD_MAIN_PATH).get_enabled_game_limits()
+	if game_limits != null:
+		r = game_limits.get_chunk_load_radius()
+		chunks_per_frame = game_limits.get_chunks_per_frame()
 
 	# Ensure the shadow queue-set exists for this TileMapManager instance.
 	if not _queued_set.has(inst_id):
@@ -50,7 +51,7 @@ func load_chunks(chain: ModLoaderHookChain) -> void:
 
 	# --- Zone rebuild (only when a chunkloader crosses a chunk boundary) ----------
 	var prev_ids: Dictionary = _prev_chunk_ids.get(inst_id, {})
-	if current_ids != prev_ids:
+	if current_ids != prev_ids or r != _prev_radius.get(inst_id, -1):
 		tm.live_chunks = {}
 		tm.simple_collision_chunks = {}
 
@@ -91,6 +92,7 @@ func load_chunks(chain: ModLoaderHookChain) -> void:
 					chunk.change_state(TileMapChunk.States.DISABLED)
 
 		_prev_chunk_ids[inst_id] = current_ids
+		_prev_radius[inst_id] = r
 
 		if load(MOD_MAIN_PATH)._debug:
 			ModLoaderLog.info(
@@ -107,7 +109,7 @@ func load_chunks(chain: ModLoaderHookChain) -> void:
 		tm.load_next_unloaded_chunk()
 
 	tm.change_next_chunk_state()
-	# chain.execute_next() intentionally omitted — fully replaces vanilla + game_limits_mod.
+	# chain.execute_next() intentionally omitted — fully replaces vanilla.
 
 
 func apply_tile_effects(chain: ModLoaderHookChain) -> void:

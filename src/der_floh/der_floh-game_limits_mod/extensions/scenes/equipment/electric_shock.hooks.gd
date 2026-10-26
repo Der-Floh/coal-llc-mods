@@ -2,7 +2,8 @@ extends Object
 # Fully replaces ElectricShock._physics_process() so the chain reaction caps at
 # the user-configured value instead of the hardcoded MAX_TILES = 500, and limits
 # visual arc nodes to the configured max to keep GPU cost bounded.
-# When performance_mod is also installed its hook supersedes this one entirely.
+# While performance_mod is active this hook defers to its version, which reads
+# the same settings.
 
 const LOG_NAME := "der_floh-game_limits_mod:ElectricShockHook"
 
@@ -10,7 +11,7 @@ const LOG_NAME := "der_floh-game_limits_mod:ElectricShockHook"
 func _physics_process(chain: ModLoaderHookChain, _delta: float) -> void:
 	var self_obj := chain.reference_object as ElectricShock
 	var mod_main = load("res://mods-unpacked/der_floh-game_limits_mod/mod_main.gd")
-	if not mod_main.get_enabled():
+	if mod_main.defers_to_performance() or not mod_main.get_enabled():
 		chain.execute_next([_delta])
 		return
 

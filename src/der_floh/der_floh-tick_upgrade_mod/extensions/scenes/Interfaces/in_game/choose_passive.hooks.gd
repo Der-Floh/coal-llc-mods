@@ -49,10 +49,8 @@ func _ready(chain: ModLoaderHookChain) -> void:
 		if item.itemType in FIRE_TICK_WEAPONS:
 			has_fire_weapon = true
 
-	if has_poison_weapon and "poison_tick_speed" not in leftover_options:
-		leftover_options.append("poison_tick_speed")
-	if has_fire_weapon and "fire_tick_speed" not in leftover_options:
-		leftover_options.append("fire_tick_speed")
+	_offer_only_if(leftover_options, "poison_tick_speed", has_poison_weapon)
+	_offer_only_if(leftover_options, "fire_tick_speed", has_fire_weapon)
 
 	var choice_options: Array[String]
 	for inv_item in player_inventory.items:
@@ -111,6 +109,7 @@ func _ready(chain: ModLoaderHookChain) -> void:
 	self_obj.choose_between.shuffle()
 
 	self_obj.set_up_buttons()
+	_relabel_tick_buttons(self_obj)
 
 
 func set_up_buttons(chain: ModLoaderHookChain) -> void:
@@ -133,10 +132,28 @@ func set_up_buttons(chain: ModLoaderHookChain) -> void:
 			base_val = MOD_PASSIVES[key]
 		else:
 			base_val = ChoosePassive.ALL_PASSIVES.get(key, 0.05)
-		buttons[i].text = (
-			"Increase " + key.replace("_", " ").capitalize()
-			+ " +" + str(self_obj.multiplier * base_val * 100) + "%"
-		)
+		buttons[i].text = _label_text(key, self_obj.multiplier * base_val)
+
+
+# Extra Passives labels every button itself when one of its passives is offered,
+# using a +5% fallback for ours, so the tick buttons are written again afterwards.
+static func _relabel_tick_buttons(chooser: ChoosePassive) -> void:
+	var buttons := [chooser.button, chooser.button_2, chooser.button_3]
+	for i in range(3):
+		var key: String = chooser.choose_between[i]
+		if MOD_PASSIVES.has(key):
+			buttons[i].text = _label_text(key, chooser.multiplier * MOD_PASSIVES[key])
+
+
+static func _label_text(key: String, step: float) -> String:
+	return "Increase " + key.replace("_", " ").capitalize() + " +" + str(step * 100) + "%"
+
+
+static func _offer_only_if(options: Array, key: String, condition: bool) -> void:
+	if not condition:
+		options.erase(key)
+	elif key not in options:
+		options.append(key)
 
 
 func _on_button_pressed(chain: ModLoaderHookChain) -> void:

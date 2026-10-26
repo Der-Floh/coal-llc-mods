@@ -62,7 +62,7 @@ func _ready() -> void:
 	chests_bool.default = bool(mod_main.DEFAULT_CHEST_GENERATION_ENABLED)
 	chests_bool.new_value.connect(_on_chest_generation_changed)
 	vbox.add_child(chests_bool)
-	chests_bool.setting_label.text = "Chest Generation (takes effect on next level load)"
+	chests_bool.setting_label.text = "Chest Generation (new chunks only)"
 	chests_bool.check_button.button_pressed = mod_main.get_chest_generation_enabled()
 
 	# --- Section: Behaviour ---
