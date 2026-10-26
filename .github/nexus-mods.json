@@ -48,50 +48,50 @@
         "file-description": "Passives that speed up poison/fire ticking; effects keep ticking on unloaded tiles"
     },
     "ingenitus-axe_glare_toggle_mod": {
-        "file-id": "",
-        "mod-id": "",
+        "file-id": "8241594",
+        "mod-id": "39981850558482",
         "file-name": "Axe Glare Toggle Mod",
         "file-description": "Hide the axe/battleaxe full-spin glare particles"
     },
     "ingenitus-bug_fixes_mod": {
-        "file-id": "",
-        "mod-id": "",
+        "file-id": "8241618",
+        "mod-id": "39981850558483",
         "file-name": "Bug Fixes Mod",
         "file-description": "Fixes quota overflow, save loss, stuck pause, loot duplication and more (each toggleable)"
     },
     "ingenitus-chest_qol_mod": {
-        "file-id": "",
-        "mod-id": "",
+        "file-id": "8241636",
+        "mod-id": "39981850558484",
         "file-name": "Chest QoL Mod",
         "file-description": "Open/loot chests on touch, reach them from their protective tiles, no outclassed scrolls"
     },
     "ingenitus-custom_seed_mod": {
-        "file-id": "",
-        "mod-id": "",
+        "file-id": "8241678",
+        "mod-id": "39981850558485",
         "file-name": "Custom Seed Mod",
         "file-description": "World seed for reproducible mines, independent of exploration order"
     },
     "ingenitus-employee_balance_mod": {
-        "file-id": "",
-        "mod-id": "",
+        "file-id": "8241699",
+        "mod-id": "39981850558486",
         "file-name": "Employee Balance Mod",
         "file-description": "Bomber and elementalist tiers mine faster as they rank up"
     },
     "ingenitus-extra_passives_mod": {
-        "file-id": "",
-        "mod-id": "",
+        "file-id": "8241714",
+        "mod-id": "39981850558487",
         "file-name": "Extra Passives Mod",
         "file-description": "Ten new passives for guns, axes, vacuum, drill, earthquake and bombs"
     },
     "ingenitus-move_speed_slider_mod": {
-        "file-id": "",
-        "mod-id": "",
+        "file-id": "8241729",
+        "mod-id": "39981850558488",
         "file-name": "Move Speed Slider Mod",
         "file-description": "Walk Speed slider (Tab) that can raise walking up to sprint speed"
     },
     "ingenitus-number_format_mod": {
-        "file-id": "",
-        "mod-id": "",
+        "file-id": "8241753",
+        "mod-id": "39981850558489",
         "file-name": "Number Format Mod",
         "file-description": "Large numbers as 1.23e10 instead of 1.23457e+10"
     }
