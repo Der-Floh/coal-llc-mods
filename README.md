@@ -58,7 +58,7 @@ Every mod in this repository has its own README with all its settings, linked fr
 
 ### [Ore Value Mod](src/der_floh/der_floh-ore_value_mod/README.md) (`der_floh-ore_value_mod`)
 
-[![Ore Value Mod](src/der_floh/der_floh-ore_value_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/7)
+[![Ore Value Mod](src/der_floh/der_floh-ore_value_mod/media/banner.png)](https://www.nexusmods.com/coalllc/mods/7)
 
 Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/7).
 
@@ -102,7 +102,7 @@ Adds an **Ore Value** tab to the in-game settings menu with a number input per o
 
 ### [Passive Drop Mod](src/der_floh/der_floh-passive_drop_mod/README.md) (`der_floh-passive_drop_mod`)
 
-[![Passive Drop Mod](src/der_floh/der_floh-passive_drop_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/8)
+[![Passive Drop Mod](src/der_floh/der_floh-passive_drop_mod/media/banner.png)](https://www.nexusmods.com/coalllc/mods/8)
 
 Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/8).
 
@@ -154,7 +154,7 @@ Individual sliders for each ore type. Defaults reflect ore rarity:
 
 ### [Pickaxe AOE Mod](src/der_floh/der_floh-pickaxeaoe_mod/README.md) (`der_floh-pickaxeaoe_mod`)
 
-[![Pickaxe AOE Mod](src/der_floh/der_floh-pickaxeaoe_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/10)
+[![Pickaxe AOE Mod](src/der_floh/der_floh-pickaxeaoe_mod/media/banner.png)](https://www.nexusmods.com/coalllc/mods/10)
 
 Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/10).
 
@@ -169,7 +169,7 @@ No configuration options.
 
 ### [Effect Spread Mod](src/der_floh/der_floh-effect_spread_mod/README.md) (`der_floh-effect_spread_mod`)
 
-[![Effect Spread Mod](src/der_floh/der_floh-effect_spread_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/4)
+[![Effect Spread Mod](src/der_floh/der_floh-effect_spread_mod/media/banner.png)](https://www.nexusmods.com/coalllc/mods/4)
 
 Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/4).
 
@@ -187,7 +187,7 @@ Adds an **Effect Spread** tab to the in-game settings menu.
 
 ### [Game Limits Mod](src/der_floh/der_floh-game_limits_mod/README.md) (`der_floh-game_limits_mod`)
 
-[![Game Limits Mod](src/der_floh/der_floh-game_limits_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/5)
+[![Game Limits Mod](src/der_floh/der_floh-game_limits_mod/media/banner.png)](https://www.nexusmods.com/coalllc/mods/5)
 
 Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/5).
 
@@ -208,7 +208,7 @@ Adds a **Game Limits** tab to the in-game settings menu, letting you tune perfor
 
 ### [Performance Mod](src/der_floh/der_floh-performance_mod/README.md) (`der_floh-performance_mod`)
 
-[![Performance Mod](src/der_floh/der_floh-performance_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/9)
+[![Performance Mod](src/der_floh/der_floh-performance_mod/media/banner.png)](https://www.nexusmods.com/coalllc/mods/9)
 
 Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/9).
 
@@ -227,7 +227,7 @@ No additional configuration options - configure chunk behaviour via the Game Lim
 
 ### [No Holes Mod](src/der_floh/der_floh-no_holes_mod/README.md) (`der_floh-no_holes_mod`)
 
-[![No Holes Mod](src/der_floh/der_floh-no_holes_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/6)
+[![No Holes Mod](src/der_floh/der_floh-no_holes_mod/media/banner.png)](https://www.nexusmods.com/coalllc/mods/6)
 
 Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/6).
 
@@ -241,7 +241,7 @@ No configuration options. To disable, uninstall the mod.
 
 ### [Tick Upgrade Mod](src/der_floh/der_floh-tick_upgrade_mod/README.md) (`der_floh-tick_upgrade_mod`)
 
-[![Tick Upgrade Mod](src/der_floh/der_floh-tick_upgrade_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/11)
+[![Tick Upgrade Mod](src/der_floh/der_floh-tick_upgrade_mod/media/banner.png)](https://www.nexusmods.com/coalllc/mods/11)
 
 Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/11).
 
@@ -262,7 +262,7 @@ Adds a **Tick Upgrades** tab to the in-game settings menu.
 
 ### [Custom Seed Mod](src/ingenitus/ingenitus-custom_seed_mod/README.md) (`ingenitus-custom_seed_mod`)
 
-![Custom Seed Mod](src/ingenitus/ingenitus-custom_seed_mod/media/thumbnail.png)
+![Custom Seed Mod](src/ingenitus/ingenitus-custom_seed_mod/media/banner.png)
 
 Set a **world seed** to get the same mine again. Every chunk is generated from the seed, the day and the chunk's own position, so terrain, ore layers and chests come out identical however you explore. The rest of gameplay (loot rolls, employees, ...) stays random.
 
@@ -279,7 +279,7 @@ Adds a **World Seed** tab to the in-game settings menu.
 
 ### [Axe Glare Toggle Mod](src/ingenitus/ingenitus-axe_glare_toggle_mod/README.md) (`ingenitus-axe_glare_toggle_mod`)
 
-![Axe Glare Toggle Mod](src/ingenitus/ingenitus-axe_glare_toggle_mod/media/thumbnail.png)
+![Axe Glare Toggle Mod](src/ingenitus/ingenitus-axe_glare_toggle_mod/media/banner.png)
 
 Hides the **glare particles** the axe and battleaxe whirl emits at full spin, which can cover the tiles you are mining. Spin, movement and damage are unchanged.
 
@@ -293,7 +293,7 @@ Adds an **Axe Glare** tab to the in-game settings menu.
 
 ### [Bug Fixes Mod](src/ingenitus/ingenitus-bug_fixes_mod/README.md) (`ingenitus-bug_fixes_mod`)
 
-![Bug Fixes Mod](src/ingenitus/ingenitus-bug_fixes_mod/media/thumbnail.png)
+![Bug Fixes Mod](src/ingenitus/ingenitus-bug_fixes_mod/media/banner.png)
 
 Fixes vanilla bugs. Each fix can be switched off on its own in the **Bug Fixes** tab of the in-game settings menu.
 
@@ -314,7 +314,7 @@ Fixes vanilla bugs. Each fix can be switched off on its own in the **Bug Fixes**
 
 ### [Chest QoL Mod](src/ingenitus/ingenitus-chest_qol_mod/README.md) (`ingenitus-chest_qol_mod`)
 
-![Chest QoL Mod](src/ingenitus/ingenitus-chest_qol_mod/media/thumbnail.png)
+![Chest QoL Mod](src/ingenitus/ingenitus-chest_qol_mod/media/banner.png)
 
 Less fiddly chests. Adds a **Chests** tab to the in-game settings menu.
 
@@ -329,7 +329,7 @@ Less fiddly chests. Adds a **Chests** tab to the in-game settings menu.
 
 ### [Number Format Mod](src/ingenitus/ingenitus-number_format_mod/README.md) (`ingenitus-number_format_mod`)
 
-![Number Format Mod](src/ingenitus/ingenitus-number_format_mod/media/thumbnail.png)
+![Number Format Mod](src/ingenitus/ingenitus-number_format_mod/media/banner.png)
 
 Large numbers (cash, coal, prices) show as short scientific notation like `1.23e10` instead of Godot's `1.23457e+10`. Numbers shown with thousands separators are unchanged.
 
@@ -339,7 +339,7 @@ No configuration options besides `enabled` in the config file.
 
 ### [Employee Balance Mod](src/ingenitus/ingenitus-employee_balance_mod/README.md) (`ingenitus-employee_balance_mod`)
 
-![Employee Balance Mod](src/ingenitus/ingenitus-employee_balance_mod/media/thumbnail.png)
+![Employee Balance Mod](src/ingenitus/ingenitus-employee_balance_mod/media/banner.png)
 
 In vanilla every bomber and elementalist tier swings at the intern's mining speed (`0.5`), while miners and barbarians speed up with tier. This mod gives them the same kind of ladder. Their bombs and elemental globs are unchanged.
 
@@ -355,7 +355,7 @@ No configuration options besides `enabled` in the config file.
 
 ### [Extra Passives Mod](src/ingenitus/ingenitus-extra_passives_mod/README.md) (`ingenitus-extra_passives_mod`)
 
-![Extra Passives Mod](src/ingenitus/ingenitus-extra_passives_mod/media/thumbnail.png)
+![Extra Passives Mod](src/ingenitus/ingenitus-extra_passives_mod/media/banner.png)
 
 Ten new level-up passives for weapons and tools that had few or none. A passive is only offered while you own an item it applies to (or a vacuum), and a passive with a cap is no longer offered once it reaches it.
 
@@ -378,7 +378,7 @@ All bomb and earthquake blasts are limited to 48 tiles (the loaded area around t
 
 ### [Move Speed Slider Mod](src/ingenitus/ingenitus-move_speed_slider_mod/README.md) (`ingenitus-move_speed_slider_mod`)
 
-![Move Speed Slider Mod](src/ingenitus/ingenitus-move_speed_slider_mod/media/thumbnail.png)
+![Move Speed Slider Mod](src/ingenitus/ingenitus-move_speed_slider_mod/media/banner.png)
 
 Adds a **Walk Speed** slider to the passive bonuses panel (Tab). Walking can be raised up to your current sprint speed and never past it: the sprint passive, the sprint slider and the speed quest reward all count. Handy with auto-sprint, or to move at sprint pace without holding the key.
 
