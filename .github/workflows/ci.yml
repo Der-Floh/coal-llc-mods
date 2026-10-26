@@ -19,11 +19,11 @@ jobs:
 
       - name: Pack mods
         shell: pwsh
-        run: ./build/build.ps1
+        run: ./.vscode/build/build.ps1
 
       - name: Validate packed mods
         shell: pwsh
-        run: ./build/validate.ps1
+        run: ./.vscode/build/validate.ps1
 
       - name: Upload packed mods
         uses: actions/upload-artifact@v4

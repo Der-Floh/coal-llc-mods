@@ -16,7 +16,7 @@ Folder holding the author folders. Defaults to src/ in the repository root.
 Folder the descriptions are written to. Defaults to out/nexus/ in the repository root.
 
 .EXAMPLE
-./build/nexus-descriptions.ps1
+./.vscode/build/nexus-descriptions.ps1
 #>
 [CmdletBinding()]
 param(

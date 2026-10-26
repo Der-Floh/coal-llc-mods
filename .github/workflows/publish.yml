@@ -17,7 +17,7 @@ jobs:
   publish:
     uses: Der-Floh/Der-Floh/.github/workflows/nexus-publish.yml@v1
     with:
-      build-command: pwsh -NoProfile -File build/build.ps1 && pwsh -NoProfile -File build/validate.ps1
+      build-command: pwsh -NoProfile -File .vscode/build/build.ps1 && pwsh -NoProfile -File .vscode/build/validate.ps1
       package-dir: out
       mods-file: .github/nexus-mods.json
       mods-dir: out/der_floh

@@ -5,10 +5,10 @@
             "label": "Build mods",
             "type": "process",
             "command": "pwsh",
-            "args": ["-NoProfile", "-File", "${workspaceFolder}/build/build.ps1"],
+            "args": ["-NoProfile", "-File", "${workspaceFolder}/.vscode/build/build.ps1"],
             "windows": {
                 "command": "powershell.exe",
-                "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/build/build.ps1"]
+                "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/.vscode/build/build.ps1"]
             },
             "group": {
                 "kind": "build",
@@ -20,10 +20,10 @@
             "label": "Validate mods",
             "type": "process",
             "command": "pwsh",
-            "args": ["-NoProfile", "-File", "${workspaceFolder}/build/validate.ps1"],
+            "args": ["-NoProfile", "-File", "${workspaceFolder}/.vscode/build/validate.ps1"],
             "windows": {
                 "command": "powershell.exe",
-                "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/build/validate.ps1"]
+                "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/.vscode/build/validate.ps1"]
             },
             "dependsOn": "Build mods",
             "group": {
@@ -36,10 +36,10 @@
             "label": "Nexus descriptions",
             "type": "process",
             "command": "pwsh",
-            "args": ["-NoProfile", "-File", "${workspaceFolder}/build/nexus-descriptions.ps1"],
+            "args": ["-NoProfile", "-File", "${workspaceFolder}/.vscode/build/nexus-descriptions.ps1"],
             "windows": {
                 "command": "powershell.exe",
-                "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/build/nexus-descriptions.ps1"]
+                "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/.vscode/build/nexus-descriptions.ps1"]
             },
             "problemMatcher": []
         }

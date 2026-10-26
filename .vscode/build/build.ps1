@@ -14,7 +14,7 @@ Folder holding the author folders. Defaults to src/ in the repository root.
 Folder the author folders with the zips and the nexus/ folder with the descriptions are written to. Defaults to out/ in the repository root.
 
 .EXAMPLE
-./build/build.ps1 -OutputDirectory ./dist
+./.vscode/build/build.ps1 -OutputDirectory ./dist
 #>
 [CmdletBinding()]
 param(

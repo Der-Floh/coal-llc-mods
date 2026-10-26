@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 
 Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
 
-$RepositoryRoot = Split-Path $PSScriptRoot -Parent
+$RepositoryRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 $DefaultSourceDirectory = Join-Path $RepositoryRoot 'src'
 $DefaultZipDirectory = Join-Path $RepositoryRoot 'out'
 $NexusDirectoryName = 'nexus'
