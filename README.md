@@ -58,6 +58,10 @@ Every mod in this repository has its own README with all its settings, linked fr
 
 ### [Ore Value Mod](src/der_floh/der_floh-ore_value_mod/README.md) (`der_floh-ore_value_mod`)
 
+[![Ore Value Mod](src/der_floh/der_floh-ore_value_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/7)
+
+Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/7).
+
 Configurable sell price **multiplier** for every ore type. Each ore can be scaled independently relative to its vanilla price - set Coal to `1000000` to make it sell for 1,000,000x vanilla, or leave everything at `1` for pure vanilla prices.
 
 > **Note:** A changed multiplier applies immediately. Under the **Coal Is Worthless** hard modifier, coal sells for 0 whatever its multiplier.
@@ -97,6 +101,10 @@ Adds an **Ore Value** tab to the in-game settings menu with a number input per o
 ---
 
 ### [Passive Drop Mod](src/der_floh/der_floh-passive_drop_mod/README.md) (`der_floh-passive_drop_mod`)
+
+[![Passive Drop Mod](src/der_floh/der_floh-passive_drop_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/8)
+
+Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/8).
 
 Adds a configurable chance for each **ore type** (and optionally any block) to drop a **PassiveUpgrade** scroll when destroyed. The **quality** of the dropped passive scales with the layer depth of the destroyed tile — just like vanilla chests give better loot deeper down.
 
@@ -146,6 +154,10 @@ Individual sliders for each ore type. Defaults reflect ore rarity:
 
 ### [Pickaxe AOE Mod](src/der_floh/der_floh-pickaxeaoe_mod/README.md) (`der_floh-pickaxeaoe_mod`)
 
+[![Pickaxe AOE Mod](src/der_floh/der_floh-pickaxeaoe_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/10)
+
+Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/10).
+
 Makes the **electric pickaxe** and the **AOE ability** deal full damage to every tile they hit, instead of the reduced ratios vanilla applies to chained/surrounding tiles.
 
 - Electric pickaxe: removes the per-step chain falloff (vanilla: ×0.8 per step)
@@ -156,6 +168,10 @@ No configuration options.
 ---
 
 ### [Effect Spread Mod](src/der_floh/der_floh-effect_spread_mod/README.md) (`der_floh-effect_spread_mod`)
+
+[![Effect Spread Mod](src/der_floh/der_floh-effect_spread_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/4)
+
+Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/4).
 
 When a tile that still has **poison** or **fire** ticks left, or is **wet**, is destroyed, those effects spread to the breakable tiles in a configurable square around it - so you don't waste pre-applied effects.
 
@@ -170,6 +186,10 @@ Adds an **Effect Spread** tab to the in-game settings menu.
 ---
 
 ### [Game Limits Mod](src/der_floh/der_floh-game_limits_mod/README.md) (`der_floh-game_limits_mod`)
+
+[![Game Limits Mod](src/der_floh/der_floh-game_limits_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/5)
+
+Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/5).
 
 Adds a **Game Limits** tab to the in-game settings menu, letting you tune performance-related caps without editing files. It also fixes resuming with Esc sometimes leaving the game paused with no menu.
 
@@ -188,6 +208,10 @@ Adds a **Game Limits** tab to the in-game settings menu, letting you tune perfor
 
 ### [Performance Mod](src/der_floh/der_floh-performance_mod/README.md) (`der_floh-performance_mod`)
 
+[![Performance Mod](src/der_floh/der_floh-performance_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/9)
+
+Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/9).
+
 Replaces the vanilla chunk loading and tile effect processing with optimised implementations. Reduces frame time spikes when moving through the world or when many tile effects are active.
 
 - Replaces `load_chunks` with a more efficient version
@@ -203,6 +227,10 @@ No additional configuration options - configure chunk behaviour via the Game Lim
 
 ### [No Holes Mod](src/der_floh/der_floh-no_holes_mod/README.md) (`der_floh-no_holes_mod`)
 
+[![No Holes Mod](src/der_floh/der_floh-no_holes_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/6)
+
+Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/6).
+
 Fills **air pockets** that vanilla world generation leaves behind. Runs a post-processing pass after each chunk is generated and fills any remaining empty underground tiles with the correct background material for their depth.
 
 No configuration options. To disable, uninstall the mod.
@@ -212,6 +240,10 @@ No configuration options. To disable, uninstall the mod.
 ---
 
 ### [Tick Upgrade Mod](src/der_floh/der_floh-tick_upgrade_mod/README.md) (`der_floh-tick_upgrade_mod`)
+
+[![Tick Upgrade Mod](src/der_floh/der_floh-tick_upgrade_mod/media/thumbnail.png)](https://www.nexusmods.com/coalllc/mods/11)
+
+Download from [Nexus Mods](https://www.nexusmods.com/coalllc/mods/11).
 
 Adds two level-up passives, **Poison Tick Speed** and **Fire Tick Speed**, each adding +10 % to its tick rate per level. They are offered while you have a poison gun or poison staff (poison) or a flamethrower (fire), are saved with your run, show up in the passive bonuses panel (Tab), and can be prioritised in AutoPassiveChooser.
 
@@ -230,6 +262,8 @@ Adds a **Tick Upgrades** tab to the in-game settings menu.
 
 ### [Custom Seed Mod](src/ingenitus/ingenitus-custom_seed_mod/README.md) (`ingenitus-custom_seed_mod`)
 
+![Custom Seed Mod](src/ingenitus/ingenitus-custom_seed_mod/media/thumbnail.png)
+
 Set a **world seed** to get the same mine again. Every chunk is generated from the seed, the day and the chunk's own position, so terrain, ore layers and chests come out identical however you explore. The rest of gameplay (loot rolls, employees, ...) stays random.
 
 Adds a **World Seed** tab to the in-game settings menu.
@@ -245,6 +279,8 @@ Adds a **World Seed** tab to the in-game settings menu.
 
 ### [Axe Glare Toggle Mod](src/ingenitus/ingenitus-axe_glare_toggle_mod/README.md) (`ingenitus-axe_glare_toggle_mod`)
 
+![Axe Glare Toggle Mod](src/ingenitus/ingenitus-axe_glare_toggle_mod/media/thumbnail.png)
+
 Hides the **glare particles** the axe and battleaxe whirl emits at full spin, which can cover the tiles you are mining. Spin, movement and damage are unchanged.
 
 Adds an **Axe Glare** tab to the in-game settings menu.
@@ -256,6 +292,8 @@ Adds an **Axe Glare** tab to the in-game settings menu.
 ---
 
 ### [Bug Fixes Mod](src/ingenitus/ingenitus-bug_fixes_mod/README.md) (`ingenitus-bug_fixes_mod`)
+
+![Bug Fixes Mod](src/ingenitus/ingenitus-bug_fixes_mod/media/thumbnail.png)
 
 Fixes vanilla bugs. Each fix can be switched off on its own in the **Bug Fixes** tab of the in-game settings menu.
 
@@ -276,6 +314,8 @@ Fixes vanilla bugs. Each fix can be switched off on its own in the **Bug Fixes**
 
 ### [Chest QoL Mod](src/ingenitus/ingenitus-chest_qol_mod/README.md) (`ingenitus-chest_qol_mod`)
 
+![Chest QoL Mod](src/ingenitus/ingenitus-chest_qol_mod/media/thumbnail.png)
+
 Less fiddly chests. Adds a **Chests** tab to the in-game settings menu.
 
 | Option                   | Default | Description                                                                                       |
@@ -289,6 +329,8 @@ Less fiddly chests. Adds a **Chests** tab to the in-game settings menu.
 
 ### [Number Format Mod](src/ingenitus/ingenitus-number_format_mod/README.md) (`ingenitus-number_format_mod`)
 
+![Number Format Mod](src/ingenitus/ingenitus-number_format_mod/media/thumbnail.png)
+
 Large numbers (cash, coal, prices) show as short scientific notation like `1.23e10` instead of Godot's `1.23457e+10`. Numbers shown with thousands separators are unchanged.
 
 No configuration options besides `enabled` in the config file.
@@ -296,6 +338,8 @@ No configuration options besides `enabled` in the config file.
 ---
 
 ### [Employee Balance Mod](src/ingenitus/ingenitus-employee_balance_mod/README.md) (`ingenitus-employee_balance_mod`)
+
+![Employee Balance Mod](src/ingenitus/ingenitus-employee_balance_mod/media/thumbnail.png)
 
 In vanilla every bomber and elementalist tier swings at the intern's mining speed (`0.5`), while miners and barbarians speed up with tier. This mod gives them the same kind of ladder. Their bombs and elemental globs are unchanged.
 
@@ -310,6 +354,8 @@ No configuration options besides `enabled` in the config file.
 ---
 
 ### [Extra Passives Mod](src/ingenitus/ingenitus-extra_passives_mod/README.md) (`ingenitus-extra_passives_mod`)
+
+![Extra Passives Mod](src/ingenitus/ingenitus-extra_passives_mod/media/thumbnail.png)
 
 Ten new level-up passives for weapons and tools that had few or none. A passive is only offered while you own an item it applies to (or a vacuum), and a passive with a cap is no longer offered once it reaches it.
 
@@ -331,6 +377,8 @@ All bomb and earthquake blasts are limited to 48 tiles (the loaded area around t
 ---
 
 ### [Move Speed Slider Mod](src/ingenitus/ingenitus-move_speed_slider_mod/README.md) (`ingenitus-move_speed_slider_mod`)
+
+![Move Speed Slider Mod](src/ingenitus/ingenitus-move_speed_slider_mod/media/thumbnail.png)
 
 Adds a **Walk Speed** slider to the passive bonuses panel (Tab). Walking can be raised up to your current sprint speed and never past it: the sprint passive, the sprint slider and the speed quest reward all count. Handy with auto-sprint, or to move at sprint pace without holding the key.
 
