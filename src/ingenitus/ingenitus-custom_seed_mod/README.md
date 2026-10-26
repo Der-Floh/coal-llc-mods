@@ -1,7 +1,5 @@
 # Custom Seed Mod
 
-By **Ingenitus**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 Set a **world seed** to get the same mine again. Every chunk is generated from the seed, the day and the chunk's own position, so terrain, ore layers and chest positions come out the same however you explore. Chest contents and the rest of the game, such as employees, stay random.
 
 ## Settings

@@ -1,7 +1,5 @@
 # Ore Value Mod
 
-By **der_floh**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 Sets a sell price **multiplier** for every ore type. Each ore is scaled on its own, relative to its vanilla price: set Coal to `1000000` to sell it for 1,000,000× its vanilla price, or leave everything at `1` for vanilla prices.
 
 ## Settings

@@ -1,7 +1,5 @@
 # Passive Drop Mod
 
-By **der_floh**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 Gives every ore type, and optionally every other block, a chance to drop a **Passive Upgrade** card when it is destroyed: the card chests give, which opens the passive chooser. Like chest loot, the card gets better deeper down. Its multiplier follows the tile's layer: ×1 in layers 0–1, ×2 in 2–4, ×3 in 5–7, ×4 in 8–11, and from ×25 up to ×144 in the deep layers 12–19.
 
 The mod can also turn the weapon scrolls in chests into cards, switch chest generation on and off, and collect dropped cards for you.

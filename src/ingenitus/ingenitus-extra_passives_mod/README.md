@@ -1,7 +1,5 @@
 # Extra Passives Mod
 
-By **Ingenitus**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 Ten new level-up passives for weapons and tools that had few or none. A passive is only offered while you hold an item it applies to (or own a vacuum), and a passive with a cap is no longer offered once it reaches it.
 
 ## Passives

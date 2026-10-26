@@ -1,7 +1,5 @@
 # Number Format Mod
 
-By **Ingenitus**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 Large numbers (cash, coal, prices) show as short scientific notation like `1.23e10` instead of Godot's `1.23457e+10`. Values that round up show as `1.00e16`, never `10.00e15`. Numbers the game shows with thousands separators are unchanged.
 
 The mod only changes how numbers are displayed: it has no settings tab and doesn't touch your save.

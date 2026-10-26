@@ -1,7 +1,5 @@
 # Performance Mod
 
-By **der_floh**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 Replaces some of the game's busiest code with faster versions, to cut frame-time spikes while you move through the world, while many tiles burn or are poisoned, and during long electric pickaxe chains. The mines it generates are identical to vanilla's.
 
 - **Chunk loading:** the loaded area is only rebuilt when something that loads chunks moves into another chunk, or when the chunk load radius changes.

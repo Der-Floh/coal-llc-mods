@@ -1,7 +1,5 @@
 # Effect Spread Mod
 
-By **der_floh**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 When a tile that still has **poison** or **fire** ticks left, or is **wet**, is destroyed, those effects spread to the breakable tiles around it, so effects you applied aren't wasted. Any destruction counts: your pickaxe, employees, bombs, and poison or fire breaking the tile itself.
 
 ## Settings

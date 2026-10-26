@@ -1,7 +1,5 @@
 # Move Speed Slider Mod
 
-By **Ingenitus**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 Adds a **Walk Speed** slider to the passive bonuses panel (Tab). Walking can be raised up to your current sprint speed and never past it: the sprint passive, the sprint slider and the speed quest reward all count. Handy with Auto Sprint, or to move at sprint pace without holding the key.
 
 ## Slider

@@ -1,7 +1,5 @@
 # No Holes Mod
 
-By **der_floh**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 Fills the **air pockets** world generation leaves underground, such as caves, small pockets and the gaps of Sparse maps, with the plain block of their layer, so the rock below the surface is always solid. No ore is added, and the fill blocks drop nothing. The surface and chest rooms are left alone.
 
 - The fill block follows the layer: clay, stone, ice and fire in the upper layers, then the dark, green, orange, purple, dark green, yellow, dark brown and dark blue blocks of the deep layers.

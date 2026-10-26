@@ -1,7 +1,5 @@
 # Chest QoL Mod
 
-By **Ingenitus**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 Less fiddly chests: they open when you touch them, can loot straight to your inventory, can be taken from their protective tiles once one of them is mined, and stop offering power-up scrolls for weapons you have already outclassed.
 
 ## Settings

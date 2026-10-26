@@ -1,7 +1,5 @@
 # Game Limits Mod
 
-By **der_floh**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 Lets you tune limits the game normally fixes: how many mortar shells fly at once, how many employees are drawn, how much of the world around you is loaded, and how far electric pickaxe chains reach. It also fixes resuming with Esc sometimes leaving the game paused with no menu.
 
 ## Settings

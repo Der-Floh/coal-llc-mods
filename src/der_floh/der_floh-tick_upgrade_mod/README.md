@@ -1,7 +1,5 @@
 # Tick Upgrade Mod
 
-By **der_floh**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 Adds two level-up passives, **Poison Tick Speed** and **Fire Tick Speed**, that make poison and fire tick faster. It also keeps poison and fire **ticking on distant tiles** outside the loaded area, instead of pausing them when you walk away.
 
 ## Passives

@@ -1,7 +1,5 @@
 # Employee Balance Mod
 
-By **Ingenitus**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 In vanilla every bomber and elementalist tier swings at the intern's mining speed (`0.5`), while miners and barbarians get faster as they rank up. This mod gives bombers and elementalists the same kind of ladder. Their bombs and elemental globs are unchanged, and employees you have already hired get the new speed too.
 
 | Employee            | Vanilla | Modded |

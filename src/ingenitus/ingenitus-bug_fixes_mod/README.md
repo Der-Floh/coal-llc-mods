@@ -1,7 +1,5 @@
 # Bug Fixes Mod
 
-By **Ingenitus**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 Fixes ten bugs of the vanilla game, from the coal quota overflowing on late days to lost saves and duplicated loot. Each fix can be switched off on its own.
 
 ## Settings

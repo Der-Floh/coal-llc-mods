@@ -3,7 +3,7 @@
 Converts the README of every mod in .github/nexus-mods.json into the BBCode of its Nexus Mods description.
 
 .DESCRIPTION
-Nexus Mods descriptions are BBCode and have no tables, so each mod's README.md is converted: the title is dropped (Nexus Mods shows the mod name), headings become sizes, tables become lists, inline code becomes bold and relative links point to the file on GitHub. Each description is written to <OutputDirectory>/<namespace>-<name>.txt, ready to paste into the description editor in BBCode mode.
+Nexus Mods descriptions are BBCode and have no tables, so each mod's README.md is converted: headings become sizes, tables become lists, inline code becomes bold and relative links point to the file on GitHub. Each description is written to <OutputDirectory>/<namespace>-<name>.txt, ready to paste into the description editor in BBCode mode.
 
 The converter handles the Markdown the mod READMEs use: headings, paragraphs, bold, italic, inline code, links, lists (nested by indentation), blockquotes, tables, horizontal rules and fenced code blocks.
 
@@ -107,7 +107,7 @@ function ConvertFrom-MarkdownTable {
         if ($prose.Count -gt 0) { $item += ": $($prose -join ' ')" }
         $item
     }
-    "[list]`n$($items -join "`n")`n[/list]"
+    "[list]$($items -join "`n")`n[/list]"
 }
 
 function ConvertFrom-MarkdownList {
@@ -155,14 +155,13 @@ function ConvertFrom-ListEntries {
         }
         $index++
     }
-    [pscustomobject]@{ Text = "$opening`n$($items -join "`n")`n[/list]"; Next = $index }
+    [pscustomobject]@{ Text = "$opening$($items -join "`n")`n[/list]"; Next = $index }
 }
 
 function ConvertTo-NexusBBCode {
     param(
         [Parameter(Mandatory)][AllowEmptyString()][string[]]$Lines,
-        [Parameter(Mandatory)][string]$LinkBase,
-        [switch]$KeepTitle
+        [Parameter(Mandatory)][string]$LinkBase
     )
 
     $blocks = [System.Collections.Generic.List[string]]::new()
@@ -186,7 +185,6 @@ function ConvertTo-NexusBBCode {
             $level = $Matches[1].Length
             $title = ConvertTo-BBCodeInline -Text $Matches[2] -LinkBase $LinkBase
             $index++
-            if ($level -eq 1 -and -not $KeepTitle) { continue }
             $blocks.Add($(switch ($level) {
                         1 { "[size=6][b]$title[/b][/size]" }
                         2 { "[size=5][b]$title[/b][/size]" }
@@ -204,7 +202,7 @@ function ConvertTo-NexusBBCode {
                 $quote.Add(($Lines[$index] -replace '^\s*> ?', ''))
                 $index++
             }
-            $inner = ConvertTo-NexusBBCode -Lines $quote.ToArray() -LinkBase $LinkBase -KeepTitle
+            $inner = ConvertTo-NexusBBCode -Lines $quote.ToArray() -LinkBase $LinkBase
             $blocks.Add("[quote]$inner[/quote]")
         }
         elseif ($line -match '^\s*\|' -and $index + 1 -lt $Lines.Count -and $Lines[$index + 1] -match '^\s*\|?\s*:?-{3,}') {

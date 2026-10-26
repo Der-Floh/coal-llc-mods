@@ -1,7 +1,5 @@
 # Pickaxe AOE Mod
 
-By **der_floh**, part of the [Coal LLC Mods](https://github.com/Der-Floh/coal-llc-mods) collection for [Coal LLC](https://store.steampowered.com/app/3361510/Coal_LLC/).
-
 Makes the **electric pickaxe** and the **AOE strike** deal full damage to every tile they hit, instead of the reduced damage vanilla deals to chained and surrounding tiles.
 
 - **Electric pickaxe:** in vanilla the chain loses 20% per tile (100%, 80%, 64%, 51% and so on). With the mod every chained tile takes 100%. The chain still only runs through touching tiles of the same block, so it now goes on until the end of the vein or the chain limit (500 tiles, adjustable in the [Game Limits Mod](../der_floh-game_limits_mod/README.md)). The tile you hit is no longer hit a second time by its own chain.
