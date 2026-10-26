@@ -5,7 +5,7 @@ Checks the zips built by build.ps1 against the mod sources and against what Godo
 .DESCRIPTION
 Every mod in src/<author>/<mod>/ needs a namespace named like its author folder and exactly one zip, and every zip must:
 - sit in the folder of its mod's author, <author>/ like src/<author>/,
-- contain the files of its source folder, unchanged, and nothing else,
+- contain the files of its source folder except media/, unchanged, and nothing else,
 - keep them under mods-unpacked/<namespace>-<name>/ with '/' separators,
 - include mod_main.gd and a manifest.json that passes the checks of GML 7.0.1 (NanobotZ build),
 - be named <namespace>-<name>-<version_number>.zip,
@@ -376,8 +376,13 @@ function Test-MatchesSource {
             "$entryName differs from its source file"
         }
     }
+    $mediaRoot = "$entryRoot$MediaDirectoryName/"
     foreach ($entryName in $Package.Files.Keys) {
-        if (-not $sourceFiles.ContainsKey($entryName)) {
+        if ($sourceFiles.ContainsKey($entryName)) { continue }
+        if ($entryName.StartsWith($mediaRoot, [System.StringComparison]::OrdinalIgnoreCase)) {
+            "$entryName is in $MediaDirectoryName/, which build.ps1 leaves out of the zip; rebuild it"
+        }
+        else {
             "$entryName is in the zip but not in src"
         }
     }

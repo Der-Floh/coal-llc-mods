@@ -7,6 +7,7 @@ $RepositoryRoot = Split-Path $PSScriptRoot -Parent
 $DefaultSourceDirectory = Join-Path $RepositoryRoot 'src'
 $DefaultZipDirectory = Join-Path $RepositoryRoot 'out'
 $NexusDirectoryName = 'nexus'
+$MediaDirectoryName = 'media'
 $ZipModsRoot = 'mods-unpacked'
 $ManifestFileName = 'manifest.json'
 
@@ -35,9 +36,11 @@ function Get-ModItem {
     param([Parameter(Mandatory)][System.IO.DirectoryInfo]$ModDirectory)
 
     foreach ($item in Get-ChildItem -LiteralPath $ModDirectory.FullName -Recurse) {
+        $relativePath = $item.FullName.Substring($ModDirectory.FullName.Length + 1).Replace('\', '/')
+        if ($relativePath.Split('/')[0] -eq $MediaDirectoryName) { continue }
         [pscustomobject]@{
             Item         = $item
-            RelativePath = $item.FullName.Substring($ModDirectory.FullName.Length + 1).Replace('\', '/')
+            RelativePath = $relativePath
         }
     }
 }

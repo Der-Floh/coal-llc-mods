@@ -3,7 +3,7 @@
 Packs every mod in src/<author>/<mod>/ into a zip for Godot Mod Loader and writes the Nexus Mods descriptions.
 
 .DESCRIPTION
-Each zip is named <namespace>-<name>-<version_number>.zip from the mod's manifest.json and holds the mod folder under mods-unpacked/, the layout GML expects. It is written to the folder of the mod's author in the output folder, <author>/ like src/<author>/, and zips of other versions of the same mod are removed from there.
+Each zip is named <namespace>-<name>-<version_number>.zip from the mod's manifest.json and holds the mod folder under mods-unpacked/, the layout GML expects. The mod's media/ folder, with the images for its mod page, is left out. It is written to the folder of the mod's author in the output folder, <author>/ like src/<author>/, and zips of other versions of the same mod are removed from there.
 
 After packing, nexus-descriptions.ps1 converts the README of every mod in .github/nexus-mods.json into its Nexus Mods description, written to nexus/ in the output folder.
 
