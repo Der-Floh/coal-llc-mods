@@ -14,7 +14,6 @@ var extensions_dir_path: String
 func _init() -> void:
 	mod_dir_path = ModLoaderMod.get_unpacked_dir().path_join(MOD_DIR)
 	extensions_dir_path = mod_dir_path.path_join("extensions")
-	install_hooks()
 
 
 func install_hooks() -> void:
@@ -32,6 +31,8 @@ func install_hooks() -> void:
 	)
 
 func _ready() -> void:
+	# Installed here, not in _init: loading vanilla scripts before the game's autoloads can leave Empty.tres without its Item script.
+	install_hooks()
 	_debug = get_debug_logging()
 	_game_limits = _find_game_limits()
 	ModLoaderLog.info("Ready! debug_logging=%s, game_limits_mod found=%s" % [str(_debug), str(_game_limits != null)], LOG_NAME)

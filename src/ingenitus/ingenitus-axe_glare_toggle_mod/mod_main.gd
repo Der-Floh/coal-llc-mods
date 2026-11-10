@@ -12,7 +12,6 @@ var extensions_dir_path: String
 func _init() -> void:
 	mod_dir_path = ModLoaderMod.get_unpacked_dir().path_join(MOD_DIR)
 	extensions_dir_path = mod_dir_path.path_join("extensions")
-	install_hooks()
 
 
 func install_hooks() -> void:
@@ -34,6 +33,8 @@ func install_hooks() -> void:
 
 
 func _ready() -> void:
+	# Installed here, not in _init: loading vanilla scripts before the game's autoloads can leave Empty.tres without its Item script.
+	install_hooks()
 	ModLoaderLog.info("Ready! show_glare=%s enabled=%s" % [str(get_show_glare()), str(get_enabled())], LOG_NAME)
 
 

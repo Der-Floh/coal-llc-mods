@@ -1,7 +1,7 @@
 {
     "name": "bug_fixes_mod",
     "namespace": "ingenitus",
-    "version_number": "1.1.1",
+    "version_number": "1.1.2",
     "description": "Fixes vanilla bugs: late-day coal quota overflow, progress loss from a corrupt save, stuck pause after Esc, negative cash, duplicated loot, loot cap ignored during nukes, clipped explosion edges, x0 employee boxes, chest upgrade cards with the wrong multiplier and the AOE miner gap. Each fix can be switched off.",
     "website_url": "",
     "dependencies": [],

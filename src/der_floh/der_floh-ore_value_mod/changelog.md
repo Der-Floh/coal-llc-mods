@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.3] – 2026-11-10
+
+### Fixed
+
+- The sell price multipliers are applied through a hook instead of a `Gvars` script extension, and the mod no longer loads game scripts while the mod loader starts. Loading them that early could shrink the inventory to the pickaxe slot.
+
 ## [1.1.2] – 2026-10-26
 
 ### Fixed

@@ -1,7 +1,7 @@
 {
     "name": "no_holes_mod",
     "namespace": "der_floh",
-    "version_number": "1.0.2",
+    "version_number": "1.0.3",
     "description": "Eliminates air pockets in world generation by filling empty underground tiles with the correct background tile for their depth.",
     "website_url": "",
     "dependencies": [],

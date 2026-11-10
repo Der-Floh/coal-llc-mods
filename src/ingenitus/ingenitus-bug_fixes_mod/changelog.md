@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.2] – 2026-11-10
+
+- Hooks are installed once the game's own scripts have loaded instead of while the mod loader starts, which in some mod combinations shrank the inventory to the pickaxe slot.
+
 ## [1.1.1] – 2026-09-26
 
 - **Loot cap during bursts** no longer changes ordinary play. 1.1.0 kept the game's live-loot

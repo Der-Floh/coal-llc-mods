@@ -1,7 +1,7 @@
 {
     "name": "chest_qol_mod",
     "namespace": "ingenitus",
-    "version_number": "1.0.0",
+    "version_number": "1.0.1",
     "description": "Chests open when you touch them (and loot straight to your inventory if you own One-Click Looting), can be taken from any of their eight protective tiles once one is mined, and never offer power-up scrolls for weapons weaker than yours.",
     "website_url": "",
     "dependencies": [],

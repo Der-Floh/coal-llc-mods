@@ -1,7 +1,7 @@
 {
     "name": "performance_mod",
     "namespace": "der_floh",
-    "version_number": "1.3.4",
+    "version_number": "1.3.5",
     "description": "Optimises chunk loading, chunk and chest generation, tile effects and electric chains. Uses der_floh-game_limits_mod's limits while that mod is enabled.",
     "website_url": "",
     "dependencies": [],

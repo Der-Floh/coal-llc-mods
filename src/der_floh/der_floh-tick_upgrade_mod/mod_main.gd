@@ -13,10 +13,12 @@ var extensions_dir_path: String
 func _init() -> void:
 	mod_dir_path = ModLoaderMod.get_unpacked_dir().path_join(MOD_DIR)
 	extensions_dir_path = mod_dir_path.path_join("extensions")
-	install_hooks()
+	install_extensions()
 
 
 func _ready() -> void:
+	# Installed here, not in _init: loading vanilla scripts before the game's autoloads can leave Empty.tres without its Item script.
+	install_hooks()
 	_debug = get_debug_logging()
 	ModLoaderLog.info("Ready! poison_tick_speed=%.2f fire_tick_speed=%.2f always_distant=%s preserve_duration=%s debug_logging=%s" % [
 		poison_tick_speed, fire_tick_speed,
@@ -26,12 +28,14 @@ func _ready() -> void:
 	], LOG_NAME)
 
 
-func install_hooks() -> void:
+func install_extensions() -> void:
 	# Script Extension: expose the tick speeds as passives and save them with the run.
 	ModLoaderMod.install_script_extension(
 		extensions_dir_path.path_join("resources/passive_effects/passives.gd")
 	)
 
+
+func install_hooks() -> void:
 	# Script Hooks: inject tick-speed passives into the passive chooser UI.
 	ModLoaderMod.install_script_hooks(
 		"res://scenes/Interfaces/in_game/choose_passive.gd",

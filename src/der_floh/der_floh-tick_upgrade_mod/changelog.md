@@ -1,3 +1,9 @@
+## [1.3.4] – 2026-11-10
+
+### Fixed
+
+- With only this mod installed, the inventory shrank to the single pickaxe slot. The hooks are now installed once the game's own scripts have loaded, instead of while the mod loader starts.
+
 ## [1.3.3] – 2026-10-26
 
 ### Fixed

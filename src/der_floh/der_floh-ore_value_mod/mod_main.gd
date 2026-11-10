@@ -4,6 +4,7 @@ extends Node
 const MOD_ID  := "der_floh-ore_value_mod"
 const MOD_DIR := "der_floh-ore_value_mod"
 const LOG_NAME := "der_floh-ore_value_mod:Main"
+const GVARS_NODE_PATH := ^"/root/Gvars"
 
 # Maps vanilla itemID strings to config schema keys.
 const ITEM_ID_TO_KEY := {
@@ -49,17 +50,19 @@ var extensions_dir_path: String
 func _init() -> void:
 	mod_dir_path = ModLoaderMod.get_unpacked_dir().path_join(MOD_DIR)
 	extensions_dir_path = mod_dir_path.path_join("extensions")
-	install_hooks()
 
 
 func _ready() -> void:
+	# Installed here, not in _init: loading vanilla scripts before the game's autoloads can leave Empty.tres without its Item script.
+	install_hooks()
 	_debug = get_debug_logging()
 	ModLoaderLog.info("Ready! debug_logging=%s" % str(_debug), LOG_NAME)
 
 
 func install_hooks() -> void:
-	ModLoaderMod.install_script_extension(
-		extensions_dir_path.path_join("scripts/Gvars.gd")
+	ModLoaderMod.install_script_hooks(
+		"res://scripts/Gvars.gd",
+		extensions_dir_path.path_join("scripts/Gvars.hooks.gd")
 	)
 	ModLoaderMod.install_script_hooks(
 		"res://scenes/Interfaces/Menus/settings_2.gd",
@@ -96,7 +99,9 @@ static func _vanilla_item(item_id: String):
 
 
 static func _coal_value() -> float:
-	var hard_modifier = Gvars.hard_modifier
+	# Looked up at call time: naming Gvars here would compile Gvars.gd together with mod_main, before the game's autoloads exist.
+	var gvars = (Engine.get_main_loop() as SceneTree).root.get_node(GVARS_NODE_PATH)
+	var hard_modifier = gvars.hard_modifier
 	if hard_modifier == null:
 		return 1.0
 	return float(hard_modifier._hard_modifier_effect({"coal_value": 1})["coal_value"])

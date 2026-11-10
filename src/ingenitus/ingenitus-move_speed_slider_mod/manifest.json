@@ -1,7 +1,7 @@
 {
     "name": "move_speed_slider_mod",
     "namespace": "ingenitus",
-    "version_number": "1.0.0",
+    "version_number": "1.0.1",
     "description": "Adds a Walk Speed slider to the passive bonuses panel (Tab). Walking can be dialled up to your current sprint speed, never past it, so you can move at sprint pace without holding sprint (or keep auto-sprint and still have a fast walk).",
     "website_url": "",
     "dependencies": [],

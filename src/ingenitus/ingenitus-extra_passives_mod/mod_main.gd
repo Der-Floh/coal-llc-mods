@@ -52,15 +52,17 @@ func _init() -> void:
 	extensions_dir_path = mod_dir_path.path_join("extensions")
 	_enabled = get_enabled()
 	reset_levels()
-	install_hooks()
+	install_extensions()
 
 
-func install_hooks() -> void:
+func install_extensions() -> void:
 	# Script Extension: Passives exposes the new levels via get()/set() and saves them.
 	ModLoaderMod.install_script_extension(
 		extensions_dir_path.path_join("resources/passive_effects/passives.gd")
 	)
 
+
+func install_hooks() -> void:
 	var hooks := {
 		# Offers, buttons, and the passive bonuses panel (Tab).
 		"res://scenes/Interfaces/in_game/choose_passive.gd": "scenes/Interfaces/in_game/choose_passive.hooks.gd",
@@ -89,6 +91,8 @@ func install_hooks() -> void:
 
 
 func _ready() -> void:
+	# Installed here, not in _init: loading vanilla scripts before the game's autoloads can leave Empty.tres without its Item script.
+	install_hooks()
 	ModLoaderLog.info("Ready! enabled=%s passives=%d" % [str(get_enabled()), PASSIVES.size()], LOG_NAME)
 
 

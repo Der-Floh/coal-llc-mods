@@ -1,7 +1,7 @@
 {
     "name": "number_format_mod",
     "namespace": "ingenitus",
-    "version_number": "1.0.0",
+    "version_number": "1.0.1",
     "description": "Large numbers (cash, coal, prices) show as clean short scientific notation like 1.23e11 instead of Godot's 1.23457e+11.",
     "website_url": "",
     "dependencies": [],

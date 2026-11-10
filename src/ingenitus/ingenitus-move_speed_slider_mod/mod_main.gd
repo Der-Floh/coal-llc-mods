@@ -22,7 +22,6 @@ func _init() -> void:
 	extensions_dir_path = mod_dir_path.path_join("extensions")
 	_enabled = get_enabled()
 	walk_bonus = maxf(0.0, float(get_config().data.get("walk_speed_bonus", 0.0)))
-	install_hooks()
 
 
 func install_hooks() -> void:
@@ -38,6 +37,8 @@ func install_hooks() -> void:
 
 
 func _ready() -> void:
+	# Installed here, not in _init: loading vanilla scripts before the game's autoloads can leave Empty.tres without its Item script.
+	install_hooks()
 	ModLoaderLog.info("Ready! enabled=%s walk_bonus=%s" % [str(_enabled), str(walk_bonus)], LOG_NAME)
 
 

@@ -1,7 +1,7 @@
 {
     "name": "extra_passives_mod",
     "namespace": "ingenitus",
-    "version_number": "1.0.0",
+    "version_number": "1.0.1",
     "description": "Ten new level-up passives for weapons and tools that had few or none: gun fire rate, extra projectiles, bullet pierce, axe spin-up, vacuum range and suction, drill speed, earthquake damage and radius, and bomb radius (capped at 48 tiles, with a dial-back slider). Offered only while you own an item they apply to.",
     "website_url": "",
     "dependencies": [],

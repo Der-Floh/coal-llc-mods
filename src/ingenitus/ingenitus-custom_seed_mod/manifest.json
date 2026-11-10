@@ -1,7 +1,7 @@
 {
     "name": "custom_seed_mod",
     "namespace": "ingenitus",
-    "version_number": "1.0.0",
+    "version_number": "1.0.1",
     "description": "Set a world seed for reproducible mines. Every chunk is generated from the seed, the day and its own position, so the same seed gives the same terrain and chests however you explore. 0 = random (vanilla).",
     "website_url": "",
     "dependencies": [],

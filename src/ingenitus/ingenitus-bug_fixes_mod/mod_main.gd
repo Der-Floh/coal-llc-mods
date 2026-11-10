@@ -26,7 +26,6 @@ var extensions_dir_path: String
 func _init() -> void:
 	mod_dir_path = ModLoaderMod.get_unpacked_dir().path_join(MOD_DIR)
 	extensions_dir_path = mod_dir_path.path_join("extensions")
-	install_hooks()
 	# Runs before the game's Gvars autoload reads the saves at startup.
 	if is_on("fix_save_restore"):
 		for pair in SAVE_FILES:
@@ -53,6 +52,8 @@ func install_hooks() -> void:
 
 
 func _ready() -> void:
+	# Installed here, not in _init: loading vanilla scripts before the game's autoloads can leave Empty.tres without its Item script.
+	install_hooks()
 	var off := []
 	for key in FIXES:
 		if not bool(get_config().data.get(key, true)):

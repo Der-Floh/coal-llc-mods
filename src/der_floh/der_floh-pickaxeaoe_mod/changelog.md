@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.3] – 2026-11-10
+
+### Fixed
+
+- Hooks are installed once the game's own scripts have loaded instead of while the mod loader starts, which in some mod combinations shrank the inventory to the pickaxe slot.
+
 ## [1.1.2] – 2026-06-09
 
 ### Fixed
