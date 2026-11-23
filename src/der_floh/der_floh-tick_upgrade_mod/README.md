@@ -49,7 +49,7 @@ Edit the file while the game is closed.
 - The [Passive Drop Mod](../der_floh-passive_drop_mod/README.md)'s auto-collected cards don't pause the game while this mod is enabled.
 - Distant ticking works with the [Performance Mod](../der_floh-performance_mod/README.md)'s faster tile effects.
 - With **Preserve effect duration** on, effects spread by the [Effect Spread Mod](../der_floh-effect_spread_mod/README.md) can last longer than what was left on the destroyed tile.
-- Works with the [Extra Passives Mod](../../ingenitus/ingenitus-extra_passives_mod/README.md) by Ingenitus, whose passives are offered alongside these. Both mods save their passives with the run.
+- Works with the [Extra Passives Mod](../../ingenitus/ingenitus-extra_passives_mod/README.md) by Ingenitus, whose passives are offered alongside these. Both mods save their passives with the run. Use its version 1.0.2 or later; with older versions, one of the two mods' passives does nothing.
 
 ## Installation
 

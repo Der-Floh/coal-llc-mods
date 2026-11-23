@@ -2,6 +2,10 @@
 
 ## [1.0.2] – 2026-11-23
 
+- Gun Fire Rate is only offered with a pistol or shotgun. Rifles and miniguns already fire every 0.033 s, faster than its 0.05 s floor, so picks for them did nothing.
+- Every Earthquake Radius pick counts. The radius is whole tiles, so fractions now add up across quakes; before, they were dropped, and every other +5% pick on the 10-tile inducer did nothing. Without the passive, another mod's inducer with a radius above 48 is no longer cut to 48.
+- Drill Mining Speed also speeds up drills that are already placed.
+- With der_floh's Tick Upgrade Mod 1.3.3 or later also installed, these passives were offered but did nothing and didn't show in the Tab list, because only one of the two mods could change the game's passives script. Both mods now share that change. Use Tick Upgrade 1.3.5 or later.
 - Vacuum Range and Vacuum Suction take effect as soon as you pick them. Before, the vacuum only changed at the start of the next mine day.
 - AutoPassiveChooser's priority list always shows all ten passives, for every profession. Before, it only listed the ones you could be offered at that moment, and confirming the list deleted the saved priorities of the others.
 - Drill Speed is now Drill Mining Speed (key `drill_mining_speed`). Dual Multipliers has its own Drill Speed passive under the old key, which took over the picks when both mods were installed. Levels you already earned carry over; an AutoPassiveChooser priority for it has to be set again.

@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.2] – 2026-11-23
+
+- The Walk Speed limit follows the vanilla sprint slider: lowering it lowers the label and the slider's range at once. Before, both kept the limit of your fully earned sprint, so the slider could be dragged past the speed that applies. Your chosen walk speed is kept and returns when you raise the sprint slider again.
+
 ## [1.0.1] – 2026-11-10
 
 - Hooks are installed once the game's own scripts have loaded instead of while the mod loader starts, which in some mod combinations shrank the inventory to the pickaxe slot.

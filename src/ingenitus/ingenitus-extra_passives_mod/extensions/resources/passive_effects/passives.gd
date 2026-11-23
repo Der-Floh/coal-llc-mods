@@ -1,43 +1,43 @@
 extends "res://resources/passive_effects/passives.gd"
 
-# The new passives are not properties of Passives, so their levels live in
-# mod_main. _get/_set expose them as if they were: vanilla apply_effect
-# (set(name, get(name) + amount)), NanobotZ-AutoPassiveChooser's "up to" limits
-# (Gvars.passives.get(effect)) and any other code reading passives by name see
-# the real values. They are saved inside the run save under their own key.
+# Godot 4.4 can't compile a second script extension of a class_name script, so every mod that adds passives
+# ships this same file, only the first one installs it, and each registers its mod_main as a provider.
+const PROVIDERS_META := &"coal_llc_passive_providers"
 
-const _MOD_MAIN_PATH := "res://mods-unpacked/ingenitus-extra_passives_mod/mod_main.gd"
+
+static func _providers() -> Array:
+	return Engine.get_meta(PROVIDERS_META, [])
 
 
 func _get(property: StringName) -> Variant:
-	var mod_main = load(_MOD_MAIN_PATH)
-	if mod_main.PASSIVES.has(String(property)):
-		return float(mod_main.levels.get(String(property), 0.0))
+	for provider in _providers():
+		var value = provider.get_passive(String(property))
+		if value != null:
+			return value
 	return null
 
 
 func _set(property: StringName, value: Variant) -> bool:
-	var mod_main = load(_MOD_MAIN_PATH)
-	var key := String(property)
-	if not mod_main.PASSIVES.has(key):
-		return false
-	mod_main.add_level(key, float(value) - float(mod_main.levels.get(key, 0.0)))
-	return true
+	for provider in _providers():
+		if provider.set_passive(String(property), value):
+			return true
+	return false
 
 
 func save() -> Dictionary:
 	var part: Dictionary = super.save()
-	var mod_main = load(_MOD_MAIN_PATH)
-	part[mod_main.SAVE_KEY] = mod_main.save_data()
+	for provider in _providers():
+		provider.save_passives(part)
 	return part
 
 
 func load_save(_save: Dictionary):
 	super.load_save(_save)
-	var mod_main = load(_MOD_MAIN_PATH)
-	mod_main.load_data(_save.get(mod_main.SAVE_KEY, {}))
+	for provider in _providers():
+		provider.load_passives(_save)
 
 
 func reset():
 	super.reset()
-	load(_MOD_MAIN_PATH).reset_levels()
+	for provider in _providers():
+		provider.reset_passives()

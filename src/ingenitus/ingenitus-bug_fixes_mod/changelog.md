@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.3] – 2026-11-23
+
+- **Loot cap during bursts** also holds when a pickup of the same item is already lying in the mine. Before, those drops were passed to the game unchecked, so a nuke near a pile of coal still spawned a pickup per coal: 800 drops made 801 pickups instead of about 400.
+
 ## [1.1.2] – 2026-11-10
 
 - Hooks are installed once the game's own scripts have loaded instead of while the mod loader starts, which in some mod combinations shrank the inventory to the pickaxe slot.

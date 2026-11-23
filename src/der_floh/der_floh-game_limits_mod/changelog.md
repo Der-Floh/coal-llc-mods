@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3] – 2026-11-23
+
+### Fixed
+
+- A Max Active Mortars value below 50 or a Chunks Generated Per Frame value above 10 in the config file is corrected when you open the settings menu, like the other settings. Before, it stayed and was used.
+- Max Employee Entities Drawn moves in steps of 25 like the game's own slider, so both always show the same value. Before, opening the settings menu or setting the game's slider to a value such as 1025 stored 1050.
+
 ## [1.2.2] – 2026-11-10
 
 ### Fixed

@@ -1,3 +1,10 @@
+## [1.3.5] – 2026-11-23
+
+### Fixed
+
+- Since 1.3.3, this mod and the Extra Passives Mod broke each other: only one of them could change the game's passives script, so the other's passives (usually Extra Passives') were offered but did nothing and didn't show in the Tab list. Both mods now share that change. Use Extra Passives 1.0.2 or later.
+- Other mods can raise the tick speeds the way the game raises its own passives (`apply_effect`).
+
 ## [1.3.4] – 2026-11-10
 
 ### Fixed

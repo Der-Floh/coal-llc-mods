@@ -9,9 +9,10 @@ extends Object
 # pickups spawn at once.
 #
 # The pickups vanilla queued this frame are now counted here and added to the
-# stale count for the cap decision. Once that total reaches the cap and vanilla has
-# no existing pickup of the item to merge into, the rest of the frame's drops of
-# that item are bundled and handed to vanilla as one drop at the end of the frame.
+# stale count for the cap decision. Once that total reaches the cap, the rest of the
+# frame's drops of an item are bundled and handed to vanilla as one drop at the end
+# of the frame, unless vanilla merges them itself: it only does that into a pickup
+# already lying there, and only once its stale count is past the cap.
 # No loot is lost. Gvars.live_loot_count itself is left alone: vanilla's 200-item
 # split and merge thresholds read it too, and raising it mid-frame made those
 # engage early in ordinary play, far below the cap.
@@ -35,7 +36,7 @@ func on_drop_loot(chain: ModLoaderHookChain, pos: Vector2, itemResPath: String, 
 	var vanilla_count: int = Gvars.live_loot_count
 	if vanilla_count + _queued_this_frame() > Gvars.settings.max_item_drops and not dropped_by_player \
 			and not _straight_to_stockpile(manager, itemResPath) \
-			and not _has_live_pickup(manager, itemResPath):
+			and not _vanilla_merges(manager, itemResPath, vanilla_count):
 		_hold(manager, pos, itemResPath, count)
 		return
 	chain.execute_next([pos, itemResPath, count, dropped_by_player])
@@ -79,6 +80,10 @@ static func _straight_to_stockpile(manager, itemResPath: String) -> bool:
 	return manager.straight_to_stockpile and load(itemResPath).itemType in ["gem", "mineral", "coal"]
 
 
+static func _vanilla_merges(manager, itemResPath: String, live: int) -> bool:
+	return live > Gvars.settings.max_item_drops and _has_live_pickup(manager, itemResPath)
+
+
 # Vanilla's valve can only merge into pickups that are already children.
 static func _has_live_pickup(manager, itemResPath: String) -> bool:
 	for loot in manager.loot_drops.get_children():
@@ -92,7 +97,7 @@ static func _has_live_pickup(manager, itemResPath: String) -> bool:
 static func _queued_by_vanilla(manager, itemResPath: String, count: float, dropped_by_player: bool, live: int) -> int:
 	if _straight_to_stockpile(manager, itemResPath):
 		return 0
-	if live > Gvars.settings.max_item_drops and not dropped_by_player and _has_live_pickup(manager, itemResPath):
+	if not dropped_by_player and _vanilla_merges(manager, itemResPath, live):
 		return 0  # merged into an existing pickup
 	var bundle_above: float = 10.0 if live > MERGEABLE_LIVE_LOOT_COUNT else 20.0
 	return int(count) if count <= bundle_above else 1

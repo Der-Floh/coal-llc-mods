@@ -8,6 +8,9 @@ extends Object
 #   - Also rebuilds when the radius changes, so game_limits_mod settings apply at once.
 #   - game_limits_mod's load_chunks hook defers to this one while this mod is active.
 #
+# generate_chunk():
+#   - Gives each new chunk its zone's state at once, since load_chunks no longer reclassifies every frame.
+#
 # apply_tile_effects():
 #   - Iterates chunks_created dict instead of allocating get_children() every tick.
 #   - Skips idle outer-ring (NO_COLLISIONS) chunks that have no queued tile work.
@@ -78,18 +81,8 @@ func load_chunks(chain: ModLoaderHookChain) -> void:
 					elif not tm.live_chunks.has(cxy):
 						tm.simple_collision_chunks[cxy] = true
 
-		# Update chunk states, calling change_state only when actually needed.
 		for chunk_id in tm.chunks_created.keys():
-			var chunk: TileMapChunk = tm.chunks_created[chunk_id]
-			if tm.live_chunks.has(chunk_id):
-				if chunk.state != TileMapChunk.States.LIVE:
-					chunk.change_state(TileMapChunk.States.LIVE)
-			elif tm.simple_collision_chunks.has(chunk_id):
-				if chunk.state != TileMapChunk.States.NO_COLLISIONS:
-					chunk.change_state(TileMapChunk.States.NO_COLLISIONS)
-			else:
-				if chunk.state != TileMapChunk.States.DISABLED:
-					chunk.change_state(TileMapChunk.States.DISABLED)
+			_sync_chunk_state(tm, chunk_id)
 
 		_prev_chunk_ids[inst_id] = current_ids
 		_prev_radius[inst_id] = r
@@ -110,6 +103,33 @@ func load_chunks(chain: ModLoaderHookChain) -> void:
 
 	tm.change_next_chunk_state()
 	# chain.execute_next() intentionally omitted — fully replaces vanilla.
+
+
+# Chunks are created LIVE. Vanilla reclassifies every chunk each frame, but load_chunks above only does so
+# on a zone rebuild, so a chunk created in between (load queue, explosions, other chunkloaders) is classified here.
+func generate_chunk(chain: ModLoaderHookChain, chunk_x, chunk_y) -> void:
+	var tm := chain.reference_object as TileMapManager
+	var chunk_id := Vector2i(chunk_x, chunk_y)
+	var is_new := not tm.chunks_created.has(chunk_id)
+	chain.execute_next([chunk_x, chunk_y])
+	# Before the first zone rebuild (level start) the zones are empty, so new chunks keep vanilla's LIVE.
+	if is_new and _prev_chunk_ids.has(tm.get_instance_id()):
+		_sync_chunk_state(tm, chunk_id)
+
+
+static func _sync_chunk_state(tm: TileMapManager, chunk_id: Vector2i) -> void:
+	var chunk: TileMapChunk = tm.chunks_created[chunk_id]
+	var target := _zone_state(tm, chunk_id)
+	if chunk.state != target:
+		chunk.change_state(target)
+
+
+static func _zone_state(tm: TileMapManager, chunk_id: Vector2i) -> TileMapChunk.States:
+	if tm.live_chunks.has(chunk_id):
+		return TileMapChunk.States.LIVE
+	if tm.simple_collision_chunks.has(chunk_id):
+		return TileMapChunk.States.NO_COLLISIONS
+	return TileMapChunk.States.DISABLED
 
 
 func apply_tile_effects(chain: ModLoaderHookChain) -> void:

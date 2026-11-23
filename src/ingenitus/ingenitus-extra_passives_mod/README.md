@@ -2,7 +2,7 @@
 
 > **Credit:** Ingenitus created this mod and handed it over to me. Thank you, Ingenitus, for your work!
 
-Ten new level-up passives for weapons and tools that had few or none. A passive is only offered while you hold an item it applies to (or own a vacuum), and a passive with a cap is no longer offered once it reaches it.
+Ten new level-up passives for weapons and tools that had few or none. A passive is only offered while you own an item it applies to (or a vacuum), and a passive with a cap is no longer offered once it reaches it.
 
 ## Passives
 
@@ -10,15 +10,15 @@ Each pick adds the step below. A passive-upgrade card from a chest multiplies it
 
 | Passive            | Per pick | Offered with                    | Cap    | Effect                                                                                                                                        |
 | ------------------ | -------- | ------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Gun Fire Rate      | +5%      | pistol, shotgun, rifle, minigun | +1300% | Shorter gun cooldown, never below 0.05 s                                                                                                      |
+| Gun Fire Rate      | +5%      | pistol, shotgun                 | +1300% | Shorter gun cooldown, never below 0.05 s. Rifles and miniguns already fire faster than that, so it isn't offered for them                     |
 | Extra Projectiles  | +10%     | pistol, shotgun, rifle, minigun | -      | Every 100% adds one bullet per shot; fractions add up across shots, so +50% gives one extra bullet every other shot                           |
 | Bullet Pierce      | +10%     | pistol, shotgun, rifle, minigun | -      | Every 100% lets each bullet pass one more breakable block; fractions add up across shots. Unbreakable tiles and the gun's range still stop it |
 | Axe Spin-Up Speed  | +5%      | axe, battleaxe                  | -      | The whirl reaches full spin, and stops, faster. Top speed and damage are unchanged                                                            |
 | Vacuum Range       | +5%      | any vacuum                      | -      | Longer hose                                                                                                                                   |
 | Vacuum Suction     | +5%      | any vacuum                      | -      | Wider grab area at the nozzle                                                                                                                 |
-| Drill Mining Speed | +5%      | drill                           | -      | Drills dig faster                                                                                                                             |
+| Drill Mining Speed | +5%      | drill                           | -      | Drills dig faster, including ones already placed                                                                                              |
 | Earthquake Damage  | +5%      | earthquake inducer              | -      | More damage                                                                                                                                   |
-| Earthquake Radius  | +5%      | earthquake inducer              | +380%  | Bigger radius                                                                                                                                 |
+| Earthquake Radius  | +5%      | earthquake inducer              | +380%  | Bigger radius; fractions of a tile add up across quakes                                                                                       |
 | Bomb Radius        | +5%      | bombs, nuke                     | +1100% | Bigger blasts                                                                                                                                 |
 
 - Bomb and earthquake blasts reach at most 48 tiles from their centre, the area loaded around the player. Small bombs get the full bonus, while the nuke (radius 40) grows to 48 at most.
@@ -40,7 +40,7 @@ Edit the file while the game is closed.
 ## Compatibility
 
 - [AutoPassiveChooser](https://github.com/NanobotZ/CoalLLC-AutoPassiveChooser) can prioritise and limit these passives. All ten are always in its list, for every profession, while the level-up cards still only offer the ones you can use.
-- Works with the [Tick Upgrade Mod](../../der_floh/der_floh-tick_upgrade_mod/README.md), whose tick-speed passives are offered alongside these.
+- Works with the [Tick Upgrade Mod](../../der_floh/der_floh-tick_upgrade_mod/README.md), whose tick-speed passives are offered alongside these. Use its version 1.3.5 or later; with older versions, one of the two mods' passives does nothing.
 - Works with the [Axe Glare Toggle Mod](../ingenitus-axe_glare_toggle_mod/README.md) and the [Bug Fixes Mod](../ingenitus-bug_fixes_mod/README.md), whose explosion fix also covers enlarged blasts.
 
 ## Installation

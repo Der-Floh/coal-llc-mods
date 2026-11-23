@@ -51,9 +51,10 @@ static func walk_speed_for(walk_speed: float, sprint_speed: float) -> float:
 	return minf(walk_speed * (1.0 + walk_bonus), sprint_now)
 
 
-# Largest useful bonus: the one that makes walking as fast as fully earned sprint.
-# Base sprint (150) is already faster than base walk (100), and the speed quest
-# reward doubles sprint only, so the range is open even with no sprint passive.
+# Largest useful bonus: the one that makes walking as fast as sprinting is right
+# now, sprint slider included. Base sprint (150) is already faster than base walk
+# (100), and the speed quest reward doubles sprint only, so the range is open even
+# with no sprint passive.
 static func max_walk_bonus() -> float:
 	# Loaded at call time: naming the Player class here would compile player_2.gd
 	# together with mod_main, before the game's autoloads exist.
@@ -61,7 +62,7 @@ static func max_walk_bonus() -> float:
 	var sprint: float = player_script.BASE_SPRINT_SPEED
 	if Gvars.bonus_equipment_manager.passive_player_speed_increase:
 		sprint *= 2.0
-	return sprint * (1.0 + Gvars.passives.player_sprint_speed) / player_script.BASE_WALK_SPEED - 1.0
+	return sprint * (1.0 + Gvars.passives.adjusted_player_sprint_speed) / player_script.BASE_WALK_SPEED - 1.0
 
 
 static func set_walk_bonus(value: float) -> void:

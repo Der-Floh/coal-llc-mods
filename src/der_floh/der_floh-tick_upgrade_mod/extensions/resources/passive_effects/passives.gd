@@ -1,23 +1,43 @@
 extends "res://resources/passive_effects/passives.gd"
 
+# Godot 4.4 can't compile a second script extension of a class_name script, so every mod that adds passives
+# ships this same file, only the first one installs it, and each registers its mod_main as a provider.
+const PROVIDERS_META := &"coal_llc_passive_providers"
+
+
+static func _providers() -> Array:
+	return Engine.get_meta(PROVIDERS_META, [])
+
 
 func _get(property: StringName) -> Variant:
-	return load("res://mods-unpacked/der_floh-tick_upgrade_mod/mod_main.gd").get_tick_bonus(String(property))
+	for provider in _providers():
+		var value = provider.get_passive(String(property))
+		if value != null:
+			return value
+	return null
+
+
+func _set(property: StringName, value: Variant) -> bool:
+	for provider in _providers():
+		if provider.set_passive(String(property), value):
+			return true
+	return false
 
 
 func save() -> Dictionary:
 	var part: Dictionary = super.save()
-	var mod_main = load("res://mods-unpacked/der_floh-tick_upgrade_mod/mod_main.gd")
-	part[mod_main.SAVE_KEY] = mod_main.save_data()
+	for provider in _providers():
+		provider.save_passives(part)
 	return part
 
 
 func load_save(_save: Dictionary):
 	super.load_save(_save)
-	var mod_main = load("res://mods-unpacked/der_floh-tick_upgrade_mod/mod_main.gd")
-	mod_main.load_data(_save.get(mod_main.SAVE_KEY))
+	for provider in _providers():
+		provider.load_passives(_save)
 
 
 func reset():
 	super.reset()
-	load("res://mods-unpacked/der_floh-tick_upgrade_mod/mod_main.gd").reset_tick_speeds()
+	for provider in _providers():
+		provider.reset_passives()

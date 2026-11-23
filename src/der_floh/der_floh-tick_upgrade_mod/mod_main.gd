@@ -5,6 +5,7 @@ const MOD_ID  := "der_floh-tick_upgrade_mod"
 const MOD_DIR := "der_floh-tick_upgrade_mod"
 const LOG_NAME := "der_floh-tick_upgrade_mod:Main"
 const SAVE_KEY := "der_floh_tick_upgrade"
+const PASSIVE_PROVIDERS_META := &"coal_llc_passive_providers"
 
 var mod_dir_path: String
 var extensions_dir_path: String
@@ -30,9 +31,14 @@ func _ready() -> void:
 
 func install_extensions() -> void:
 	# Script Extension: expose the tick speeds as passives and save them with the run.
-	ModLoaderMod.install_script_extension(
-		extensions_dir_path.path_join("resources/passive_effects/passives.gd")
-	)
+	# Shared with other passive mods: only the first one installs it, the rest just register.
+	var providers: Array = Engine.get_meta(PASSIVE_PROVIDERS_META, [])
+	if providers.is_empty():
+		ModLoaderMod.install_script_extension(
+			extensions_dir_path.path_join("resources/passive_effects/passives.gd")
+		)
+	providers.append(get_script())
+	Engine.set_meta(PASSIVE_PROVIDERS_META, providers)
 
 
 func install_hooks() -> void:
@@ -125,7 +131,10 @@ static func add_fire_tick_speed(amount: float) -> void:
 	fire_tick_speed += amount
 
 
-static func get_tick_bonus(key: String):
+# --- Passive provider, called by the shared passives.gd extension ---
+# Passives hold the bonus over vanilla, so a speed of 1.2 reads as 0.2.
+
+static func get_passive(key: String) -> Variant:
 	match key:
 		"poison_tick_speed":
 			return poison_tick_speed - 1.0
@@ -134,17 +143,29 @@ static func get_tick_bonus(key: String):
 	return null
 
 
-static func reset_tick_speeds() -> void:
+static func set_passive(key: String, value: Variant) -> bool:
+	match key:
+		"poison_tick_speed":
+			poison_tick_speed = 1.0 + float(value)
+		"fire_tick_speed":
+			fire_tick_speed = 1.0 + float(value)
+		_:
+			return false
+	return true
+
+
+static func reset_passives() -> void:
 	poison_tick_speed = 1.0
 	fire_tick_speed = 1.0
 
 
-static func save_data() -> Dictionary:
-	return {"poison_tick_speed": poison_tick_speed, "fire_tick_speed": fire_tick_speed}
+static func save_passives(save_part: Dictionary) -> void:
+	save_part[SAVE_KEY] = {"poison_tick_speed": poison_tick_speed, "fire_tick_speed": fire_tick_speed}
 
 
-static func load_data(data) -> void:
-	reset_tick_speeds()
+static func load_passives(save: Dictionary) -> void:
+	reset_passives()
+	var data = save.get(SAVE_KEY)
 	if data is Dictionary:
 		poison_tick_speed = float(data.get("poison_tick_speed", 1.0))
 		fire_tick_speed = float(data.get("fire_tick_speed", 1.0))

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.6] – 2026-11-23
+
+### Fixed
+
+- Chunks that load while you stay inside one chunk get their proper state at once. Before, they kept full collision and were processed every frame until you crossed into another chunk: more work instead of less, and the outer ring the Game Limits Mod describes as collision-free wasn't.
+
 ## [1.3.5] – 2026-11-10
 
 ### Fixed

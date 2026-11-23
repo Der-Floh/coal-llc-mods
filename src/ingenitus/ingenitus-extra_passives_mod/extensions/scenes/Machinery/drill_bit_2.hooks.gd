@@ -1,12 +1,14 @@
 extends Object
 
 # drill_mining_speed: the drill's "mining" animation (which triggers each dig) plays faster.
+# Drills join a group, so a later pick speeds up the ones already placed too.
 
 const MOD_MAIN_PATH := "res://mods-unpacked/ingenitus-extra_passives_mod/mod_main.gd"
 
 
 func _ready(chain: ModLoaderHookChain) -> void:
 	chain.execute_next()
-	var speed: float = load(MOD_MAIN_PATH).level("drill_mining_speed")
-	if speed > 0.0:
-		chain.reference_object.animation_player.speed_scale = 1.0 + speed
+	var mod_main = load(MOD_MAIN_PATH)
+	var drill: Node = chain.reference_object
+	drill.add_to_group(mod_main.DRILL_GROUP)
+	mod_main.apply_drill_speed(drill)

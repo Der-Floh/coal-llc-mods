@@ -6,12 +6,14 @@ const MOD_DIR := "ingenitus-extra_passives_mod"
 const LOG_NAME := "ingenitus-extra_passives_mod:Main"
 
 const GUNS := ["pistol", "shotgun", "rifle", "minigun"]
+# Rifles and miniguns already shoot every 0.033 s, below GUN_COOLDOWN_FLOOR, so fire rate can't speed them up.
+const SLOW_GUNS := ["pistol", "shotgun"]
 
 # New passives: step per pick (x the card multiplier, like vanilla's ALL_PASSIVES),
 # the item types that make it worth offering, a display name, and an optional cap
 # past which it leaves the offer pool (it would do nothing more).
 const PASSIVES := {
-	"gun_fire_rate": {"step": 0.05, "items": GUNS, "name": "Gun Fire Rate", "cap": 13.0},
+	"gun_fire_rate": {"step": 0.05, "items": SLOW_GUNS, "name": "Gun Fire Rate", "cap": 13.0},
 	"multi_projectile": {"step": 0.1, "items": GUNS, "name": "Extra Projectiles"},
 	"bullet_pierce": {"step": 0.1, "items": GUNS, "name": "Bullet Pierce"},
 	"axe_spin_speed": {"step": 0.05, "items": ["axe", "battleaxe"], "name": "Axe Spin-Up Speed"},
@@ -33,17 +35,19 @@ const MAX_BLAST_RADIUS := 48.0
 const GUN_COOLDOWN_FLOOR := 0.05
 # Extra projectiles on a gun with no spread would stack on one line.
 const MULTI_MIN_SPREAD := 20.0
-# Vacuums built this mine day, so a Vacuum Range or Suction pick re-applies to them at once.
+# Vacuums and drills in the mine, so a pick re-applies to them at once.
 const VACUUM_GROUP := &"ingenitus_extra_passives_vacuum"
+const DRILL_GROUP := &"ingenitus_extra_passives_drill"
 const META_VACUUM_BASE_LENGTH := &"ingenitus_vacuum_base_length"
 const META_VACUUM_APPLIED_LENGTH := &"ingenitus_vacuum_applied_length"
 
 const SAVE_KEY := "ingenitus_extra_passives"
+const PASSIVE_PROVIDERS_META := &"coal_llc_passive_providers"
 # Passive key -> the key saves from before 1.0.2 used for it (drill_speed clashed with Dual Multipliers).
 const LEGACY_LEVEL_KEYS := {"drill_mining_speed": "drill_speed"}
 
 # Earned levels (0.0 = none) and the player's dial-back of bomb radius. Kept here,
-# saved inside the run save by passives.hooks.gd.
+# saved inside the run save by the shared passives.gd extension.
 static var levels: Dictionary = {}
 static var adjusted_bomb_radius: float = 0.0
 # Cached config switch; level() runs per bullet per frame.
@@ -60,15 +64,20 @@ func _init() -> void:
 	mod_dir_path = ModLoaderMod.get_unpacked_dir().path_join(MOD_DIR)
 	extensions_dir_path = mod_dir_path.path_join("extensions")
 	_enabled = get_enabled()
-	reset_levels()
+	reset_passives()
 	install_extensions()
 
 
 func install_extensions() -> void:
 	# Script Extension: Passives exposes the new levels via get()/set() and saves them.
-	ModLoaderMod.install_script_extension(
-		extensions_dir_path.path_join("resources/passive_effects/passives.gd")
-	)
+	# Shared with other passive mods: only the first one installs it, the rest just register.
+	var providers: Array = Engine.get_meta(PASSIVE_PROVIDERS_META, [])
+	if providers.is_empty():
+		ModLoaderMod.install_script_extension(
+			extensions_dir_path.path_join("resources/passive_effects/passives.gd")
+		)
+	providers.append(get_script())
+	Engine.set_meta(PASSIVE_PROVIDERS_META, providers)
 
 
 func install_hooks() -> void:
@@ -127,20 +136,38 @@ static func add_level(key: String, amount: float) -> void:
 		adjusted_bomb_radius = levels[key]
 	if PASSIVES.get(key, {}).get("vacuum", false):
 		refresh_vacuums()
+	elif key == "drill_mining_speed":
+		refresh_drills()
 
 
-static func reset_levels() -> void:
+# --- Passive provider, called by the shared passives.gd extension ---
+
+static func get_passive(key: String) -> Variant:
+	if not PASSIVES.has(key):
+		return null
+	return float(levels.get(key, 0.0))
+
+
+static func set_passive(key: String, value: Variant) -> bool:
+	if not PASSIVES.has(key):
+		return false
+	add_level(key, float(value) - float(levels.get(key, 0.0)))
+	return true
+
+
+static func reset_passives() -> void:
 	for key in PASSIVES:
 		levels[key] = 0.0
 	adjusted_bomb_radius = 0.0
 
 
-static func save_data() -> Dictionary:
-	return {"levels": levels.duplicate(), "adjusted_bomb_radius": adjusted_bomb_radius}
+static func save_passives(save_part: Dictionary) -> void:
+	save_part[SAVE_KEY] = {"levels": levels.duplicate(), "adjusted_bomb_radius": adjusted_bomb_radius}
 
 
-static func load_data(data: Dictionary) -> void:
-	reset_levels()
+static func load_passives(save: Dictionary) -> void:
+	reset_passives()
+	var data: Dictionary = save.get(SAVE_KEY, {})
 	var saved: Dictionary = data.get("levels", {})
 	for key in PASSIVES:
 		var saved_key: String = key if saved.has(key) else LEGACY_LEVEL_KEYS.get(key, key)
@@ -149,14 +176,26 @@ static func load_data(data: Dictionary) -> void:
 	adjusted_bomb_radius = float(data.get("adjusted_bomb_radius", levels["bomb_radius"]))
 
 
-# --- Vacuum ---
+# --- Vacuum and drill ---
 
 static func refresh_vacuums() -> void:
-	var tree := Engine.get_main_loop() as SceneTree
-	if tree == null:
-		return
-	for vacuum in tree.get_nodes_in_group(VACUUM_GROUP):
+	for vacuum in _nodes_in_group(VACUUM_GROUP):
 		apply_vacuum_bonus(vacuum)
+
+
+static func refresh_drills() -> void:
+	for drill in _nodes_in_group(DRILL_GROUP):
+		apply_drill_speed(drill)
+
+
+# The drill's "mining" animation triggers each dig, so playing it faster digs faster.
+static func apply_drill_speed(drill: Node) -> void:
+	drill.animation_player.speed_scale = 1.0 + level("drill_mining_speed")
+
+
+static func _nodes_in_group(group: StringName) -> Array:
+	var tree := Engine.get_main_loop() as SceneTree
+	return tree.get_nodes_in_group(group) if tree else []
 
 
 # Range scales the length the vacuum was built with; a length another mod set since our last change becomes the new base.
