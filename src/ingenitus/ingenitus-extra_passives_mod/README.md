@@ -39,7 +39,7 @@ Edit the file while the game is closed.
 
 ## Compatibility
 
-- [AutoPassiveChooser](https://github.com/NanobotZ/CoalLLC-AutoPassiveChooser) can prioritise and limit these passives. They only show up in its list while they can be offered, for example mid-run while you hold the item.
+- [AutoPassiveChooser](https://github.com/NanobotZ/CoalLLC-AutoPassiveChooser) can prioritise and limit these passives. All ten are always in its list, for every profession, while the level-up cards still only offer the ones you can use.
 - Works with the [Tick Upgrade Mod](../../der_floh/der_floh-tick_upgrade_mod/README.md), whose tick-speed passives are offered alongside these.
 - Works with the [Axe Glare Toggle Mod](../ingenitus-axe_glare_toggle_mod/README.md) and the [Bug Fixes Mod](../ingenitus-bug_fixes_mod/README.md), whose explosion fix also covers enlarged blasts.
 

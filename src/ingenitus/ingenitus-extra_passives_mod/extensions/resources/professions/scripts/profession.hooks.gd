@@ -1,8 +1,9 @@
 extends Object
 
-# Adds the new passives to the offer pool while they are worth offering (the player
-# owns an item they apply to, or a vacuum, and they are below their cap). The same
-# list feeds NanobotZ-AutoPassiveChooser's priority settings.
+# Adds the new passives to every profession's pool. While a level-up card is being
+# built, only the ones worth offering are added (the player owns an item they apply
+# to, or a vacuum, and they are below their cap); every other reader of the pool, such
+# as NanobotZ-AutoPassiveChooser's priority settings, sees all of them.
 #
 # Also: assassins field Strong Elementalists, whose water globs make wet tiles take
 # double damage, and already unlock poison_damage, but vanilla never offers them
@@ -20,7 +21,7 @@ func _profession_effect(chain: ModLoaderHookChain, _data: Dictionary) -> Diction
 		return result
 	var pool: Array = result["unlocked_passives"]
 	for key in mod_main.PASSIVES:
-		if mod_main.offerable(key) and key not in pool:
+		if key not in pool and (not mod_main.building_offer or mod_main.offerable(key)):
 			pool.append(key)
 	var script: Script = (chain.reference_object as Object).get_script()
 	if script and script.resource_path.ends_with("/assassin.gd") and "wet_damage" not in pool:

@@ -46,6 +46,9 @@ static var levels: Dictionary = {}
 static var adjusted_bomb_radius: float = 0.0
 # Cached config switch; level() runs per bullet per frame.
 static var _enabled: bool = true
+# True while a level-up card is being built (GUI.hooks.gd); only then are the new
+# passives limited to the ones worth offering (profession.hooks.gd).
+static var building_offer: bool = false
 
 var mod_dir_path: String
 var extensions_dir_path: String
@@ -69,6 +72,7 @@ func install_extensions() -> void:
 func install_hooks() -> void:
 	var hooks := {
 		# Offers, buttons, and the passive bonuses panel (Tab).
+		"res://scripts/GUI.gd": "scripts/GUI.hooks.gd",
 		"res://scenes/Interfaces/in_game/choose_passive.gd": "scenes/Interfaces/in_game/choose_passive.hooks.gd",
 		"res://scenes/Interfaces/Management/passive_bonuses.gd": "scenes/Interfaces/Management/passive_bonuses.hooks.gd",
 		# Effects.
