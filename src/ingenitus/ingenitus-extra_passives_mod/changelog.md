@@ -4,6 +4,7 @@
 
 - Vacuum Range and Vacuum Suction take effect as soon as you pick them. Before, the vacuum only changed at the start of the next mine day.
 - AutoPassiveChooser's priority list always shows all ten passives, for every profession. Before, it only listed the ones you could be offered at that moment, and confirming the list deleted the saved priorities of the others.
+- Drill Speed is now Drill Mining Speed (key `drill_mining_speed`). Dual Multipliers has its own Drill Speed passive under the old key, which took over the picks when both mods were installed. Levels you already earned carry over; an AutoPassiveChooser priority for it has to be set again.
 
 ## [1.0.1] – 2026-11-10
 

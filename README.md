@@ -359,18 +359,18 @@ No configuration options besides `enabled` in the config file.
 
 Ten new level-up passives for weapons and tools that had few or none. A passive is only offered while you own an item it applies to (or a vacuum), and a passive with a cap is no longer offered once it reaches it.
 
-| Passive           | Offered with                     | Effect                                                              |
-| ----------------- | -------------------------------- | ------------------------------------------------------------------- |
-| Gun Fire Rate     | pistol, shotgun, rifle, minigun  | Shorter gun cooldown (never below 0.05 s)                          |
-| Extra Projectiles | guns                             | Extra bullets per shot                                             |
-| Bullet Pierce     | guns                             | Bullets pass through extra breakable blocks                        |
-| Axe Spin-Up Speed | axe, battleaxe                   | Reaches full spin faster                                           |
-| Vacuum Range      | a vacuum                         | Longer hose                                                        |
-| Vacuum Suction    | a vacuum                         | Wider grab area                                                    |
-| Drill Speed       | drill                            | Drills dig faster                                                  |
-| Earthquake Damage | earthquake inducer               | More damage                                                        |
-| Earthquake Radius | earthquake inducer               | Bigger radius                                                      |
-| Bomb Radius       | bombs, nuke                      | Bigger blasts, with a dial-back slider in the passive bonuses panel |
+| Passive            | Offered with                     | Effect                                                              |
+| ------------------ | -------------------------------- | ------------------------------------------------------------------- |
+| Gun Fire Rate      | pistol, shotgun, rifle, minigun  | Shorter gun cooldown (never below 0.05 s)                          |
+| Extra Projectiles  | guns                             | Extra bullets per shot                                             |
+| Bullet Pierce      | guns                             | Bullets pass through extra breakable blocks                        |
+| Axe Spin-Up Speed  | axe, battleaxe                   | Reaches full spin faster                                           |
+| Vacuum Range       | a vacuum                         | Longer hose                                                        |
+| Vacuum Suction     | a vacuum                         | Wider grab area                                                    |
+| Drill Mining Speed | drill                            | Drills dig faster                                                  |
+| Earthquake Damage  | earthquake inducer               | More damage                                                        |
+| Earthquake Radius  | earthquake inducer               | Bigger radius                                                      |
+| Bomb Radius        | bombs, nuke                      | Bigger blasts, with a dial-back slider in the passive bonuses panel |
 
 All bomb and earthquake blasts are limited to 48 tiles (the loaded area around the player). Assassins can also be offered Wet Damage. Works with AutoPassiveChooser and the Tick Upgrade Mod.
 

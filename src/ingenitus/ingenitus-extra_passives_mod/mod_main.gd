@@ -17,7 +17,7 @@ const PASSIVES := {
 	"axe_spin_speed": {"step": 0.05, "items": ["axe", "battleaxe"], "name": "Axe Spin-Up Speed"},
 	"vacuum_range": {"step": 0.05, "items": [], "vacuum": true, "name": "Vacuum Range"},
 	"vacuum_power": {"step": 0.05, "items": [], "vacuum": true, "name": "Vacuum Suction"},
-	"drill_speed": {"step": 0.05, "items": ["drill"], "name": "Drill Speed"},
+	"drill_mining_speed": {"step": 0.05, "items": ["drill"], "name": "Drill Mining Speed"},
 	"earthquake_damage": {"step": 0.05, "items": ["earthquake"], "name": "Earthquake Damage"},
 	"earthquake_radius": {"step": 0.05, "items": ["earthquake"], "name": "Earthquake Radius", "cap": 3.8},
 	"bomb_radius": {"step": 0.05, "items": ["bomb", "nuke"], "name": "Bomb Radius", "cap": 11.0},
@@ -39,6 +39,8 @@ const META_VACUUM_BASE_LENGTH := &"ingenitus_vacuum_base_length"
 const META_VACUUM_APPLIED_LENGTH := &"ingenitus_vacuum_applied_length"
 
 const SAVE_KEY := "ingenitus_extra_passives"
+# Passive key -> the key saves from before 1.0.2 used for it (drill_speed clashed with Dual Multipliers).
+const LEGACY_LEVEL_KEYS := {"drill_mining_speed": "drill_speed"}
 
 # Earned levels (0.0 = none) and the player's dial-back of bomb radius. Kept here,
 # saved inside the run save by passives.hooks.gd.
@@ -141,7 +143,8 @@ static func load_data(data: Dictionary) -> void:
 	reset_levels()
 	var saved: Dictionary = data.get("levels", {})
 	for key in PASSIVES:
-		levels[key] = float(saved.get(key, 0.0))
+		var saved_key: String = key if saved.has(key) else LEGACY_LEVEL_KEYS.get(key, key)
+		levels[key] = float(saved.get(saved_key, 0.0))
 	# A save without a dial-back value keeps the full earned radius.
 	adjusted_bomb_radius = float(data.get("adjusted_bomb_radius", levels["bomb_radius"]))
 

@@ -8,18 +8,18 @@ Ten new level-up passives for weapons and tools that had few or none. A passive 
 
 Each pick adds the step below. A passive-upgrade card from a chest multiplies it, as it does for vanilla passives.
 
-| Passive           | Per pick | Offered with                    | Cap    | Effect                                                                                                                                        |
-| ----------------- | -------- | ------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Gun Fire Rate     | +5%      | pistol, shotgun, rifle, minigun | +1300% | Shorter gun cooldown, never below 0.05 s                                                                                                      |
-| Extra Projectiles | +10%     | pistol, shotgun, rifle, minigun | -      | Every 100% adds one bullet per shot; fractions add up across shots, so +50% gives one extra bullet every other shot                           |
-| Bullet Pierce     | +10%     | pistol, shotgun, rifle, minigun | -      | Every 100% lets each bullet pass one more breakable block; fractions add up across shots. Unbreakable tiles and the gun's range still stop it |
-| Axe Spin-Up Speed | +5%      | axe, battleaxe                  | -      | The whirl reaches full spin, and stops, faster. Top speed and damage are unchanged                                                            |
-| Vacuum Range      | +5%      | any vacuum                      | -      | Longer hose                                                                                                                                   |
-| Vacuum Suction    | +5%      | any vacuum                      | -      | Wider grab area at the nozzle                                                                                                                 |
-| Drill Speed       | +5%      | drill                           | -      | Drills dig faster                                                                                                                             |
-| Earthquake Damage | +5%      | earthquake inducer              | -      | More damage                                                                                                                                   |
-| Earthquake Radius | +5%      | earthquake inducer              | +380%  | Bigger radius                                                                                                                                 |
-| Bomb Radius       | +5%      | bombs, nuke                     | +1100% | Bigger blasts                                                                                                                                 |
+| Passive            | Per pick | Offered with                    | Cap    | Effect                                                                                                                                        |
+| ------------------ | -------- | ------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Gun Fire Rate      | +5%      | pistol, shotgun, rifle, minigun | +1300% | Shorter gun cooldown, never below 0.05 s                                                                                                      |
+| Extra Projectiles  | +10%     | pistol, shotgun, rifle, minigun | -      | Every 100% adds one bullet per shot; fractions add up across shots, so +50% gives one extra bullet every other shot                           |
+| Bullet Pierce      | +10%     | pistol, shotgun, rifle, minigun | -      | Every 100% lets each bullet pass one more breakable block; fractions add up across shots. Unbreakable tiles and the gun's range still stop it |
+| Axe Spin-Up Speed  | +5%      | axe, battleaxe                  | -      | The whirl reaches full spin, and stops, faster. Top speed and damage are unchanged                                                            |
+| Vacuum Range       | +5%      | any vacuum                      | -      | Longer hose                                                                                                                                   |
+| Vacuum Suction     | +5%      | any vacuum                      | -      | Wider grab area at the nozzle                                                                                                                 |
+| Drill Mining Speed | +5%      | drill                           | -      | Drills dig faster                                                                                                                             |
+| Earthquake Damage  | +5%      | earthquake inducer              | -      | More damage                                                                                                                                   |
+| Earthquake Radius  | +5%      | earthquake inducer              | +380%  | Bigger radius                                                                                                                                 |
+| Bomb Radius        | +5%      | bombs, nuke                     | +1100% | Bigger blasts                                                                                                                                 |
 
 - Bomb and earthquake blasts reach at most 48 tiles from their centre, the area loaded around the player. Small bombs get the full bonus, while the nuke (radius 40) grows to 48 at most.
 - Once you have Bomb Radius, the passive bonuses panel (Tab) has a slider to dial it back, from 0 up to what you have earned. At full it follows new picks. While a Bomb Radius bonus is in use, bombs from other mods with a radius above 48 are limited to 48 too; dial the slider to 0% to avoid that.
