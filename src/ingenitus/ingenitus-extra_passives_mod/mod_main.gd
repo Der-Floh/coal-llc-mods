@@ -33,6 +33,10 @@ const MAX_BLAST_RADIUS := 48.0
 const GUN_COOLDOWN_FLOOR := 0.05
 # Extra projectiles on a gun with no spread would stack on one line.
 const MULTI_MIN_SPREAD := 20.0
+# Vacuums built this mine day, so a Vacuum Range or Suction pick re-applies to them at once.
+const VACUUM_GROUP := &"ingenitus_extra_passives_vacuum"
+const META_VACUUM_BASE_LENGTH := &"ingenitus_vacuum_base_length"
+const META_VACUUM_APPLIED_LENGTH := &"ingenitus_vacuum_applied_length"
 
 const SAVE_KEY := "ingenitus_extra_passives"
 
@@ -115,6 +119,8 @@ static func add_level(key: String, amount: float) -> void:
 	# Keep the dial-back at full while it tracks the earned value (like vanilla's sliders).
 	if key == "bomb_radius" and is_equal_approx(adjusted_bomb_radius, old):
 		adjusted_bomb_radius = levels[key]
+	if PASSIVES.get(key, {}).get("vacuum", false):
+		refresh_vacuums()
 
 
 static func reset_levels() -> void:
@@ -134,6 +140,29 @@ static func load_data(data: Dictionary) -> void:
 		levels[key] = float(saved.get(key, 0.0))
 	# A save without a dial-back value keeps the full earned radius.
 	adjusted_bomb_radius = float(data.get("adjusted_bomb_radius", levels["bomb_radius"]))
+
+
+# --- Vacuum ---
+
+static func refresh_vacuums() -> void:
+	var tree := Engine.get_main_loop() as SceneTree
+	if tree == null:
+		return
+	for vacuum in tree.get_nodes_in_group(VACUUM_GROUP):
+		apply_vacuum_bonus(vacuum)
+
+
+# Range scales the length the vacuum was built with; a length another mod set since our last change becomes the new base.
+static func apply_vacuum_bonus(vacuum: Node) -> void:
+	var base: int = vacuum.get_meta(META_VACUUM_BASE_LENGTH, vacuum.vacuum_length)
+	if vacuum.vacuum_length != vacuum.get_meta(META_VACUUM_APPLIED_LENGTH, base):
+		base = vacuum.vacuum_length
+	vacuum.vacuum_length = int(base * (1.0 + level("vacuum_range")))
+	vacuum.set_meta(META_VACUUM_BASE_LENGTH, base)
+	vacuum.set_meta(META_VACUUM_APPLIED_LENGTH, vacuum.vacuum_length)
+	var power := level("vacuum_power")
+	if power > 0.0:
+		vacuum.suck_end.scale = Vector2.ONE * (1.0 + power)
 
 
 # --- Offers ---

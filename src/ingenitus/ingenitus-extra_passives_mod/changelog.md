@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.2] – 2026-11-23
+
+- Vacuum Range and Vacuum Suction take effect as soon as you pick them. Before, the vacuum only changed at the start of the next mine day.
+
 ## [1.0.1] – 2026-11-10
 
 - Hooks are installed once the game's own scripts have loaded instead of while the mod loader starts, which in some mod combinations shrank the inventory to the pickaxe slot.
