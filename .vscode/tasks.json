@@ -42,6 +42,28 @@
                 "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/.vscode/build/nexus-descriptions.ps1"]
             },
             "problemMatcher": []
+        },
+        {
+            "label": "Integration tests",
+            "type": "process",
+            "command": "pwsh",
+            "args": ["-NoProfile", "-File", "${workspaceFolder}/tests/run-integration.ps1"],
+            "windows": {
+                "command": "powershell.exe",
+                "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/tests/run-integration.ps1"]
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Fetch third-party mods",
+            "type": "process",
+            "command": "pwsh",
+            "args": ["-NoProfile", "-File", "${workspaceFolder}/tests/fetch-third-party.ps1"],
+            "windows": {
+                "command": "powershell.exe",
+                "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/tests/fetch-third-party.ps1"]
+            },
+            "problemMatcher": []
         }
     ]
 }

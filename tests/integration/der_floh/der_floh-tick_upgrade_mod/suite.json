@@ -1,0 +1,14 @@
+{
+    "sessions": [
+        {
+            "name": "with-extra-passives",
+            "mods": ["ingenitus-extra_passives_mod"],
+            "tests": ["test_passives.gd", "test_cards.gd"]
+        },
+        {
+            "name": "with-auto-passive-chooser",
+            "third_party": ["CoalLLC-AutoPassiveChooser"],
+            "tests": ["test_auto_passive_chooser.gd"]
+        }
+    ]
+}

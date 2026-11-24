@@ -1,0 +1,9 @@
+{
+    "sessions": [
+        {
+            "name": "with-game-limits",
+            "mods": ["der_floh-game_limits_mod"],
+            "tests": ["test_pause.gd"]
+        }
+    ]
+}

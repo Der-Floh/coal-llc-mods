@@ -1,0 +1,9 @@
+{
+    "sessions": [
+        {
+            "name": "with-tick-upgrade",
+            "mods": ["der_floh-tick_upgrade_mod"],
+            "tests": ["test_spread.gd"]
+        }
+    ]
+}

@@ -10,12 +10,15 @@ $NexusDirectoryName = 'nexus'
 $MediaDirectoryName = 'media'
 $ZipModsRoot = 'mods-unpacked'
 $ManifestFileName = 'manifest.json'
+# Other authors' mods, kept only for reference and for integration tests; never built, validated or published.
+$ThirdPartyDirectoryName = 'ThirdParty'
 
 function Get-ModDirectory {
     param([Parameter(Mandatory)][string]$Path)
 
     $modDirectories = @(
         Get-ChildItem -LiteralPath $Path -Directory |
+            Where-Object Name -ne $ThirdPartyDirectoryName |
             Get-ChildItem -Directory |
             Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName $ManifestFileName) -PathType Leaf } |
             Sort-Object FullName
@@ -42,5 +45,33 @@ function Get-ModItem {
             Item         = $item
             RelativePath = $relativePath
         }
+    }
+}
+
+# Packs a mod folder under mods-unpacked/<ModFolderName>/, the layout GML expects; the folder name must be the mod id.
+function New-ModZip {
+    param(
+        [Parameter(Mandatory)][System.IO.DirectoryInfo]$ModDirectory,
+        [Parameter(Mandatory)][string]$ZipPath,
+        [string]$ModFolderName = $ModDirectory.Name
+    )
+
+    $entryRoot = "$ZipModsRoot/$ModFolderName/"
+    $archive = [System.IO.Compression.ZipFile]::Open($ZipPath, [System.IO.Compression.ZipArchiveMode]::Create)
+    try {
+        [void]$archive.CreateEntry("$ZipModsRoot/")
+        [void]$archive.CreateEntry($entryRoot)
+        foreach ($modItem in Get-ModItem -ModDirectory $ModDirectory) {
+            $entryName = $entryRoot + $modItem.RelativePath
+            if ($modItem.Item.PSIsContainer) {
+                [void]$archive.CreateEntry("$entryName/")
+            }
+            else {
+                [void][System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $modItem.Item.FullName, $entryName)
+            }
+        }
+    }
+    finally {
+        $archive.Dispose()
     }
 }

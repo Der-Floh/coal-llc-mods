@@ -1,0 +1,14 @@
+{
+    "sessions": [
+        {
+            "name": "with-performance",
+            "mods": ["der_floh-performance_mod"],
+            "tests": ["test_chunks.gd", "test_electric.gd"]
+        },
+        {
+            "name": "with-bug-fixes",
+            "mods": ["ingenitus-bug_fixes_mod"],
+            "tests": ["test_pause.gd"]
+        }
+    ]
+}

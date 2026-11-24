@@ -1,0 +1,9 @@
+{
+    "sessions": [
+        {
+            "name": "with-custom-seed",
+            "mods": ["ingenitus-custom_seed_mod"],
+            "tests": ["test_seeded.gd"]
+        }
+    ]
+}

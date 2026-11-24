@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-Packs every mod in src/<author>/<mod>/ into a zip for Godot Mod Loader and writes the Nexus Mods descriptions.
+Packs every mod in src/<author>/<mod>/ (except src/ThirdParty/) into a zip for Godot Mod Loader and writes the Nexus Mods descriptions.
 
 .DESCRIPTION
 Each zip is named <namespace>-<name>-<version_number>.zip from the mod's manifest.json and holds the mod folder under mods-unpacked/, the layout GML expects. The mod's media/ folder, with the images for its mod page, is left out. It is written to the folder of the mod's author in the output folder, <author>/ like src/<author>/, and zips of other versions of the same mod are removed from there.
@@ -63,32 +63,6 @@ function Remove-ModZip {
     Get-ChildItem -LiteralPath $Directory -Filter "$ModId-*.zip" -File |
         Where-Object { $_.Name -match $versionedZipPattern } |
         Remove-Item
-}
-
-function New-ModZip {
-    param(
-        [Parameter(Mandatory)][System.IO.DirectoryInfo]$ModDirectory,
-        [Parameter(Mandatory)][string]$ZipPath
-    )
-
-    $entryRoot = "$ZipModsRoot/$($ModDirectory.Name)/"
-    $archive = [System.IO.Compression.ZipFile]::Open($ZipPath, [System.IO.Compression.ZipArchiveMode]::Create)
-    try {
-        [void]$archive.CreateEntry("$ZipModsRoot/")
-        [void]$archive.CreateEntry($entryRoot)
-        foreach ($modItem in Get-ModItem -ModDirectory $ModDirectory) {
-            $entryName = $entryRoot + $modItem.RelativePath
-            if ($modItem.Item.PSIsContainer) {
-                [void]$archive.CreateEntry("$entryName/")
-            }
-            else {
-                [void][System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $modItem.Item.FullName, $entryName)
-            }
-        }
-    }
-    finally {
-        $archive.Dispose()
-    }
 }
 
 $outputRoot = New-Item -ItemType Directory -Path $OutputDirectory -Force

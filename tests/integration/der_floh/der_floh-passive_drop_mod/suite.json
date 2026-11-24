@@ -1,0 +1,9 @@
+{
+    "sessions": [
+        {
+            "name": "with-auto-passive-chooser",
+            "third_party": ["CoalLLC-AutoPassiveChooser"],
+            "tests": ["test_auto_collect.gd"]
+        }
+    ]
+}

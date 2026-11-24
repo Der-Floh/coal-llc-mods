@@ -1,0 +1,14 @@
+{
+    "sessions": [
+        {
+            "name": "with-tick-upgrade",
+            "mods": ["der_floh-tick_upgrade_mod"],
+            "tests": ["test_passives.gd", "test_cards.gd"]
+        },
+        {
+            "name": "with-auto-passive-chooser",
+            "third_party": ["CoalLLC-AutoPassiveChooser"],
+            "tests": ["test_auto_passive_chooser.gd"]
+        }
+    ]
+}

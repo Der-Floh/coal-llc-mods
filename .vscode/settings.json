@@ -3,6 +3,7 @@
         "out": false,
     },
     "search.exclude": {
-        "out": true
+        "out": true,
+        "tests/harness/run": true
     }
 }

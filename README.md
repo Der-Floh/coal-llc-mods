@@ -426,7 +426,7 @@ garethwhite-prog's mods come from [garethwhite-prog/coal-llc-mods](https://githu
 
 ## Building from source
 
-[`.vscode/build/build.ps1`](.vscode/build/build.ps1) packs every mod in `src/<author>/<mod>/` into `out/<author>/<namespace>-<name>-<version>.zip`, ready to drop into the game's `mods/` folder, and writes the Nexus Mods descriptions to `out/nexus/` (see below). [`.vscode/build/validate.ps1`](.vscode/build/validate.ps1) then checks that every zip is in the folder of its mod's author, matches its source folder and has the layout and manifest Godot Mod Loader expects.
+[`.vscode/build/build.ps1`](.vscode/build/build.ps1) packs every mod in `src/<author>/<mod>/` (except `src/ThirdParty/`, see [Third-party mods](#third-party-mods)) into `out/<author>/<namespace>-<name>-<version>.zip`, ready to drop into the game's `mods/` folder, and writes the Nexus Mods descriptions to `out/nexus/` (see below). [`.vscode/build/validate.ps1`](.vscode/build/validate.ps1) then checks that every zip is in the folder of its mod's author, matches its source folder and has the layout and manifest Godot Mod Loader expects.
 
 ```powershell
 ./.vscode/build/build.ps1
@@ -443,4 +443,22 @@ Every mod folder has a `README.md`, which is packed into the zip like the mod's 
 
 ```powershell
 ./.vscode/build/nexus-descriptions.ps1
+```
+
+## Integration tests
+
+[`tests/run-integration.ps1`](tests/run-integration.ps1) starts Coal LLC with the mods and checks, inside the running game, that each mod does what its README says: alone, with all mods in `src/` at once, and in the combinations its suite declares. The tests need the game and Steam, so they run only locally, never in GitHub's workflows. [tests/README.md](tests/README.md) explains running them and writing new ones, and [tests/harness/README.md](tests/harness/README.md) the harness they use to drive the game.
+
+```powershell
+./tests/run-integration.ps1
+```
+
+In VS Code, the **Integration tests** task runs them.
+
+## Third-party mods
+
+`src/ThirdParty/` holds other authors' mods, for reading their code and for testing compatibility with them. Only [`ThirdParty-Mods.csv`](src/ThirdParty/ThirdParty-Mods.csv), with each mod's name, author and URL, is tracked; everything else in the folder is ignored by git, and the build, the validation and publishing skip it. Never edit a mod there. [`tests/fetch-third-party.ps1`](tests/fetch-third-party.ps1) downloads each listed mod as a zip Godot Mod Loader can load, for the integration test sessions that need it.
+
+```powershell
+./tests/fetch-third-party.ps1
 ```

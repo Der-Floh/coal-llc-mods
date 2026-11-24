@@ -1,0 +1,9 @@
+{
+    "sessions": [
+        {
+            "name": "with-bug-fixes",
+            "mods": ["ingenitus-bug_fixes_mod"],
+            "tests": ["test_strikes.gd"]
+        }
+    ]
+}
